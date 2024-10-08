@@ -1,0 +1,54 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["omitApi", "postgresqlExtensions", "prismaSchemaFolder"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Payment {
+  payment_id  Int      @id @default(autoincrement())
+  bank_number String
+  bank_bin    String
+  amount      Int?
+  content     String?
+  create_at   DateTime @default(now())
+  create_by   String
+}
+
+model User {
+  user_id       String    @id
+  candy         Int       @default(0)
+  premium_candy Int       @default(0)
+  card_id       String
+  last_daily    DateTime?
+  streak_daily  Int       @default(0)
+  streak_winner Int       @default(0)
+  quests        Quest[]
+}
+
+model Quest {
+  quest_id String        @id @default(cuid())
+  user_id  String
+  user     User          @relation(fields: [user_id], references: [user_id])
+  target   Int
+  progress Int           @default(0)
+  function QuestFunction
+
+  channel_id String?
+}
+
+model Card {
+  id      String
+  card_id String
+  user    User
+  user_id String
+}

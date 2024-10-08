@@ -1,0 +1,8 @@
+enum QuestFunction {
+  voice
+  chat
+  chat_channel
+  open_pack
+  boost
+  upgrade_card
+}
