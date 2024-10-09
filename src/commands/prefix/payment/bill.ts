@@ -20,7 +20,7 @@ export default prefix(
         ignore: false,
         category: Category.info,
     },
-    async (client, message, args) => {
+    async (client, user, message, args) => {
         const bankName = process.env.BANKNAME;
         const accountNo = process.env.BANKNO;
         const amount = Number(args.shift());

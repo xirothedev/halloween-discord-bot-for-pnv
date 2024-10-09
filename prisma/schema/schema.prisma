@@ -19,25 +19,30 @@ model Payment {
 }
 
 model User {
-  user_id       String    @id
-  card_id       String?
-  last_daily    DateTime?
-  streak_daily  Int       @default(0)
-  streak_winner Int       @default(0)
-  inv           Inv?
-  quests        Quest[]
+  user_id          String    @id
+  card_id          String?
+  last_claim_daily DateTime?
+  last_claim_quest DateTime?
+  streak_daily     Int       @default(0)
+  streak_winner    Int       @default(0)
+  streak_unpack    Int       @default(0)
+  inv              Inv?
+  quests           Quest[]
 
   @@map("user")
 }
 
 model Quest {
-  quest_id   String        @id @default(cuid())
-  user_id    String
-  user       User          @relation(fields: [user_id], references: [user_id], onDelete: Cascade, onUpdate: Cascade)
-  target     Int
-  progress   Int           @default(0)
-  function   QuestFunction
-  channel_id String?
+  quest_id      String        @id @default(cuid())
+  user_id       String
+  user          User          @relation(fields: [user_id], references: [user_id], onDelete: Cascade, onUpdate: Cascade)
+  name          String
+  reward_item   Item
+  reward_amount Int
+  target        Int
+  progress      Int           @default(0)
+  function      QuestFunction
+  channel_id    String?
 
   @@map("quest")
 }

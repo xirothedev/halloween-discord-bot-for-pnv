@@ -6,3 +6,7 @@ enum QuestFunction {
   boost
   upgrade_card
 }
+
+enum Item {
+  candy
+}

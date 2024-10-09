@@ -16,7 +16,7 @@ export default prefix(
         ignore: false,
         category: Category.info,
     },
-    async (client, message, args) => {
+    async (client, user, message, args) => {
         const embed = new EmbedBuilder();
         const commands = client.collection.prefixcommands;
         const categories = [...new Set(commands.map((cmd) => cmd.options.category))];
@@ -45,7 +45,7 @@ export default prefix(
                         "Không có"
                     }\n**Quyền của bot:** ${
                         command.options.botPermissions?.map((perm) => `\`${perm.toString()}\``).join(", ") || "Không có"
-                    }\n**Chỉ dành cho nhà phát triển:** ${command.options.developersOnly ? "Có" : "Không"}`
+                    }\n**Chỉ dành cho nhà phát triển:** ${command.options.developersOnly ? "Có" : "Không"}`,
                 );
             return await message.channel.send({ embeds: [helpEmbed] });
         }
@@ -63,7 +63,7 @@ export default prefix(
             .setColor(client.color.main)
             .setTitle("Menu trợ giúp")
             .setDescription(
-                `Chào bạn! Tôi là ${client.user?.displayName}, một supporter về thanh toán được tạo bởi Phố Người Việt. Bạn có thể sử dụng \`${client.prefix} help <command>\` để biết thêm thông tin về lệnh.`
+                `Chào bạn! Tôi là ${client.user?.displayName}, một supporter về thanh toán được tạo bởi Phố Người Việt. Bạn có thể sử dụng \`${client.prefix} help <command>\` để biết thêm thông tin về lệnh.`,
             )
             .setFooter({
                 text: `Sử dụng ${client.prefix} help <command> để biết thêm thông tin về lệnh`,
@@ -71,5 +71,5 @@ export default prefix(
             .addFields(...fields);
 
         return await message.channel.send({ embeds: [helpEmbed] });
-    }
+    },
 );

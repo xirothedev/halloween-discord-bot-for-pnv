@@ -1,5 +1,4 @@
 import type { ClientEvents } from "discord.js";
-import type { LavalinkManagerEvents, NodeManagerEvents } from "lavalink-client";
 
 export interface EventOptions {
     once: boolean;

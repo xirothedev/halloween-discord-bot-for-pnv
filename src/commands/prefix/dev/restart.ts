@@ -16,7 +16,7 @@ export default prefix(
         category: Category.dev,
         hidden: true,
     },
-    async (client, message, args) => {
+    async (client, user, message, args) => {
         const embed = new EmbedBuilder();
         const button = new ButtonBuilder()
             .setStyle(ButtonStyle.Danger)
@@ -60,5 +60,5 @@ export default prefix(
                 });
             }
         });
-    }
+    },
 );

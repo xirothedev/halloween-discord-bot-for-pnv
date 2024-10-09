@@ -133,7 +133,13 @@ export default event("messageCreate", { once: false }, async (client, message) =
                 );
             }
 
-            await command.handler(client, message, args);
+            const user = await client.prisma.user.upsert({
+                where: { user_id: message.author.id },
+                create: { user_id: message.author.id },
+                update: {},
+            });
+
+            await command.handler(client, user, message, args);
         } catch (error) {
             console.error(error);
         }
