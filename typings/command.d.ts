@@ -1,6 +1,6 @@
 import type { Embed, Message, PermissionResolvable } from "discord.js";
 import type { Category } from "./utils";
-import type { User } from "@prisma/client";
+import type { Card, Pack, Quest, User } from "@prisma/client";
 
 interface PrefixOptions {
     description: {
@@ -21,8 +21,18 @@ interface PrefixOptions {
     botPermissions?: PermissionResolvable[] | null;
 }
 
+interface FullUser extends User {
+    quests: Quest[];
+    cards: Card[];
+    packs: Pack[];
+}
+
+interface UserWithCards extends User {
+    cards: Card[];
+}
+
 export interface Command {
     name: string;
     options: PrefixOptions;
-    handler: (client: ExtendedClient, user: User, message: Message<true>, args: string[]) => void;
+    handler: (client: ExtendedClient, user: FullUser, message: Message<true>, args: string[]) => void;
 }

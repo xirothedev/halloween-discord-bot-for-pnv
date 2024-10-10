@@ -9,6 +9,10 @@ import { ActivityType, Client, Collection, Partials, PresenceUpdateStatus } from
 import type { Command } from "typings/command";
 import Express from "express";
 import express from "@/handlers/express";
+import items from "@/data/items.json";
+import cards from "@/data/cards.json";
+import packs from "@/data/packs.json";
+import type { Items } from "typings";
 
 export const logger = new Logger();
 export const prisma = new PrismaClient();
@@ -63,6 +67,14 @@ export default class ExtendedClient extends Client<true> {
     public icons = config.icons;
 
     public color = config.color;
+
+    public colors = config.colors;
+
+    public items: Items = items;
+
+    public cards = cards;
+
+    public packs = packs;
 
     public start = async (token: string, prefix: string) => {
         commands(this);

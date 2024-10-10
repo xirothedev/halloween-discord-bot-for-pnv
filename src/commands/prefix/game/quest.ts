@@ -4,7 +4,7 @@ import ErrorInterface from "@/interfaces/error";
 import QuestInterface from "@/interfaces/quest";
 import prefix from "@/layouts/prefix";
 import type { Item, Quest } from "@prisma/client";
-import { channelMention, EmbedBuilder } from "discord.js";
+import { channelMention } from "discord.js";
 import { Category } from "typings/utils";
 
 export default prefix(
@@ -22,27 +22,22 @@ export default prefix(
         category: Category.game,
     },
     async (client, user, message, args) => {
-        const embed = new EmbedBuilder();
         const today = new Date();
-        const User = await client.prisma.user.findUnique({
-            where: { user_id: user.user_id },
-            include: { quests: true },
-        });
 
         let quest: Omit<Omit<Quest, "quest_id">, "user_id">[] = [];
 
         if (user.last_claim_quest && user.last_claim_quest.getTime() > today.setHours(0, 0, 0, 0)) {
-            if (!User?.quests) {
+            if (!user?.quests) {
                 return message.channel.send({
                     embeds: [new ErrorInterface(client).setDescription("Bạn không có quest để hiển thị")],
                 });
             } else {
-                quest = User.quests;
+                quest = user.quests;
             }
         } else {
             await client.prisma.quest.deleteMany({ where: { user_id: user.user_id } });
             for (let index = 0; index < 3; index++) {
-                let q = quests[ranInt(0, quests.length)];
+                let q = quests[ranInt(0, quests.length)]
 
                 if (quest.find((f) => f.function === q.function)) {
                     q = quests[ranInt(0, quests.length)];

@@ -19,14 +19,22 @@ const config = {
             shuffle: "🔀",
         },
     },
-    icons: {} as { [key: string]: string },
+    icons: {
+        b_rank: "<:pnv_B:1293614451408240751>",
+        a_rank: "<:pnv_A:1293614453677490186>",
+        r_rank: "<:pnv_R:1293614458706333776>",
+        sr_rank: "<:pnv_SR:1293615184027451473>",
+        s_rank: "<:pnv_S:1293614468885905488>",
+    },
     color: {
         red: 0xff0000,
         green: 0x00ff00,
         blue: 0x0000ff,
         yellow: 0xffff00,
-        main: 0x2f3136,
     } as { [key: string]: ColorResolvable },
+    colors: {
+        main: ["#ffa500", "#a500ff"],
+    } as { [key: string]: ColorResolvable[] },
 };
 
 export default config;

@@ -9,4 +9,13 @@ enum QuestFunction {
 
 enum Item {
   candy
+  premium_candy
+}
+
+enum Rank {
+  b_rank
+  a_rank
+  r_rank
+  sr_rank
+  s_rank
 }

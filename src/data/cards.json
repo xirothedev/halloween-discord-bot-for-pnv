@@ -1,0 +1,67 @@
+[
+    {
+        "id": "test_card_b",
+        "name": "Test card B",
+        "icon": "<:pnv_B:1293614451408240751>",
+        "topic": "hellpack",
+        "rank": "b_rank",
+        "rate": {
+            "shortName": "B",
+            "fullName": "Basic",
+            "no": 95
+        },
+        "image": "slenderman.gif"
+    },
+    {
+        "id": "test_card_a",
+        "name": "Test card A",
+        "icon": "<:pnv_A:1293614453677490186>",
+        "topic": "hellpack",
+        "rank": "a_rank",
+        "rate": {
+            "shortName": "A",
+            "fullName": "Average",
+            "no": 3
+        },
+        "image": "slenderman.gif"
+    },
+    {
+        "id": "test_card_r",
+        "name": "Test card R",
+        "icon": "<:pnv_R:1293614458706333776>",
+        "topic": "hellpack",
+        "rank": "r_rank",
+        "rate": {
+            "shortName": "R",
+            "fullName": "Rare",
+            "no": 1
+        },
+        "image": "slenderman.gif"
+    },
+    {
+        "id": "test_card_sr",
+        "name": "Test card SR",
+        "icon": "<:pnv_SR:1293615184027451473>",
+        "topic": "hellpack",
+        "rank": "sr_rank",
+        "rate": {
+            "shortName": "SR",
+            "fullName": "Super Rare",
+            "no": 0.75
+        },
+        "image": "slenderman.gif"
+    },
+    {
+        "id": "test_card_s",
+        "name": "Test card S",
+        "icon": "<:pnv_S:1293614468885905488>",
+        "topic": "hellpack",
+        "rank": "s_rank",
+        "rate": {
+            "shortName": "S",
+            "fullName": "Secret",
+            "no": 0.25
+        },
+        "image": "slenderman.gif"
+    }
+]
