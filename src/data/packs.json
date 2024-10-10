@@ -2,6 +2,7 @@
     {
         "id": "hellpack",
         "name": "hell pack",
-        "icon": "<:2581012:1293488650725752832>"
+        "icon": "<:2581012:1293488650725752832>",
+        "cards": ["test_card_s", "test_card_b"]
     }
 ]

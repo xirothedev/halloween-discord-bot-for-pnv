@@ -25,6 +25,7 @@ const config = {
         r_rank: "<:pnv_R:1293614458706333776>",
         sr_rank: "<:pnv_SR:1293615184027451473>",
         s_rank: "<:pnv_S:1293614468885905488>",
+        hellpack: "<:pnv_chamcam:1293566504524185642>"
     },
     color: {
         red: 0xff0000,

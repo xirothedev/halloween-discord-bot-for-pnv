@@ -17,6 +17,5 @@ type Items = {
         id: string;
         name: string;
         icon: string;
-        useable: boolean;
     };
 };

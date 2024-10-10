@@ -10,7 +10,7 @@
             "fullName": "Basic",
             "no": 95
         },
-        "image": "slenderman.gif"
+        "image": "https://cdn.discordapp.com/attachments/1079494260350525582/1293611141494210602/Comp_3_1.gif?ex=6708a982&is=67075802&hm=7a41772e5c04741b86b99d308fe87a9e3e9e86b8a310180d1fad55cc3595ccda&"
     },
     {
         "id": "test_card_a",
@@ -23,7 +23,7 @@
             "fullName": "Average",
             "no": 3
         },
-        "image": "slenderman.gif"
+        "image": "https://cdn.discordapp.com/attachments/1079494260350525582/1293611141494210602/Comp_3_1.gif?ex=6708a982&is=67075802&hm=7a41772e5c04741b86b99d308fe87a9e3e9e86b8a310180d1fad55cc3595ccda&"
     },
     {
         "id": "test_card_r",
@@ -36,7 +36,7 @@
             "fullName": "Rare",
             "no": 1
         },
-        "image": "slenderman.gif"
+        "image": "https://cdn.discordapp.com/attachments/1079494260350525582/1293611141494210602/Comp_3_1.gif?ex=6708a982&is=67075802&hm=7a41772e5c04741b86b99d308fe87a9e3e9e86b8a310180d1fad55cc3595ccda&"
     },
     {
         "id": "test_card_sr",
@@ -49,7 +49,7 @@
             "fullName": "Super Rare",
             "no": 0.75
         },
-        "image": "slenderman.gif"
+        "image": "https://cdn.discordapp.com/attachments/1079494260350525582/1293611141494210602/Comp_3_1.gif?ex=6708a982&is=67075802&hm=7a41772e5c04741b86b99d308fe87a9e3e9e86b8a310180d1fad55cc3595ccda&"
     },
     {
         "id": "test_card_s",
@@ -62,6 +62,6 @@
             "fullName": "Secret",
             "no": 0.25
         },
-        "image": "slenderman.gif"
+        "image": "https://cdn.discordapp.com/attachments/1079494260350525582/1293611141494210602/Comp_3_1.gif?ex=6708a982&is=67075802&hm=7a41772e5c04741b86b99d308fe87a9e3e9e86b8a310180d1fad55cc3595ccda&"
     }
 ]

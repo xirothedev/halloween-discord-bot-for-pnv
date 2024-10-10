@@ -2,13 +2,16 @@
     "candy": {
         "id": "candy",
         "name": "candy",
-        "icon": "<:2581037:1293488657038311566>",
-        "useable": false
+        "icon": "<:2581037:1293488657038311566>"
     },
     "premium_candy": {
         "id": "premium_candy",
         "name": "premium candy",
-        "icon": "<:2581012:1293488650725752832>",
-        "useable": false
+        "icon": "<:2581012:1293488650725752832>"
+    },
+    "soul": {
+        "id": "soul",
+        "name": "soul",
+        "icon": "<:pnv_linhhon:1293633284898816081>"
     }
 }

@@ -13,6 +13,7 @@ import items from "@/data/items.json";
 import cards from "@/data/cards.json";
 import packs from "@/data/packs.json";
 import type { Items } from "typings";
+import Utils from "./Utils";
 
 export const logger = new Logger();
 export const prisma = new PrismaClient();
@@ -57,6 +58,8 @@ export default class ExtendedClient extends Client<true> {
     }
 
     public app = Express();
+
+    public utils = new Utils(this)
 
     public prisma = prisma;
 

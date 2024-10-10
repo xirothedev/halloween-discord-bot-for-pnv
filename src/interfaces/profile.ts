@@ -24,28 +24,4 @@ export default class ProfileInterface extends EmbedBuilder {
             },
         });
     }
-
-    public async getTopPremiumCandy() {
-        const premiumCandy = await this.client.prisma.user.findMany({
-            where: { premium_candy: { gt: this.user.premium_candy } },
-        });
-
-        return premiumCandy.length;
-    }
-
-    public async getWinnerStreak() {
-        const winnerStreak = await this.client.prisma.user.findMany({
-            where: { streak_winner: { gt: this.user.streak_winner } },
-        });
-
-        return winnerStreak.length;
-    }
-
-    public async getTopPower(userWithCard: UserWithCards) {
-        const card = userWithCard.cards.find((f) => f.card_id === this.user.card_id);
-
-        if (!card) return 0;
-
-        return getPower(card.rank, card.level);
-    }
 }
