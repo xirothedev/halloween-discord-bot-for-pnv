@@ -1,20 +1,19 @@
 import config from "@/config";
+import cards from "@/data/cards.json";
+import items from "@/data/items.json";
+import packs from "@/data/packs.json";
 import commands from "@/handlers/commands";
 import deploy from "@/handlers/deploy";
 import events from "@/handlers/events";
+import express from "@/handlers/express";
 import Logger from "@/helpers/logger";
 import antiCrash from "@/plugins/antiCrash";
 import { PrismaClient } from "@prisma/client";
 import { ActivityType, Client, Collection, Partials, PresenceUpdateStatus } from "discord.js";
-import type { Command } from "typings/command";
 import Express from "express";
-import express from "@/handlers/express";
-import items from "@/data/items.json";
-import cards from "@/data/cards.json";
-import packs from "@/data/packs.json";
 import type { Items } from "typings";
+import type { Command } from "typings/command";
 import Utils from "./Utils";
-import initUserVoice from "@/handlers/initUserVoice";
 
 export const logger = new Logger();
 export const prisma = new PrismaClient();
@@ -85,7 +84,6 @@ export default class ExtendedClient extends Client<true> {
         commands(this);
         events(this);
         antiCrash(this);
-        initUserVoice(this)
         deploy(this);
         express(this);
 

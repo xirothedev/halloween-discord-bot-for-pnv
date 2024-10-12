@@ -1,3 +1,4 @@
+import claimQuest from "@/functions/claimQuest";
 import event from "@/layouts/event";
 
 export default event("voiceStateUpdate", { once: false }, async (client, oldState, newState) => {
@@ -9,12 +10,18 @@ export default event("voiceStateUpdate", { once: false }, async (client, oldStat
 
     if (!user) return;
 
+    const quest = user.quests.find(f => f.function === "voice")
+
     if (!oldState.channelId && newState.channelId) {
         const updateVoiceState = async () => {
-            await client.prisma.quest.update({
-                where: { quest_id: user.quests[0].quest_id },
+            const data = await client.prisma.quest.update({
+                where: { quest_id: quest?.quest_id },
                 data: { progress: { increment: 0.1 } },
             });
+
+            if(data.progress >= data.target) {
+                await claimQuest(client, user, data)
+            }
         };
 
         const intervalID = setInterval(updateVoiceState, 6000);

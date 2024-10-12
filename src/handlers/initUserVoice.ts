@@ -1,3 +1,5 @@
+import claimQuest from "@/functions/claimQuest";
+
 export default async function initUserVoice(client: ExtendedClient) {
     const guild = client.guilds.cache.get(process.env.GUILD_ID);
 
@@ -15,11 +17,17 @@ export default async function initUserVoice(client: ExtendedClient) {
 
             if (!user) return;
 
+            const quest = user.quests.find(f => f.function === "voice")
+
             const updateVoiceState = async () => {
-                await client.prisma.quest.update({
-                    where: { quest_id: user.quests[0].quest_id },
+                const data = await client.prisma.quest.update({
+                    where: { quest_id: quest?.quest_id },
                     data: { progress: { increment: 0.1 } },
                 });
+
+                if (data.progress >= data.target) {
+                    await claimQuest(client, user, data);
+                }
             };
 
             const intervalID = setInterval(updateVoiceState, 6000);

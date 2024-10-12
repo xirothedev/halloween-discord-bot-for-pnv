@@ -1,3 +1,4 @@
+import claimQuest from "@/functions/claimQuest";
 import ranInt from "@/helpers/ranInt";
 import ErrorInterface from "@/interfaces/error";
 import OpenpackInterface from "@/interfaces/openpack";
@@ -95,15 +96,35 @@ export default prefix(
             });
         }
 
-        await client.prisma.pack.update({
-            where: { pack_id_user_id: { pack_id: args[0], user_id: user.user_id } },
-            data: { quantity: { decrement: 1 } },
+        const data = await client.prisma.user.update({
+            where: { user_id: user.user_id },
+            data: {
+                streak_a,
+                streak_r,
+                streak_sr,
+                streak_s,
+                total_pack: { increment: 3 },
+                packs: {
+                    update: {
+                        where: { pack_id_user_id: { pack_id: args[0], user_id: user.user_id } },
+                        data: { quantity: { decrement: 1 } },
+                    },
+                },
+                quests: {
+                    updateMany: {
+                        where: { function: "open_pack", claimed: false },
+                        data: { progress: { increment: 1 } },
+                    },
+                },
+            },
+            include: { quests: true },
         });
 
-        await client.prisma.user.update({
-            where: { user_id: user.user_id },
-            data: { streak_a, streak_r, streak_sr, streak_s, total_pack: { increment: 3 } },
-        });
+        const finishedQuest = data.quests.find((f) => f.function === "open_pack" && f.progress >= f.target);
+
+        if (finishedQuest) {
+            await claimQuest(client, user, finishedQuest);
+        }
 
         return await message.channel.send({ embeds: [new OpenpackInterface(client, message, _pack, user, cards)] });
     },
