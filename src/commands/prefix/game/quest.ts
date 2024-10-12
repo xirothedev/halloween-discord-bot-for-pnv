@@ -37,7 +37,7 @@ export default prefix(
         } else {
             await client.prisma.quest.deleteMany({ where: { user_id: user.user_id } });
             for (let index = 0; index < 3; index++) {
-                let q = quests[ranInt(0, quests.length)]
+                let q = quests[ranInt(0, quests.length)];
 
                 if (quest.find((f) => f.function === q.function)) {
                     q = quests[ranInt(0, quests.length)];
@@ -57,6 +57,7 @@ export default prefix(
                     target: q.rate.target,
                     progress: 0,
                     channel_id: q.channel || null,
+                    claimed: false,
                 });
             }
 

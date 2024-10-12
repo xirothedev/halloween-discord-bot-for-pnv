@@ -136,7 +136,11 @@ export default event("messageCreate", { once: false }, async (client, message) =
             const user = await client.prisma.user.upsert({
                 where: { user_id: message.author.id },
                 create: { user_id: message.author.id },
-                include: { packs: true, cards: true, quests: true },
+                include: {
+                    packs: true,
+                    cards: true,
+                    quests: { orderBy: { quest_id: "asc" } },
+                },
                 update: {},
             });
 

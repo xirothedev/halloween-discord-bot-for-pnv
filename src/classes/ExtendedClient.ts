@@ -36,6 +36,7 @@ export default class ExtendedClient extends Client<true> {
             modals: new Collection<string, any>(),
             autocomplete: new Collection<string, any>(),
         },
+        userMessageCount: new Collection<number, number>(),
     };
 
     public applicationcommandsArray: Array<any> = [];
@@ -59,7 +60,7 @@ export default class ExtendedClient extends Client<true> {
 
     public app = Express();
 
-    public utils = new Utils(this)
+    public utils = new Utils(this);
 
     public prisma = prisma;
 
