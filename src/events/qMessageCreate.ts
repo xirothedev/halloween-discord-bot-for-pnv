@@ -1,6 +1,5 @@
-import _ from "lodash";
-import event from "@/layouts/event";
 import claimQuest from "@/functions/claimQuest";
+import event from "@/layouts/event";
 
 export default event("messageCreate", { once: false }, async (client, message) => {
     if (message.author.bot || !message.inGuild()) return;
@@ -14,16 +13,10 @@ export default event("messageCreate", { once: false }, async (client, message) =
     const noChannel = user.quests.find((f) => f.function === "chat");
 
     if (channel && channel.channel_id === message.channelId) {
-        const count = client.collection.userMessageCount.get(channel.quest_id);
-
-        client.collection.userMessageCount.set(channel.quest_id, count ? count + 1 : 1);
-
         const quest = await client.prisma.quest.update({
             where: { quest_id: channel.quest_id },
             data: { progress: { increment: 1 } },
         });
-
-        client.collection.userMessageCount.delete(channel.quest_id);
 
         if (quest.progress >= quest.target) {
             await claimQuest(client, user, quest);
@@ -31,16 +24,10 @@ export default event("messageCreate", { once: false }, async (client, message) =
     }
 
     if (!channel && noChannel) {
-        const count = client.collection.userMessageCount.get(noChannel.quest_id);
-
-        client.collection.userMessageCount.set(noChannel.quest_id, count ? count + 1 : 1);
-
         const quest = await client.prisma.quest.update({
             where: { quest_id: noChannel.quest_id },
             data: { progress: { increment: 1 } },
         });
-
-        client.collection.userMessageCount.delete(noChannel.quest_id);
 
         if (quest.progress >= quest.target) {
             await claimQuest(client, user, quest);

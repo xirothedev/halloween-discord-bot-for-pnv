@@ -14,6 +14,7 @@ import cards from "@/data/cards.json";
 import packs from "@/data/packs.json";
 import type { Items } from "typings";
 import Utils from "./Utils";
+import initUserVoice from "@/handlers/initUserVoice";
 
 export const logger = new Logger();
 export const prisma = new PrismaClient();
@@ -36,7 +37,7 @@ export default class ExtendedClient extends Client<true> {
             modals: new Collection<string, any>(),
             autocomplete: new Collection<string, any>(),
         },
-        userMessageCount: new Collection<number, number>(),
+        userVoiceCount: new Collection<string, Timer>(),
     };
 
     public applicationcommandsArray: Array<any> = [];
@@ -84,6 +85,7 @@ export default class ExtendedClient extends Client<true> {
         commands(this);
         events(this);
         antiCrash(this);
+        initUserVoice(this)
         deploy(this);
         express(this);
 
