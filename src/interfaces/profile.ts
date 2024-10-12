@@ -1,7 +1,6 @@
-import getPower from "@/functions/getBasePower";
 import ranColor from "@/helpers/ranColor";
 import { EmbedBuilder, Message, resolveColor } from "discord.js";
-import type { FullUser, UserWithCards } from "typings/command";
+import type { FullUser } from "typings/command";
 
 export default class ProfileInterface extends EmbedBuilder {
     constructor(

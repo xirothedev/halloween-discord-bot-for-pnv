@@ -66,7 +66,7 @@ export class BaseBstCardInterface extends EmbedBuilder {
                 text: `@${message.author.username} • .gg/phonguoiviet`,
                 iconURL: message.author.displayAvatarURL(),
             },
-            description: packLine + "\n" + cardLine,
+            description: packLine + "\n\n" + cardLine,
             thumbnail: {
                 url: "https://images-ext-1.discordapp.net/external/BBNdTd7dwpLmwjyT6xCsTow-pOo7fSmQHIqpCvQ3Fys/https/cdn-icons-png.flaticon.com/128/1183/1183774.png",
             },

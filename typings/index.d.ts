@@ -4,7 +4,6 @@ type QuestProps = {
     name: string;
     function: QuestFunction;
     item: string;
-    rank: Rank;
     rate: {
         target: number;
         amount: number;
@@ -18,4 +17,17 @@ type Items = {
         name: string;
         icon: string;
     };
+};
+
+type Card = {
+    id: string;
+    name: string;
+    icon: string;
+    topic: string;
+    rank: string;
+    rate: {
+        shortName: string;
+        fullName: string;
+    };
+    image: string;
 };

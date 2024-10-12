@@ -27,7 +27,7 @@ model User {
   streak_winner    Int       @default(0)
   streak_a         Int       @default(0)
   streak_r         Int       @default(0)
-  streak_ur        Int       @default(0)
+  streak_sr        Int       @default(0)
   streak_s         Int       @default(0)
   total_pack       Int       @default(0)
   soul             Int       @default(0)

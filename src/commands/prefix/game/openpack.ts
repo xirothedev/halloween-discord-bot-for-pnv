@@ -1,5 +1,6 @@
 import ranInt from "@/helpers/ranInt";
 import ErrorInterface from "@/interfaces/error";
+import OpenpackInterface from "@/interfaces/openpack";
 import prefix from "@/layouts/prefix";
 import type { Rank } from "@prisma/client";
 import { Category } from "typings/utils";
@@ -27,8 +28,9 @@ export default prefix(
 
         const item = client.packs.find((f) => f.id === args[0]);
         const pack = user.packs.find((f) => f.pack_id === args[0]);
+        const _pack = client.packs.find((f) => f.id === args[0]);
 
-        if (!item || !pack || pack.quantity <= 0) {
+        if (!item || !_pack || !pack || pack.quantity <= 0) {
             return message.channel.send({
                 embeds: [new ErrorInterface(client).setDescription("Vật phẩm này không thể mở")],
             });
@@ -39,43 +41,43 @@ export default prefix(
 
         let streak_a = user.streak_a;
         let streak_r = user.streak_r;
-        let streak_ur = user.streak_ur;
+        let streak_sr = user.streak_sr;
         let streak_s = user.streak_s;
 
         for (let index = 0; index < 3; index++) {
             let c;
             streak_a++;
             streak_r++;
-            streak_ur++;
+            streak_sr++;
             streak_s++;
             const rand = ranInt(1, 101);
 
             if (streak_a >= 10) {
-                c = card.filter((f) => f.rate.no === 3);
+                c = card.filter((f) => f.rate.shortName === "A");
                 streak_a = 0;
             } else if (streak_r >= 50) {
-                c = card.filter((f) => f.rate.no === 1);
+                c = card.filter((f) => f.rate.shortName === "R");
                 streak_r = 0;
-            } else if (streak_ur >= 100) {
-                c = card.filter((f) => f.rate.no === 0.75);
-                streak_ur = 0;
+            } else if (streak_sr >= 100) {
+                c = card.filter((f) => f.rate.shortName === "SR");
+                streak_sr = 0;
             } else if (streak_s >= 1000) {
-                c = card.filter((f) => f.rate.no === 0.25);
+                c = card.filter((f) => f.rate.shortName === "S");
                 streak_s = 0;
             } else if (rand <= 0.25) {
-                c = card.filter((f) => f.rate.no === 0.25);
+                c = card.filter((f) => f.rate.shortName === "S");
                 streak_s = 0;
             } else if (rand <= 0.75) {
-                c = card.filter((f) => f.rate.no === 0.75);
-                streak_ur = 0;
+                c = card.filter((f) => f.rate.shortName === "SR");
+                streak_sr = 0;
             } else if (rand <= 1) {
-                c = card.filter((f) => f.rate.no === 1);
+                c = card.filter((f) => f.rate.shortName === "R");
                 streak_r = 0;
             } else if (rand <= 3) {
-                c = card.filter((f) => f.rate.no === 3);
+                c = card.filter((f) => f.rate.shortName === "A");
                 streak_a = 0;
             } else {
-                c = card.filter((f) => f.rate.no === 95);
+                c = card.filter((f) => f.rate.shortName === "B");
             }
 
             const _c = c[ranInt(0, c.length)];
@@ -100,9 +102,9 @@ export default prefix(
 
         await client.prisma.user.update({
             where: { user_id: user.user_id },
-            data: { streak_a, streak_r, streak_ur, streak_s, total_pack: { increment: 3 } },
+            data: { streak_a, streak_r, streak_sr, streak_s, total_pack: { increment: 3 } },
         });
 
-        return await message.channel.send({ content: cards.map(({ icon, name }) => `${icon} • ${name}`).join("\n") });
+        return await message.channel.send({ embeds: [new OpenpackInterface(client, message, _pack, user, cards)] });
     },
 );

@@ -1,67 +1,146 @@
 [
     {
-        "id": "test_card_b",
-        "name": "Test card B",
-        "icon": "<:pnv_B:1293614451408240751>",
-        "topic": "hellpack",
-        "rank": "b_rank",
-        "rate": {
-            "shortName": "B",
-            "fullName": "Basic",
-            "no": 95
-        },
-        "image": "https://cdn.discordapp.com/attachments/1079494260350525582/1293611141494210602/Comp_3_1.gif?ex=6708a982&is=67075802&hm=7a41772e5c04741b86b99d308fe87a9e3e9e86b8a310180d1fad55cc3595ccda&"
-    },
-    {
-        "id": "test_card_a",
-        "name": "Test card A",
-        "icon": "<:pnv_A:1293614453677490186>",
-        "topic": "hellpack",
-        "rank": "a_rank",
-        "rate": {
-            "shortName": "A",
-            "fullName": "Average",
-            "no": 3
-        },
-        "image": "https://cdn.discordapp.com/attachments/1079494260350525582/1293611141494210602/Comp_3_1.gif?ex=6708a982&is=67075802&hm=7a41772e5c04741b86b99d308fe87a9e3e9e86b8a310180d1fad55cc3595ccda&"
-    },
-    {
-        "id": "test_card_r",
-        "name": "Test card R",
-        "icon": "<:pnv_R:1293614458706333776>",
-        "topic": "hellpack",
-        "rank": "r_rank",
-        "rate": {
-            "shortName": "R",
-            "fullName": "Rare",
-            "no": 1
-        },
-        "image": "https://cdn.discordapp.com/attachments/1079494260350525582/1293611141494210602/Comp_3_1.gif?ex=6708a982&is=67075802&hm=7a41772e5c04741b86b99d308fe87a9e3e9e86b8a310180d1fad55cc3595ccda&"
-    },
-    {
-        "id": "test_card_sr",
-        "name": "Test card SR",
+        "id": "u1",
+        "name": "Slender Man",
         "icon": "<:pnv_SR:1293615184027451473>",
-        "topic": "hellpack",
+        "topic": "urban_legends",
         "rank": "sr_rank",
         "rate": {
             "shortName": "SR",
-            "fullName": "Super Rare",
-            "no": 0.75
+            "fullName": "Super Rare"
         },
-        "image": "https://cdn.discordapp.com/attachments/1079494260350525582/1293611141494210602/Comp_3_1.gif?ex=6708a982&is=67075802&hm=7a41772e5c04741b86b99d308fe87a9e3e9e86b8a310180d1fad55cc3595ccda&"
+        "image": "https://cdn.discordapp.com/attachments/1293978154163114115/1293985708754600007/UB-SR_Slenderman.gif?ex=670aaf1a&is=67095d9a&hm=93ffd0f2cf480fb2e192ffe5b888d944d40635b659b3574dc117750017db80da&"
     },
     {
-        "id": "test_card_s",
-        "name": "Test card S",
-        "icon": "<:pnv_S:1293614468885905488>",
-        "topic": "hellpack",
-        "rank": "s_rank",
+        "id": "u2",
+        "name": "Pennywise",
+        "icon": "<:pnv_R:1293614458706333776>",
+        "topic": "urban_legends",
+        "rank": "r_rank",
         "rate": {
-            "shortName": "S",
-            "fullName": "Secret",
-            "no": 0.25
+            "shortName": "R",
+            "fullName": "Rare"
         },
-        "image": "https://cdn.discordapp.com/attachments/1079494260350525582/1293611141494210602/Comp_3_1.gif?ex=6708a982&is=67075802&hm=7a41772e5c04741b86b99d308fe87a9e3e9e86b8a310180d1fad55cc3595ccda&"
+        "image": "https://cdn.discordapp.com/attachments/1293978154163114115/1293986152382206002/UB-R_Pennywise.png?ex=670aaf83&is=67095e03&hm=7a54014abfcee7b5e68dc429a80c7cecaf332127ac7ee0006cfb6180f2b8e7e8&"
+    },
+    {
+        "id": "u3",
+        "name": "Freddy Krueger",
+        "icon": "<:pnv_R:1293614458706333776>",
+        "topic": "urban_legends",
+        "rank": "r_rank",
+        "rate": {
+            "shortName": "R",
+            "fullName": "Rare"
+        },
+        "image": "https://cdn.discordapp.com/attachments/1293978154163114115/1293986188205752331/UB-R_Freddy_Krueger.png?ex=670aaf8c&is=67095e0c&hm=1aaa1bbedcd394443ed00cf5a6daf40bdde1b93e2233f9adb7e870ced4bf3132&"
+    },
+    {
+        "id": "u4",
+        "name": "Spring Bonnie",
+        "icon": "<:pnv_A:1293614453677490186>",
+        "topic": "urban_legends",
+        "rank": "a_rank",
+        "rate": {
+            "shortName": "A",
+            "fullName": "Average"
+        },
+        "image": "https://cdn.discordapp.com/attachments/1293978154163114115/1293986217540583576/UB-A_Spring_Bonnie-15.png?ex=670aaf93&is=67095e13&hm=947129a5ab8404427b7fb279a79e96e12845666af63183ee36aa2be575d0f88b&"
+    },
+    {
+        "id": "u5",
+        "name": "Sirenhead",
+        "icon": "<:pnv_A:1293614453677490186>",
+        "topic": "urban_legends",
+        "rank": "a_rank",
+        "rate": {
+            "shortName": "A",
+            "fullName": "Average"
+        },
+        "image": "https://cdn.discordapp.com/attachments/1293978154163114115/1293986241150455878/UB-A_Sirenhead.png?ex=670aaf98&is=67095e18&hm=8eac2acaf031cbff98f53bab3c28ca3e9c74d5780385e9aa9cbb076d5d2b341b&"
+    },
+    {
+        "id": "u6",
+        "name": "Werewolf",
+        "icon": "<:pnv_A:1293614453677490186>",
+        "topic": "urban_legends",
+        "rank": "a_rank",
+        "rate": {
+            "shortName": "A",
+            "fullName": "Average"
+        },
+        "image": "https://cdn.discordapp.com/attachments/1293978154163114115/1293986262344142888/UB-A_Werewolf.png?ex=670aaf9e&is=67095e1e&hm=88678d5e1eab941ef81d48c755bf87818d01e2c2aeb83a01368ca7265dd06ad1&"
+    },
+    {
+        "id": "u7",
+        "name": "Annabelle",
+        "icon": "<:pnv_A:1293614453677490186>",
+        "topic": "urban_legends",
+        "rank": "a_rank",
+        "rate": {
+            "shortName": "A",
+            "fullName": "Average"
+        },
+        "image": "https://cdn.discordapp.com/attachments/1293978154163114115/1293986289263317022/UB-A_Annabelle.png?ex=670aafa4&is=67095e24&hm=b3ed47c44c1684589d8150905120a9545c72c0e9994638304d6d8754ffd50e52&"
+    },
+    {
+        "id": "u8",
+        "name": "Bigfoot",
+        "icon": "<:pnv_B:1293614451408240751>",
+        "topic": "urban_legends",
+        "rank": "b_rank",
+        "rate": {
+            "shortName": "B",
+            "fullName": "Basic"
+        },
+        "image": "https://cdn.discordapp.com/attachments/1293978154163114115/1293986610739675147/UB-B_Bigfoot.png?ex=670aaff1&is=67095e71&hm=b59a3e141e37fcdf2b7f10b9402107d04f60b2d7c56470f84833996df9360caa&"
+    },
+    {
+        "id": "u9",
+        "name": "Billy",
+        "icon": "<:pnv_B:1293614451408240751>",
+        "topic": "urban_legends",
+        "rank": "b_rank",
+        "rate": {
+            "shortName": "B",
+            "fullName": "Basic"
+        },
+        "image": "https://cdn.discordapp.com/attachments/1293978154163114115/1293986626950660128/UB-B_Billy.png?ex=670aaff4&is=67095e74&hm=05c9c0828df3d5e93e6de3a1891273b6ab4bae29695a5a8a1a48d47fdc36b852&"
+    },
+    {
+        "id": "u10",
+        "name": "Goblin",
+        "icon": "<:pnv_B:1293614451408240751>",
+        "topic": "urban_legends",
+        "rank": "b_rank",
+        "rate": {
+            "shortName": "B",
+            "fullName": "Basic"
+        },
+        "image": "https://cdn.discordapp.com/attachments/1293978154163114115/1293986657531461742/UB-B_Goblin.png?ex=670aaffc&is=67095e7c&hm=28eff68aa50049e04941b8559fb4dd4cd85efbbcdc96e75134e5f2438c6dc2d7&"
+    },
+    {
+        "id": "u11",
+        "name": "The Cult",
+        "icon": "<:pnv_B:1293614451408240751>",
+        "topic": "urban_legends",
+        "rank": "b_rank",
+        "rate": {
+            "shortName": "B",
+            "fullName": "Basic"
+        },
+        "image": "https://cdn.discordapp.com/attachments/1293978154163114115/1293986682105892945/UB-B_The_Cult.png?ex=670ab002&is=67095e82&hm=e93ba409769ee4ee7189c5c7d63774a7e062c837b1ff6bb4a2103f7e0a79cc36&"
+    },
+    {
+        "id": "u12",
+        "name": "Nessie",
+        "icon": "<:pnv_B:1293614451408240751>",
+        "topic": "urban_legends",
+        "rank": "b_rank",
+        "rate": {
+            "shortName": "B",
+            "fullName": "Basic"
+        },
+        "image": "https://cdn.discordapp.com/attachments/1293978154163114115/1293986760308691064/UB-B_Nessie.png?ex=670ab014&is=67095e94&hm=9536543348140dfeeeacfaae022c7eed60b418105def17fcd74941476e1cd7ff&"
     }
 ]

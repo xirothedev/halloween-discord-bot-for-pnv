@@ -50,7 +50,7 @@ export default prefix(
             ? `<:pnv_star:1293636195674488884> ${bold("Thẻ Bài")}\n> ${client.icons[card.rank]} • \`Lv ${card.level}\` • ${bold(card.name)}\n> <:pnv_power:1293636491637162066> Sức Mạnh: ${bold(Intl.NumberFormat().format(power))}`
             : "";
 
-        embed.setDescription(information + "\n" + bxh + "\n" + myCard);
+        embed.setDescription(information + "\n\n" + bxh + "\n\n" + myCard);
 
         return await message.channel.send({ embeds: [embed] });
     },

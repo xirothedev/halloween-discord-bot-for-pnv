@@ -1,8 +1,8 @@
 [
     {
-        "id": "hellpack",
-        "name": "hell pack",
+        "id": "urban_legends",
+        "name": "Urban Legends",
         "icon": "<:2581012:1293488650725752832>",
-        "cards": ["test_card_s", "test_card_b"]
+        "cards": ["u1", "u2", "u3", "u4", "u5", "u6", "u7", "u8", "u9", "u10", "u11", "u12"]
     }
 ]

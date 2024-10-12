@@ -1,3 +1,4 @@
+import ranColor from "@/helpers/ranColor";
 import prefix from "@/layouts/prefix";
 import { EmbedBuilder } from "discord.js";
 import { Category } from "typings/utils";
@@ -30,7 +31,7 @@ export default prefix(
                 name: "Pong",
                 iconURL: client.user?.displayAvatarURL(),
             })
-            .setColor(client.color.main)
+            .setColor(ranColor(client.colors.main))
             .addFields([
                 {
                     name: "Độ trễ của Bot",
