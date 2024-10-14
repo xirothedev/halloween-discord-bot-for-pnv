@@ -1,10 +1,8 @@
-import ranColor from "@/helpers/ranColor";
 import ranInt from "@/helpers/ranInt";
 import DailyInterface from "@/interfaces/daily";
 import ErrorInterface from "@/interfaces/error";
 import prefix from "@/layouts/prefix";
 import { addDays } from "date-fns";
-import { bold, EmbedBuilder } from "discord.js";
 import { Category } from "typings/utils";
 
 export default prefix(

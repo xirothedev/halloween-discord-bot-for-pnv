@@ -142,5 +142,150 @@
             "fullName": "Basic"
         },
         "image": "https://cdn.discordapp.com/attachments/1293978154163114115/1293986760308691064/UB-B_Nessie.png?ex=670ab014&is=67095e94&hm=9536543348140dfeeeacfaae022c7eed60b418105def17fcd74941476e1cd7ff&"
+    },
+    {
+        "id": "t1",
+        "name": "Vampire",
+        "icon": "<:pnv_SR:1293615184027451473>",
+        "topic": "treat_or_trick",
+        "rank": "sr_rank",
+        "rate": {
+            "shortName": "SR",
+            "fullName": "Super Rare"
+        },
+        "image": "https://cdn.discordapp.com/attachments/1293978154163114115/1295097987793686649/ToT-SR_Vampire.gif?ex=670e123e&is=670cc0be&hm=21ff8087497d017925f233b3ddcdc9ae4876fa8d4ffc1a2fcf216e5da796d35d&"
+    },
+    {
+        "id": "t2",
+        "name": "Witch",
+        "icon": "<:pnv_R:1293614458706333776>",
+        "topic": "treat_or_trick",
+        "rank": "r_rank",
+        "rate": {
+            "shortName": "R",
+            "fullName": "Rare"
+        },
+        "image": "https://cdn.discordapp.com/attachments/1293978154163114115/1295098131578359948/ToT-R_Witch.png?ex=670e1260&is=670cc0e0&hm=152a15e42478b30676360801cba5fce6e07cb85da1ba7545d89c1e717944c48d&"
+    },
+    {
+        "id": "t3",
+        "name": "Grim Reaper",
+        "icon": "<:pnv_R:1293614458706333776>",
+        "topic": "treat_or_trick",
+        "rank": "r_rank",
+        "rate": {
+            "shortName": "R",
+            "fullName": "Rare"
+        },
+        "image": "https://cdn.discordapp.com/attachments/1293978154163114115/1295098207990321253/ToT-R_Grim_Reaper.png?ex=670e1272&is=670cc0f2&hm=60d198fd6d3ad3fa6f837c69eeed1080ab1c8a56613875d0d856444e9491d5c0&"
+    },
+    {
+        "id": "t4",
+        "name": "Frankenstein",
+        "icon": "<:pnv_A:1293614453677490186>",
+        "topic": "treat_or_trick",
+        "rank": "a_rank",
+        "rate": {
+            "shortName": "A",
+            "fullName": "Average"
+        },
+        "image": "https://cdn.discordapp.com/attachments/1293978154163114115/1295098335186915390/ToT-A_Frankenstein.png?ex=670e1290&is=670cc110&hm=e64cb67858d734d78f925b0024c4d3fcdc7bb746db2f5343f0aa56b01e7806c9&"
+    },
+    {
+        "id": "t5",
+        "name": "Scrate Crown",
+        "icon": "<:pnv_A:1293614453677490186>",
+        "topic": "treat_or_trick",
+        "rank": "a_rank",
+        "rate": {
+            "shortName": "A",
+            "fullName": "Average"
+        },
+        "image": "https://cdn.discordapp.com/attachments/1293978154163114115/1295098393298862140/ToT-A_Scarecrown.png?ex=670e129e&is=670cc11e&hm=feeb2520173780e7f56e7ad1e12d95b9c71571f5827afa37b8de253a08f9d2ab&"
+    },
+    {
+        "id": "t6",
+        "name": "Devil",
+        "icon": "<:pnv_A:1293614453677490186>",
+        "topic": "treat_or_trick",
+        "rank": "a_rank",
+        "rate": {
+            "shortName": "A",
+            "fullName": "Average"
+        },
+        "image": "https://cdn.discordapp.com/attachments/1293978154163114115/1295098433987940373/ToT-A_Devil.png?ex=670e12a8&is=670cc128&hm=3ba1154a40eab017271d2f307a32464835b9d0434f61369b4dfd573fa927898b&"
+    },
+    {
+        "id": "t7",
+        "name": "Grave",
+        "icon": "<:pnv_A:1293614453677490186>",
+        "topic": "treat_or_trick",
+        "rank": "a_rank",
+        "rate": {
+            "shortName": "A",
+            "fullName": "Average"
+        },
+        "image": "https://cdn.discordapp.com/attachments/1293978154163114115/1295098478720061462/ToT-A_Grave.png?ex=670e12b3&is=670cc133&hm=084b8613c0624898ed7af017d22fb1dcf0894e41b8166b31752d28a549a8bf81&"
+    },
+
+    {
+        "id": "t8",
+        "name": "Ghost",
+        "icon": "<:pnv_B:1293614451408240751>",
+        "topic": "treat_or_trick",
+        "rank": "b_rank",
+        "rate": {
+            "shortName": "B",
+            "fullName": "Basic"
+        },
+        "image": "https://cdn.discordapp.com/attachments/1293978154163114115/1295098568474103958/ToT-B_Ghost.png?ex=670e12c8&is=670cc148&hm=d8f35e64ea9fb48cffb51af8f83d509020ad60ce0fdb45987c55a23195c78741&"
+    },
+    {
+        "id": "t9",
+        "name": "Black Cat",
+        "icon": "<:pnv_B:1293614451408240751>",
+        "topic": "treat_or_trick",
+        "rank": "b_rank",
+        "rate": {
+            "shortName": "B",
+            "fullName": "Basic"
+        },
+        "image": "https://cdn.discordapp.com/attachments/1293978154163114115/1295098623171887154/ToT-B_Black_Cat.png?ex=670e12d5&is=670cc155&hm=884cb4ef7a9014cfb1e0654753e37836430c7c4433f0b454156875380c3eff82&"
+    },
+    {
+        "id": "t10",
+        "name": "Mummy",
+        "icon": "<:pnv_B:1293614451408240751>",
+        "topic": "treat_or_trick",
+        "rank": "b_rank",
+        "rate": {
+            "shortName": "B",
+            "fullName": "Basic"
+        },
+        "image": "https://cdn.discordapp.com/attachments/1293978154163114115/1295098682701516800/ToT-B_Mummy.png?ex=670e12e3&is=670cc163&hm=504b7361715065fb2a481426e0afe43846eb406d4eb63d91220823c500d94ebe&"
+    },
+    {
+        "id": "t11",
+        "name": "Skeleton",
+        "icon": "<:pnv_B:1293614451408240751>",
+        "topic": "treat_or_trick",
+        "rank": "b_rank",
+        "rate": {
+            "shortName": "B",
+            "fullName": "Basic"
+        },
+        "image": "https://cdn.discordapp.com/attachments/1293978154163114115/1295098747176615936/ToT-B_Skeleton.png?ex=670e12f3&is=670cc173&hm=6ec4a34e4e9fb07fb34fad52c10a9c28df9e285a243a93c44c1f1018e3043813&"
+    },
+    {
+        "id": "t12",
+        "name": "Jack O' Lantern",
+        "icon": "<:pnv_B:1293614451408240751>",
+        "topic": "treat_or_trick",
+        "rank": "b_rank",
+        "rate": {
+            "shortName": "B",
+            "fullName": "Basic"
+        },
+        "image": "https://cdn.discordapp.com/attachments/1293978154163114115/1295098808228773949/ToT-B_Jack_O__Lantern.png?ex=670e1301&is=670cc181&hm=fd9785beab1c60b02fe464fe5e4601ae5866ad0fd9654eb118dc7f21d32a4157&"
     }
 ]
