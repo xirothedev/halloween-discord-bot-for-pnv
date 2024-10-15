@@ -17,11 +17,13 @@ export default async function initUserVoice(client: ExtendedClient) {
 
             if (!user) return;
 
-            const quest = user.quests.find(f => f.function === "voice")
+            const quest = user.quests.find((f) => f.function === "voice");
+
+            if (!quest) return;
 
             const updateVoiceState = async () => {
                 const data = await client.prisma.quest.update({
-                    where: { quest_id: quest?.quest_id },
+                    where: { quest_id: quest.quest_id },
                     data: { progress: { increment: 0.1 } },
                 });
 

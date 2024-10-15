@@ -10,7 +10,7 @@ export default event("voiceStateUpdate", { once: false }, async (client, oldStat
 
     if (!user) return;
 
-    const quest = user.quests.find(f => f.function === "voice")
+    const quest = user.quests.find((f) => f.function === "voice");
 
     if (!oldState.channelId && newState.channelId) {
         const updateVoiceState = async () => {
@@ -19,8 +19,8 @@ export default event("voiceStateUpdate", { once: false }, async (client, oldStat
                 data: { progress: { increment: 0.1 } },
             });
 
-            if(data.progress >= data.target) {
-                await claimQuest(client, user, data)
+            if (data.progress >= data.target) {
+                await claimQuest(client, user, data);
             }
         };
 

@@ -1,13 +1,20 @@
-import getPower from "@/functions/getBasePower";
 import type { Card } from "@prisma/client";
-import type { FullUser, UserWithCards } from "typings/command";
+import type { FullUser } from "typings/command";
 
 export default class Utils {
     constructor(private client: ExtendedClient) {}
 
     public async getTopPremiumCandy(user: FullUser) {
         const premiumCandy = await this.client.prisma.user.findMany({
-            where: { premium_candy: { gt: user.premium_candy } },
+            where: { premium_candy: { lt: user.premium_candy } },
+        });
+
+        return premiumCandy.length;
+    }
+
+    public async getTopCandy(user: FullUser) {
+        const premiumCandy = await this.client.prisma.user.findMany({
+            where: { candy: { lt: user.candy } },
         });
 
         return premiumCandy.length;
@@ -15,18 +22,10 @@ export default class Utils {
 
     public async getWinnerStreak(user: FullUser) {
         const winnerStreak = await this.client.prisma.user.findMany({
-            where: { streak_winner: { gt: user.streak_winner } },
+            where: { streak_winner: { lt: user.streak_winner } },
         });
 
         return winnerStreak.length;
-    }
-
-    public async getTopPower(userWithCard: UserWithCards, user: FullUser) {
-        const card = userWithCard.cards.find((f) => f.card_id === user.card_id);
-
-        if (!card) return 0;
-
-        return getPower(card.rank, card.level);
     }
 
     public getFinisedPack(user: FullUser) {

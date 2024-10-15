@@ -1,4 +1,4 @@
-import getPower from "@/functions/getBasePower";
+import { getPower } from "@/functions/power";
 import ranInt from "@/helpers/ranInt";
 import { bold, EmbedBuilder, Message, resolveColor } from "discord.js";
 import type { UserWithCards } from "typings/command";
@@ -10,6 +10,7 @@ export default class BattleInterface extends EmbedBuilder {
         public user: UserWithCards,
         public enemy: UserWithCards,
         public won: boolean | null,
+        public reward: { candy: number; soul: number },
     ) {
         const UserCard = user.cards.find((f) => f.card_id === user.card_id)!;
         const EnemyCard = user.cards.find((f) => f.card_id === user.card_id)!;
@@ -22,13 +23,6 @@ export default class BattleInterface extends EmbedBuilder {
                   ? "https://cdn.discordapp.com/attachments/1293487762753982478/1295079400773128295/2.png?ex=670e00ee&is=670caf6e&hm=487351a89810023dfbc3140f689ed24ec63d4c926e2ef3ccba82b0cd8570bc6b&"
                   : "https://cdn.discordapp.com/attachments/1293487762753982478/1295079400987033712/3.png?ex=670e00ee&is=670caf6e&hm=864baaba643c01ba03ab5b60a2b4db59cf769a8221423fca252f2f08cc53fa43&";
 
-        const reward: { candy: number; soul: number } = { candy: 0, soul: 0 };
-
-        if (won) {
-            reward.candy = ranInt(1, 21) + user.streak_winner * 3;
-            reward.soul = ranInt(1, 6) + user.streak_winner * 3;
-        }
-
         super({
             color: won === true ? resolveColor("Green") : won === false ? resolveColor("Red") : undefined,
             author: {
@@ -38,12 +32,12 @@ export default class BattleInterface extends EmbedBuilder {
             fields: [
                 {
                     name: `@${message.author.username}`,
-                    value: `${client.icons[UserCard.rank]} • \`Lv ${UserCard.level}\` • ${bold(UserCard.name)}\n<:pnv_power:1293636491637162066> Sức mạnh ${bold(Intl.NumberFormat().format(getPower(UserCard.rank, UserCard.level)))}`,
+                    value: `${client.icons[UserCard.rank]} • \`Lv ${UserCard.level}\` • ${bold(UserCard.name)}\n${client.icons.power} Sức mạnh ${bold(Intl.NumberFormat().format(getPower(UserCard.rank, UserCard.level)))}`,
                     inline: true,
                 },
                 {
                     name: `@${userEnemy?.username || "Người bí ẩn"}`,
-                    value: `${client.icons[EnemyCard.rank]} • \`Lv ${EnemyCard.level}\` • ${bold(EnemyCard.name)}\n<:pnv_power:1293636491637162066> Sức mạnh ${bold(Intl.NumberFormat().format(getPower(EnemyCard.rank, EnemyCard.level)))}`,
+                    value: `${client.icons[EnemyCard.rank]} • \`Lv ${EnemyCard.level}\` • ${bold(EnemyCard.name)}\n${client.icons.power} Sức mạnh ${bold(Intl.NumberFormat().format(getPower(EnemyCard.rank, EnemyCard.level)))}`,
                     inline: true,
                 },
                 {

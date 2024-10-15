@@ -1,6 +1,7 @@
 import type { Rank } from "@prisma/client";
+import type { UserWithCards } from "typings/command";
 
-export default function getPower(cardRank: Rank, level: number) {
+export function getPower(cardRank: Rank, level: number) {
     let basePower;
     let levelUp;
 
@@ -37,4 +38,12 @@ export default function getPower(cardRank: Rank, level: number) {
     }
 
     return basePower + levelUp * level;
+}
+
+export function resolvePower(user: UserWithCards, cardId: string | null) {
+    const card = user.cards.find((f) => f.card_id === cardId);
+
+    if (!card) return 0;
+
+    return getPower(card.rank, card.level);
 }

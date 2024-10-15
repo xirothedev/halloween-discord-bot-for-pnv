@@ -1,4 +1,4 @@
-import getPower from "@/functions/getBasePower";
+import { getPower } from "@/functions/power";
 import ranInt from "@/helpers/ranInt";
 import BattleInterface from "@/interfaces/battle";
 import ErrorInterface from "@/interfaces/error";
@@ -22,7 +22,7 @@ export default prefix(
     async (client, user, message, args) => {
         if (!user.card_id) {
             return message.channel.send({
-                embeds: [new ErrorInterface(client).setDescription("Bạn chưa chọn thẻ để thách đấu")],
+                embeds: [new ErrorInterface(client).setDescription("Bạn chưa chọn card để thách đấu")],
             });
         }
 
@@ -54,7 +54,7 @@ export default prefix(
 
         if (cardsUsed.length <= 0) {
             return message.channel.send({
-                embeds: [new ErrorInterface(client).setDescription("Không tìm thấy thẻ")],
+                embeds: [new ErrorInterface(client).setDescription("Không tìm thấy card")],
             });
         }
 
@@ -71,8 +71,20 @@ export default prefix(
             });
         }
 
+        const reward: { candy: number; soul: number } = { candy: 0, soul: 0 };
+
+        if (won) {
+            reward.candy = ranInt(1, 21) + user.streak_winner * 3;
+            reward.soul = ranInt(1, 6) + user.streak_winner * 3;
+
+            await client.prisma.user.update({
+                where: { user_id: user.user_id },
+                data: { candy: { increment: reward.candy }, soul: { increment: reward.soul } },
+            });
+        }
+
         return await message.channel.send({
-            embeds: [new BattleInterface(client, message, user, enemy, won)],
+            embeds: [new BattleInterface(client, message, user, enemy, won, reward)],
         });
     },
 );

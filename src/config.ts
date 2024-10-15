@@ -26,6 +26,7 @@ const config = {
         sr_rank: "<:pnv_SR:1293615184027451473>",
         s_rank: "<:pnv_S:1293614468885905488>",
         hellpack: "<:pnv_chamcam:1293566504524185642>",
+        power: "<:pnv_power:1293636491637162066>",
     },
     color: {
         red: 0xff0000,
