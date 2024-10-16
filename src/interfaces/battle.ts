@@ -13,7 +13,7 @@ export default class BattleInterface extends EmbedBuilder {
         public reward: { candy: number; soul: number },
     ) {
         const UserCard = user.cards.find((f) => f.card_id === user.card_id)!;
-        const EnemyCard = user.cards.find((f) => f.card_id === user.card_id)!;
+        const EnemyCard = user.cards.find((f) => f.card_id === enemy.card_id)!;
         const userEnemy = client.users.cache.get(enemy.user_id);
 
         const thumbnail =

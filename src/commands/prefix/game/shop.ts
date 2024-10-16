@@ -22,7 +22,7 @@ export default prefix(
     },
     async (client, user, message, args) => {
         const items = client.packs.map((pack) => {
-            return `<:pnv_chamcam:1293566504524185642> \`Pack ${pack.name}\`: ${bold("25")} ${client.items.candy.icon}`;
+            return `<:pnv_chamcam:1293566504524185642> Pack \`${pack.name}\`: ${bold("25")} ${client.items.candy.icon}`;
         });
 
         const embed = new EmbedBuilder({

@@ -31,6 +31,7 @@ export default prefix(
         );
 
         let page = 1;
+        const maxpage = client.packs.length + 1;
 
         const msg = await message.channel.send({
             embeds: [new BstInterface(client, message, user)],
@@ -38,18 +39,10 @@ export default prefix(
         });
 
         const getInterface = (page: number) => {
-            if (page === 2) {
-                return new BaseBstCardInterface(client, message, user, client.packs.find((f) => f.id === "hellpack")!);
-            } else if (page === 3) {
-                return new BaseBstCardInterface(client, message, user, client.packs.find((f) => f.id === "hellpack")!);
-            } else if (page === 4) {
-                return new BaseBstCardInterface(client, message, user, client.packs.find((f) => f.id === "hellpack")!);
-            } else if (page === 5) {
-                return new BaseBstCardInterface(client, message, user, client.packs.find((f) => f.id === "hellpack")!);
-            } else if (page === 6) {
-                return new BaseBstCardInterface(client, message, user, client.packs.find((f) => f.id === "hellpack")!);
-            } else {
+            if (page === 1) {
                 return new BstInterface(client, message, user);
+            } else {
+                return new BaseBstCardInterface(client, message, user, client.packs[page - 2]);
             }
         };
 
@@ -96,7 +89,7 @@ export default prefix(
 
                 const options: string | MessagePayload | MessageReplyOptions = { embeds: [getInterface(page)] };
 
-                if (page >= 6) {
+                if (page >= maxpage) {
                     options.components = [
                         row.setComponents(prevButton.setDisabled(false), nextButton.setDisabled(true)),
                     ];

@@ -29,13 +29,12 @@ export default prefix(
         const rate = ranInt(0, 3);
         const won = rate === 0 ? false : rate === 2 ? true : null;
 
-        const users = await client.prisma.user.findMany({
-            where: { NOT: { user_id: user.user_id } },
-            include: { cards: true },
-        });
+        const users = await client.prisma.user.findMany({ include: { cards: true } });
         const cards: Card[] = [];
-        users.forEach((user) => {
-            cards.push(...user.cards);
+
+        users.forEach((_user) => {
+            if (!_user.cards || _user.user_id === user.user_id) return;
+            cards.push(..._user.cards);
         });
         const UserCard = user.cards.find((f) => f.card_id === user.card_id)!;
 
@@ -58,7 +57,7 @@ export default prefix(
             });
         }
 
-        const cardUsed = cardsUsed[ranInt(0, cardsUsed.length)];
+        const cardUsed = cardsUsed[ranInt(0, cardsUsed.length - 1)];
 
         const enemy = await client.prisma.user.findUnique({
             where: { user_id: cardUsed.user_id },
@@ -79,7 +78,16 @@ export default prefix(
 
             await client.prisma.user.update({
                 where: { user_id: user.user_id },
-                data: { candy: { increment: reward.candy }, soul: { increment: reward.soul } },
+                data: {
+                    candy: { increment: reward.candy },
+                    soul: { increment: reward.soul },
+                    streak_winner: { increment: 1 },
+                },
+            });
+        } else if (won === false) {
+            await client.prisma.user.update({
+                where: { user_id: user.user_id },
+                data: { streak_winner: 0 },
             });
         }
 

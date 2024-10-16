@@ -1,3 +1,4 @@
+import ranColor from "@/helpers/ranColor";
 import prefix from "@/layouts/prefix";
 import { EmbedBuilder } from "discord.js";
 import { Category } from "typings/utils";
@@ -18,18 +19,22 @@ export default prefix(
     },
     async (client, user, message, args) => {
         const embed = new EmbedBuilder();
-        const commands = client.collection.prefixcommands;
+        const commands = client.collection.prefixcommands.filter((f) => !f.options.hidden && !f.options.ignore);
         const categories = [...new Set(commands.map((cmd) => cmd.options.category))];
 
         if (args[0]) {
             const command = client.collection.prefixcommands.get(args[0].toLowerCase());
             if (!command) {
                 return await message.channel.send({
-                    embeds: [embed.setColor(client.color.red).setDescription(`Lệnh \`${args[0]}\` này không tồn tại.`)],
+                    embeds: [
+                        embed
+                            .setColor(client.color.red)
+                            .setDescription(`Lệnh \`${args[0]}\` này không tồn tại.`),
+                    ],
                 });
             }
             const helpEmbed = embed
-                .setColor(client.color.main)
+                .setColor(ranColor(client.colors.main))
                 .setTitle(`Menu trợ giúp - ${command.name}`)
                 .setDescription(
                     `**Mô tả:** ${command.options.description.content}\n**Cách sử dụng:** ${client.prefix}${
@@ -60,10 +65,10 @@ export default prefix(
         }));
 
         const helpEmbed = embed
-            .setColor(client.color.main)
+            .setColor(ranColor(client.colors.main))
             .setTitle("Menu trợ giúp")
             .setDescription(
-                `Chào bạn! Tôi là ${client.user?.displayName}, một supporter về thanh toán được tạo bởi Phố Người Việt. Bạn có thể sử dụng \`${client.prefix} help <command>\` để biết thêm thông tin về lệnh.`,
+                `Chào bạn! Tôi là ${client.user?.displayName}, một bot sự kiện Halloween được tạo bởi Phố Người Việt. Bạn có thể sử dụng \`${client.prefix} help <command>\` để biết thêm thông tin về lệnh.`,
             )
             .setFooter({
                 text: `Sử dụng ${client.prefix} help <command> để biết thêm thông tin về lệnh`,

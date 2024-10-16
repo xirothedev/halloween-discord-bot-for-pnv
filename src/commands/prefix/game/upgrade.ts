@@ -1,3 +1,4 @@
+import claimQuest from "@/functions/claimQuest";
 import getIngredient from "@/functions/getIngredient";
 import { getPower } from "@/functions/power";
 import ErrorInterface from "@/interfaces/error";
@@ -26,7 +27,9 @@ export default prefix(
             });
         }
 
-        const card = user.cards.find((f) => f.card_id === args[0] || f.name.toLowerCase() === args.join(" ").toLowerCase());
+        const card = user.cards.find(
+            (f) => f.card_id === args[0] || f.name.toLowerCase() === args.join(" ").toLowerCase(),
+        );
 
         if (!card) {
             return message.channel.send({
@@ -48,7 +51,7 @@ export default prefix(
             });
         }
 
-        await client.prisma.user.update({
+        const data = await client.prisma.user.update({
             where: { user_id: user.user_id },
             data: {
                 candy: { decrement: ingredient.candy },
@@ -59,8 +62,21 @@ export default prefix(
                         data: { level: { increment: 1 } },
                     },
                 },
+                quests: {
+                    updateMany: {
+                        where: { function: "upgrade_card", claimed: false },
+                        data: { progress: { increment: 1 } },
+                    },
+                },
             },
+            include: { quests: true },
         });
+
+        const finishedQuest = data.quests.find((f) => f.function === "open_pack" && f.progress >= f.target);
+
+        if (finishedQuest) {
+            await claimQuest(client, user, finishedQuest);
+        }
 
         const content = [
             `> - Nâng cấp ${client.icons[card.rank]} • ${bold(card.name)}`,

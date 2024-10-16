@@ -12,10 +12,12 @@ export default event("voiceStateUpdate", { once: false }, async (client, oldStat
 
     const quest = user.quests.find((f) => f.function === "voice");
 
+    if(!quest) return
+
     if (!oldState.channelId && newState.channelId) {
         const updateVoiceState = async () => {
             const data = await client.prisma.quest.update({
-                where: { quest_id: quest?.quest_id },
+                where: { quest_id: quest.quest_id },
                 data: { progress: { increment: 0.1 } },
             });
 

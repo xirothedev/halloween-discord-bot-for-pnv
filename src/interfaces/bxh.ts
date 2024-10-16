@@ -10,7 +10,7 @@ export default class BxhInterface extends EmbedBuilder {
         super({
             color: resolveColor(ranColor(client.colors.main)),
             author: {
-                name: `Bảng xếp hạng ${message.guild?.name}`,
+                name: `Bảng xếp hạng của ${message.author.username}`,
                 icon_url: message.guild?.iconURL()!,
             },
             description: `${bold("Xếp hạng của bạn:")}\n\n${ranks.join("\n")}`,
@@ -34,7 +34,7 @@ export class BaseBxhInterface extends EmbedBuilder {
         super({
             color: resolveColor(ranColor(client.colors.main)),
             author: {
-                name: `Bộ Sưu Tập Của ${message.author.username}`,
+                name: `Bảng xếp hạng ${message.guild?.name}`,
                 icon_url: message.guild?.iconURL()!,
             },
             footer: {

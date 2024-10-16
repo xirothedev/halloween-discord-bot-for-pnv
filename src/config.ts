@@ -3,8 +3,8 @@ import type { ColorResolvable } from "discord.js";
 const config = {
     preconnect: true,
     users: {
-        ownerId: "1291013382849167542",
-        devIds: ["1291013382849167542", "363285735140491285"],
+        ownerId: "523708248600346635",
+        devIds: ["1291013382849167542"],
     },
     publicCommand: true,
     deleteErrorAfter: "5s",

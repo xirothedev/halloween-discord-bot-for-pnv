@@ -1,4 +1,5 @@
 import ranColor from "@/helpers/ranColor";
+import type { Rank } from "@prisma/client";
 import { bold, EmbedBuilder, Message, resolveColor } from "discord.js";
 import type { FullUser } from "typings/command";
 
@@ -46,12 +47,13 @@ export class BaseBstCardInterface extends EmbedBuilder {
     ) {
         const finishedCard = client.utils.getFinisedCard(user, pack.id);
         const packLine = `${pack.icon} ${bold(pack.name)}\n> - \`${finishedCard.cards.length}/${pack.cards.length}\``;
-        const cardLine = `${pack.icon} ${bold("Card Hiện Có")}\n${finishedCard.cards
+        const cardLine = `${pack.icon} ${bold("Card Hiện Có")}\n${client.cards
+            .filter((f) => f.topic === pack.id)
             .map((card) => {
-                if (finishedCard.pack?.cards.includes(card.card_id)) {
-                    return `> \`${card.card_id}\` • ${client.icons[card.rank]} • ${card.name}`;
+                if (finishedCard.cards.find((f) => f.card_id === card.id)) {
+                    return `> \`${card.id}\` • ${client.icons[card.rank as Rank]} • ${card.name}`;
                 } else {
-                    return `> \`${card.card_id}\` • ${client.icons[card.rank]} • ~~${card.name}~~`;
+                    return `> \`${card.id}\` • ${client.icons[card.rank as Rank]} • ~~${card.name}~~`;
                 }
             })
             .join("\n")}`;
