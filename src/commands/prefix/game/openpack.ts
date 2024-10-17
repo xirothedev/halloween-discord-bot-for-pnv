@@ -112,7 +112,10 @@ export default prefix(
                 },
                 quests: {
                     updateMany: {
-                        where: { function: "open_pack", claimed: false },
+                        where: {
+                            OR: [{ function: "open" }, { function: "open_pack", pack_id: args[0] }],
+                            claimed: false,
+                        },
                         data: { progress: { increment: 1 } },
                     },
                 },
@@ -120,10 +123,14 @@ export default prefix(
             include: { quests: true },
         });
 
-        const finishedQuest = data.quests.find((f) => f.function === "open_pack" && f.progress >= f.target);
+        const finishedQuests = data.quests.filter(
+            (f) => (f.function === "open" || f.function === "open_pack") && f.progress >= f.target,
+        );
 
-        if (finishedQuest) {
-            await claimQuest(client, user, finishedQuest);
+        if (finishedQuests) {
+            await Promise.all(
+                finishedQuests.map(async (finishedQuest) => await claimQuest(client, user, finishedQuest)),
+            );
         }
 
         return await message.channel.send({ embeds: [new OpenpackInterface(client, message, _pack, user, cards)] });

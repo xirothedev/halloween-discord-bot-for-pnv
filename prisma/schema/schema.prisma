@@ -51,6 +51,7 @@ model Quest {
   progress      Int           @default(0)
   function      QuestFunction
   channel_id    String?
+  pack_id       String?
   claimed       Boolean       @default(false)
 
   @@map("quest")

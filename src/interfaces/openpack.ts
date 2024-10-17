@@ -1,19 +1,12 @@
-import ranColor from "@/helpers/ranColor";
-import type { Rank } from "@prisma/client";
 import { bold, EmbedBuilder, Message, resolveColor, type ColorResolvable } from "discord.js";
-import type { Card } from "typings";
+import type { Card, Pack } from "typings";
 import type { FullUser } from "typings/command";
 
 export default class OpenpackInterface extends EmbedBuilder {
     constructor(
         public client: ExtendedClient,
         public message: Message,
-        public pack: {
-            id: string;
-            name: string;
-            icon: string;
-            cards: string[];
-        },
+        public pack: Pack,
         public user: FullUser,
         public cards: Card[],
     ) {

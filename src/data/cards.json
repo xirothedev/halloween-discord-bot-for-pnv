@@ -287,5 +287,294 @@
             "fullName": "Basic"
         },
         "image": "https://cdn.discordapp.com/attachments/1293978154163114115/1295098808228773949/ToT-B_Jack_O__Lantern.png?ex=670e1301&is=670cc181&hm=fd9785beab1c60b02fe464fe5e4601ae5866ad0fd9654eb118dc7f21d32a4157&"
+    },
+    {
+        "id": "m1",
+        "name": "Phoenix",
+        "icon": "<:pnv_SR:1293615184027451473>",
+        "topic": "mythology",
+        "rank": "sr_rank",
+        "rate": {
+            "shortName": "SR",
+            "fullName": "Super Rare"
+        },
+        "image": "https://cdn.discordapp.com/attachments/1293978154163114115/1295971763158519858/Phoenix_1.gif?ex=67109742&is=670f45c2&hm=f4694dc924ad25f19ee85fbbd925d0f74b2ab58ade459ca1a74568f6ab8a0104&"
+    },
+    {
+        "id": "m2",
+        "name": "Cerberus",
+        "icon": "<:pnv_R:1293614458706333776>",
+        "topic": "mythology",
+        "rank": "r_rank",
+        "rate": {
+            "shortName": "R",
+            "fullName": "Rare"
+        },
+        "image": "https://cdn.discordapp.com/attachments/1293978154163114115/1295971857211588749/Fantasy-01.png?ex=67109758&is=670f45d8&hm=96b35ec10f718349152e000f93a2c27294971e2adced19cb940abd5221f2be0d&"
+    },
+    {
+        "id": "m3",
+        "name": "Hydra",
+        "icon": "<:pnv_R:1293614458706333776>",
+        "topic": "mythology",
+        "rank": "r_rank",
+        "rate": {
+            "shortName": "R",
+            "fullName": "Rare"
+        },
+        "image": "https://cdn.discordapp.com/attachments/1293978154163114115/1295971912060764241/Fantasy-02.png?ex=67109765&is=670f45e5&hm=11d0df08de9fe57d5fa4a1d860bcd6730ac228437eac52edac52584879588caf&"
+    },
+    {
+        "id": "m4",
+        "name": "Pandora Box",
+        "icon": "<:pnv_A:1293614453677490186>",
+        "topic": "mythology",
+        "rank": "a_rank",
+        "rate": {
+            "shortName": "A",
+            "fullName": "Average"
+        },
+        "image": "https://cdn.discordapp.com/attachments/1293978154163114115/1295971989491548284/Fantasy-03.png?ex=67109778&is=670f45f8&hm=48a75fc6d2c2bf8386ee331fbafe62ea64d79869b9a5fda12d09610353dd862c&"
+    },
+    {
+        "id": "m5",
+        "name": "Griffin",
+        "icon": "<:pnv_A:1293614453677490186>",
+        "topic": "mythology",
+        "rank": "a_rank",
+        "rate": {
+            "shortName": "A",
+            "fullName": "Average"
+        },
+        "image": "https://cdn.discordapp.com/attachments/1293978154163114115/1295972043514445834/Fantasy-04.png?ex=67109785&is=670f4605&hm=4d0beee89bd5bd273d9ce7c84d80ab0f6848728c7c966cc880e063eb14ee34e0&"
+    },
+    {
+        "id": "m6",
+        "name": "Basilisk",
+        "icon": "<:pnv_A:1293614453677490186>",
+        "topic": "mythology",
+        "rank": "a_rank",
+        "rate": {
+            "shortName": "A",
+            "fullName": "Average"
+        },
+        "image": "https://cdn.discordapp.com/attachments/1293978154163114115/1295972112867262494/Fantasy-05.png?ex=67109795&is=670f4615&hm=e97919416fd1af53a9a77608472cf81afe3230d496c4ee413abe392459742088&"
+    },
+    {
+        "id": "m7",
+        "name": "Dragon",
+        "icon": "<:pnv_A:1293614453677490186>",
+        "topic": "mythology",
+        "rank": "a_rank",
+        "rate": {
+            "shortName": "A",
+            "fullName": "Average"
+        },
+        "image": "https://cdn.discordapp.com/attachments/1293978154163114115/1295972734920167576/Fantasy-11.png?ex=6710982a&is=670f46aa&hm=1df585b5da7711f3b60b99bef63a83f3dbb05ad7dcfca3e38c1b1187f5883b60&"
+    },
+    {
+        "id": "m8",
+        "name": "Nine-tailed fox",
+        "icon": "<:pnv_B:1293614451408240751>",
+        "topic": "mythology",
+        "rank": "b_rank",
+        "rate": {
+            "shortName": "B",
+            "fullName": "Basic"
+        },
+        "image": "https://cdn.discordapp.com/attachments/1293978154163114115/1295972841011019837/Fantasy-06.png?ex=67109843&is=670f46c3&hm=f3ec380e9441ae19bac8d20e2eadfeadff25d2375f22213d1d5048e447fce196&"
+    },
+    {
+        "id": "m9",
+        "name": "Unicorn",
+        "icon": "<:pnv_B:1293614451408240751>",
+        "topic": "mythology",
+        "rank": "b_rank",
+        "rate": {
+            "shortName": "B",
+            "fullName": "Basic"
+        },
+        "image": "https://cdn.discordapp.com/attachments/1293978154163114115/1295972907180363796/Fantasy-07.png?ex=67109853&is=670f46d3&hm=fe4dad354d2b470b5b7e552544446ff8c2d77673ecce691479dc1d9a4b0bfeb0&"
+    },
+    {
+        "id": "m10",
+        "name": "Faun",
+        "icon": "<:pnv_B:1293614451408240751>",
+        "topic": "mythology",
+        "rank": "b_rank",
+        "rate": {
+            "shortName": "B",
+            "fullName": "Basic"
+        },
+        "image": "https://cdn.discordapp.com/attachments/1293978154163114115/1295972953036685352/Fantasy-08.png?ex=6710985e&is=670f46de&hm=1e83a0ad54d68a07088b36fbc596a22ba44d2c7ff435cd9a5c5669b264141fdf&"
+    },
+    {
+        "id": "m11",
+        "name": "Centaur",
+        "icon": "<:pnv_B:1293614451408240751>",
+        "topic": "mythology",
+        "rank": "b_rank",
+        "rate": {
+            "shortName": "B",
+            "fullName": "Basic"
+        },
+        "image": "https://cdn.discordapp.com/attachments/1293978154163114115/1295972996380627006/Fantasy-09.png?ex=67109868&is=670f46e8&hm=f7b7a36bc9aa59fb112c70fc69e3b4e5734694719d40dbb3f31d652f867e944a&"
+    },
+    {
+        "id": "m12",
+        "name": "Mermaid",
+        "icon": "<:pnv_B:1293614451408240751>",
+        "topic": "mythology",
+        "rank": "b_rank",
+        "rate": {
+            "shortName": "B",
+            "fullName": "Basic"
+        },
+        "image": "https://cdn.discordapp.com/attachments/1293978154163114115/1295973038805749842/Fantasy-10.png?ex=67109872&is=670f46f2&hm=1de03cb49f7fd099c8beb234207b85d08ba73ac5a67aff57ed717cc3147900a1&"
+    },
+
+    {
+        "id": "c1",
+        "name": "Phoenix",
+        "icon": "<:pnv_SR:1293615184027451473>",
+        "topic": "comic_villains",
+        "rank": "sr_rank",
+        "rate": {
+            "shortName": "SR",
+            "fullName": "Super Rare"
+        },
+        "image": "https://cdn.discordapp.com/attachments/1293978154163114115/1296126719949934592/Scarlet_Witch.gif?ex=67112792&is=670fd612&hm=c326d5982b8267f87a00dd671ff46c7f082d12ce0f99d025db7aa42857cf85d7&"
+    },
+    {
+        "id": "c2",
+        "name": "Hela",
+        "icon": "<:pnv_R:1293614458706333776>",
+        "topic": "comic_villains",
+        "rank": "r_rank",
+        "rate": {
+            "shortName": "R",
+            "fullName": "Rare"
+        },
+        "image": "https://cdn.discordapp.com/attachments/1293978154163114115/1296127025660166279/Comic-03.png?ex=671127db&is=670fd65b&hm=5a59a12e43f27e9eeb7247bb16214098b8b67598e88666a96aaccf82e9cab43f&"
+    },
+    {
+        "id": "c3",
+        "name": "Joker",
+        "icon": "<:pnv_R:1293614458706333776>",
+        "topic": "comic_villains",
+        "rank": "r_rank",
+        "rate": {
+            "shortName": "R",
+            "fullName": "Rare"
+        },
+        "image": "https://cdn.discordapp.com/attachments/1293978154163114115/1296127400266174464/Comic-02.png?ex=67112835&is=670fd6b5&hm=898c47264361b63a5b9c87dd4e8b18a432a991b4f8c900dd896eefb38a6ca549&"
+    },
+    {
+        "id": "c4",
+        "name": "Harley",
+        "icon": "<:pnv_A:1293614453677490186>",
+        "topic": "comic_villains",
+        "rank": "a_rank",
+        "rate": {
+            "shortName": "A",
+            "fullName": "Average"
+        },
+        "image": "https://cdn.discordapp.com/attachments/1293978154163114115/1296127457883193354/Comic-04.png?ex=67112842&is=670fd6c2&hm=bee39e7e13153f55b6e9fae4977d30b93f830fd91e50b9062aa5cf7d42251ea7&"
+    },
+    {
+        "id": "c5",
+        "name": "Doctor Doom",
+        "icon": "<:pnv_A:1293614453677490186>",
+        "topic": "comic_villains",
+        "rank": "a_rank",
+        "rate": {
+            "shortName": "A",
+            "fullName": "Average"
+        },
+        "image": "https://cdn.discordapp.com/attachments/1293978154163114115/1296127863036313660/comic-05.png?ex=671128a3&is=670fd723&hm=f5f8d0d1bd76d3666cfe22e61ce45fee28cfeefe3630033c140ab9b9472acea4&"
+    },
+    {
+        "id": "c6",
+        "name": "Catwoman",
+        "icon": "<:pnv_A:1293614453677490186>",
+        "topic": "comic_villains",
+        "rank": "a_rank",
+        "rate": {
+            "shortName": "A",
+            "fullName": "Average"
+        },
+        "image": "https://cdn.discordapp.com/attachments/1293978154163114115/1296127952685367329/Comic-08.png?ex=671128b8&is=670fd738&hm=431df844d88afa14029529e17b131ec4205b600964f258fde4cbb7894c34752e&"
+    },
+    {
+        "id": "c7",
+        "name": "Magneto",
+        "icon": "<:pnv_A:1293614453677490186>",
+        "topic": "comic_villains",
+        "rank": "a_rank",
+        "rate": {
+            "shortName": "A",
+            "fullName": "Average"
+        },
+        "image": "https://cdn.discordapp.com/attachments/1293978154163114115/1296128018166714429/Comic-07.png?ex=671128c8&is=670fd748&hm=eb907dd24866ca436188cc420ca05a119233e7fb8bd43752d36cdedba218e472&"
+    },
+    {
+        "id": "c8",
+        "name": "Red Skull",
+        "icon": "<:pnv_B:1293614451408240751>",
+        "topic": "comic_villains",
+        "rank": "b_rank",
+        "rate": {
+            "shortName": "B",
+            "fullName": "Basic"
+        },
+        "image": "https://cdn.discordapp.com/attachments/1293978154163114115/1296128253765095497/Comic-09-09.png?ex=67112900&is=670fd780&hm=a8dbd49fe9681b43f9a9f142ec723e4574bfdb531cdd4e68e9190d784d8f0016&"
+    },
+    {
+        "id": "c9",
+        "name": "Bucky",
+        "icon": "<:pnv_B:1293614451408240751>",
+        "topic": "comic_villains",
+        "rank": "b_rank",
+        "rate": {
+            "shortName": "B",
+            "fullName": "Basic"
+        },
+        "image": "https://cdn.discordapp.com/attachments/1293978154163114115/1296128310971076608/Comic-10.png?ex=6711290e&is=670fd78e&hm=1aa89bf5a89b13fa848de7202a73c507219bea857193e53c90538adc40de0ead&"
+    },
+    {
+        "id": "c10",
+        "name": "Carnage",
+        "icon": "<:pnv_B:1293614451408240751>",
+        "topic": "comic_villains",
+        "rank": "b_rank",
+        "rate": {
+            "shortName": "B",
+            "fullName": "Basic"
+        },
+        "image": "https://cdn.discordapp.com/attachments/1293978154163114115/1296128366789001216/Comic-11.png?ex=6711291b&is=670fd79b&hm=25ceec01899b8744ae8bba74bd33ad50a363f41f933f9b67f928b534115cdd44&"
+    },
+    {
+        "id": "c11",
+        "name": "Darkseid",
+        "icon": "<:pnv_B:1293614451408240751>",
+        "topic": "comic_villains",
+        "rank": "b_rank",
+        "rate": {
+            "shortName": "B",
+            "fullName": "Basic"
+        },
+        "image": "https://cdn.discordapp.com/attachments/1293978154163114115/1296128425240821780/Comic-12.png?ex=67112929&is=670fd7a9&hm=ae858a80847f76dd1e2864c2732ff113bc7f3556ec664532d9cdfa38a9b59b4f&"
+    },
+    {
+        "id": "c12",
+        "name": "Ultron",
+        "icon": "<:pnv_B:1293614451408240751>",
+        "topic": "comic_villains",
+        "rank": "b_rank",
+        "rate": {
+            "shortName": "B",
+            "fullName": "Basic"
+        },
+        "image": "https://cdn.discordapp.com/attachments/1293978154163114115/1296128488385941644/Comic-13.png?ex=67112938&is=670fd7b8&hm=448970c8eb68070beeff5009ef2bb7625e40911d64ca292659e76a0db347ad64&"
     }
 ]

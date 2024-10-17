@@ -1,6 +1,7 @@
 import ranColor from "@/helpers/ranColor";
 import type { Rank } from "@prisma/client";
 import { bold, EmbedBuilder, Message, resolveColor } from "discord.js";
+import type { Pack } from "typings";
 import type { FullUser } from "typings/command";
 
 export default class BstInterface extends EmbedBuilder {
@@ -38,12 +39,7 @@ export class BaseBstCardInterface extends EmbedBuilder {
         public client: ExtendedClient,
         public message: Message,
         public user: FullUser,
-        public pack: {
-            id: string;
-            name: string;
-            icon: string;
-            cards: string[];
-        },
+        public pack: Pack,
     ) {
         const finishedCard = client.utils.getFinisedCard(user, pack.id);
         const packLine = `${pack.icon} ${bold(pack.name)}\n> - \`${finishedCard.cards.length}/${pack.cards.length}\``;

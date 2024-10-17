@@ -9,6 +9,8 @@ type QuestProps = {
         amount: number;
     };
     channel?: string;
+    pack?: Pack;
+    won?: boolean;
 };
 
 type Items = {
@@ -17,6 +19,13 @@ type Items = {
         name: string;
         icon: string;
     };
+};
+
+type Pack = {
+    id: string;
+    name: string;
+    icon: string;
+    cards: string[];
 };
 
 type Card = {

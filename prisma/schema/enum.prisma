@@ -3,8 +3,11 @@ enum QuestFunction {
   chat
   chat_channel
   open_pack
+  open
   boost
   upgrade_card
+  win_battle
+  battle
 }
 
 enum Item {

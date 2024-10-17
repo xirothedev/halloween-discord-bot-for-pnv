@@ -1,3 +1,4 @@
+import claimQuest from "@/functions/claimQuest";
 import { getPower } from "@/functions/power";
 import ranInt from "@/helpers/ranInt";
 import BattleInterface from "@/interfaces/battle";
@@ -89,6 +90,28 @@ export default prefix(
                 where: { user_id: user.user_id },
                 data: { streak_winner: 0 },
             });
+        }
+
+        const data = await client.prisma.user.update({
+            where: { user_id: user.user_id },
+            data: {
+                quests: {
+                    updateMany: {
+                        where: {
+                            function: "win_battle",
+                            claimed: false,
+                        },
+                        data: { progress: { increment: 1 } },
+                    },
+                },
+            },
+            include: { quests: true },
+        });
+
+        const finishedQuest = data.quests.find((f) => f.function === "upgrade_card" && f.progress >= f.target);
+
+        if (finishedQuest) {
+            await claimQuest(client, user, finishedQuest);
         }
 
         return await message.channel.send({

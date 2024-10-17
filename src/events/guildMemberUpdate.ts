@@ -14,9 +14,11 @@ export default event("guildMemberUpdate", { once: false }, async (client, oldMem
         if (!user) return;
 
         const quest = user.quests.find((f) => f.function === "voice");
+        
+        if(!quest) return
 
         const data = await client.prisma.quest.update({
-            where: { quest_id: quest?.quest_id },
+            where: { quest_id: quest.quest_id },
             data: { progress: { increment: 1 } },
         });
 

@@ -4,7 +4,7 @@ import ErrorInterface from "@/interfaces/error";
 import QuestInterface from "@/interfaces/quest";
 import prefix from "@/layouts/prefix";
 import type { Item, Quest } from "@prisma/client";
-import { channelMention } from "discord.js";
+import { bold, channelMention } from "discord.js";
 import { Category } from "typings/utils";
 
 export default prefix(
@@ -49,6 +49,10 @@ export default prefix(
                     name.replace("$2", channelMention(q.channel));
                 }
 
+                if (q.pack) {
+                    name.replace("$2", bold(q.pack.name));
+                }
+
                 quest.push({
                     function: q.function,
                     name,
@@ -57,6 +61,7 @@ export default prefix(
                     target: q.rate.target,
                     progress: 0,
                     channel_id: q.channel || null,
+                    pack_id: q.pack?.id || null,
                     claimed: false,
                 });
             }

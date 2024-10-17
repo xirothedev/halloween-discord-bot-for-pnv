@@ -32,7 +32,7 @@ export default class BattleInterface extends EmbedBuilder {
             fields: [
                 {
                     name: `@${message.author.username}`,
-                    value: `${client.icons[UserCard.rank]} • \`Lv ${UserCard.level}\` • ${bold(UserCard.name)}\n${client.icons.power} Sức mạnh ${bold(Intl.NumberFormat().format(getPower(UserCard.rank, UserCard.level)))}`,
+                    value: `${client.icons[UserCard.rank]} • \`Lv ${UserCard.level}\` • ${bold(UserCard.name)} <:pnv_versus:1296125524330020975>\n${client.icons.power} Sức mạnh ${bold(Intl.NumberFormat().format(getPower(UserCard.rank, UserCard.level)))}`,
                     inline: true,
                 },
                 {
