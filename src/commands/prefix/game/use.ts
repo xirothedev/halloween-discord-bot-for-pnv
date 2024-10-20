@@ -6,8 +6,8 @@ export default prefix(
     "use",
     {
         description: {
-            content: "Sử dụng thẻ.",
-            examples: ["use u1", "use skeleton"],
+            content: "dùng để sử dụng card được chỉ định.",
+            examples: ["use c1", "use scarlet_witch"],
             usage: "use <id/tên card>",
         },
         cooldown: "5s",

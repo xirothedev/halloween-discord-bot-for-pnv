@@ -37,20 +37,13 @@ export default prefix(
                 .setColor(ranColor(client.colors.main))
                 .setTitle(`Menu trợ giúp - ${command.name}`)
                 .setDescription(
-                    `**Mô tả:** ${command.options.description.content}\n**Cách sử dụng:** ${client.prefix}${
+                    `**Mô tả:** ${command.options.description.content}\n**Cách sử dụng:** ${client.prefix} ${
                         command.options.description.usage
                     }\n**Ví dụ:** ${command.options.description.examples
                         .map((example: string) => `${client.prefix}${example}`)
                         .join(", ")}\n**Biệt danh:** ${
                         command.options.aliases?.map((alias: string) => `\`${alias}\``).join(", ") || "Không có"
-                    }\n**Danh mục:** ${command.options.category}\n**Thời gian chờ:** ${
-                        command.options.cooldown
-                    }\n**Quyền của người dùng:** ${
-                        command.options.userPermissions?.map((perm) => `\`${perm.toString()}\``).join(", ") ||
-                        "Không có"
-                    }\n**Quyền của bot:** ${
-                        command.options.botPermissions?.map((perm) => `\`${perm.toString()}\``).join(", ") || "Không có"
-                    }\n**Chỉ dành cho nhà phát triển:** ${command.options.developersOnly ? "Có" : "Không"}`,
+                    }`,
                 );
             return await message.channel.send({ embeds: [helpEmbed] });
         }

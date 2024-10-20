@@ -20,7 +20,7 @@ export default prefix(
         const embed = new EmbedBuilder()
             .setColor(ranColor(client.colors.main))
             .setDescription(
-                `${client.items.soul.icon} **|** là một vật phẩm có thể kiếm được qua việc thách đấu. Dùng để nâng cấp thẻ của bạn`,
+                `${client.items.soul.icon} | Linh Hồn\n> - Vật phẩm có được thông qua thách đấu với người chơi khác.\n> - Dùng để nâng cấp card.`,
             );
 
         return await message.channel.send({ embeds: [embed] });

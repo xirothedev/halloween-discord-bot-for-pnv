@@ -1,4 +1,5 @@
 import type { QuestFunction, Rank } from "@prisma/client";
+import type { ColorResolvable } from "discord.js";
 
 type QuestProps = {
     name: string;
@@ -25,6 +26,7 @@ type Pack = {
     id: string;
     name: string;
     icon: string;
+    color: ColorResolvable;
     cards: string[];
 };
 

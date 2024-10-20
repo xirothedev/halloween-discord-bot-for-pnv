@@ -1,7 +1,7 @@
 [
     {
         "id": "u1",
-        "name": "Slender Man",
+        "name": "Slenderman",
         "icon": "<:pnv_SR:1293615184027451473>",
         "topic": "urban_legends",
         "rank": "sr_rank",
@@ -9,7 +9,7 @@
             "shortName": "SR",
             "fullName": "Super Rare"
         },
-        "image": "https://cdn.discordapp.com/attachments/1293978154163114115/1293985708754600007/UB-SR_Slenderman.gif?ex=670aaf1a&is=67095d9a&hm=93ffd0f2cf480fb2e192ffe5b888d944d40635b659b3574dc117750017db80da&"
+        "image": "https://cdn.discordapp.com/attachments/1293978154163114115/1297202643776704677/Slenderman_1.gif?ex=6715119b&is=6713c01b&hm=aac1c4370d8bdff37a0b1ead3c1980f16310e55f3170c8f85396fbde55df272c&"
     },
     {
         "id": "u2",
@@ -147,7 +147,7 @@
         "id": "t1",
         "name": "Vampire",
         "icon": "<:pnv_SR:1293615184027451473>",
-        "topic": "treat_or_trick",
+        "topic": "trick_or_treat",
         "rank": "sr_rank",
         "rate": {
             "shortName": "SR",
@@ -159,7 +159,7 @@
         "id": "t2",
         "name": "Witch",
         "icon": "<:pnv_R:1293614458706333776>",
-        "topic": "treat_or_trick",
+        "topic": "trick_or_treat",
         "rank": "r_rank",
         "rate": {
             "shortName": "R",
@@ -171,7 +171,7 @@
         "id": "t3",
         "name": "Grim Reaper",
         "icon": "<:pnv_R:1293614458706333776>",
-        "topic": "treat_or_trick",
+        "topic": "trick_or_treat",
         "rank": "r_rank",
         "rate": {
             "shortName": "R",
@@ -183,7 +183,7 @@
         "id": "t4",
         "name": "Frankenstein",
         "icon": "<:pnv_A:1293614453677490186>",
-        "topic": "treat_or_trick",
+        "topic": "trick_or_treat",
         "rank": "a_rank",
         "rate": {
             "shortName": "A",
@@ -193,9 +193,9 @@
     },
     {
         "id": "t5",
-        "name": "Scrate Crown",
+        "name": "Scarecrow",
         "icon": "<:pnv_A:1293614453677490186>",
-        "topic": "treat_or_trick",
+        "topic": "trick_or_treat",
         "rank": "a_rank",
         "rate": {
             "shortName": "A",
@@ -207,7 +207,7 @@
         "id": "t6",
         "name": "Devil",
         "icon": "<:pnv_A:1293614453677490186>",
-        "topic": "treat_or_trick",
+        "topic": "trick_or_treat",
         "rank": "a_rank",
         "rate": {
             "shortName": "A",
@@ -219,7 +219,7 @@
         "id": "t7",
         "name": "Grave",
         "icon": "<:pnv_A:1293614453677490186>",
-        "topic": "treat_or_trick",
+        "topic": "trick_or_treat",
         "rank": "a_rank",
         "rate": {
             "shortName": "A",
@@ -232,7 +232,7 @@
         "id": "t8",
         "name": "Ghost",
         "icon": "<:pnv_B:1293614451408240751>",
-        "topic": "treat_or_trick",
+        "topic": "trick_or_treat",
         "rank": "b_rank",
         "rate": {
             "shortName": "B",
@@ -244,7 +244,7 @@
         "id": "t9",
         "name": "Black Cat",
         "icon": "<:pnv_B:1293614451408240751>",
-        "topic": "treat_or_trick",
+        "topic": "trick_or_treat",
         "rank": "b_rank",
         "rate": {
             "shortName": "B",
@@ -256,7 +256,7 @@
         "id": "t10",
         "name": "Mummy",
         "icon": "<:pnv_B:1293614451408240751>",
-        "topic": "treat_or_trick",
+        "topic": "trick_or_treat",
         "rank": "b_rank",
         "rate": {
             "shortName": "B",
@@ -268,7 +268,7 @@
         "id": "t11",
         "name": "Skeleton",
         "icon": "<:pnv_B:1293614451408240751>",
-        "topic": "treat_or_trick",
+        "topic": "trick_or_treat",
         "rank": "b_rank",
         "rate": {
             "shortName": "B",
@@ -280,7 +280,7 @@
         "id": "t12",
         "name": "Jack O' Lantern",
         "icon": "<:pnv_B:1293614451408240751>",
-        "topic": "treat_or_trick",
+        "topic": "trick_or_treat",
         "rank": "b_rank",
         "rate": {
             "shortName": "B",
@@ -435,7 +435,7 @@
 
     {
         "id": "c1",
-        "name": "Phoenix",
+        "name": "Scarlet Witch",
         "icon": "<:pnv_SR:1293615184027451473>",
         "topic": "comic_villains",
         "rank": "sr_rank",

@@ -8,7 +8,7 @@ export default prefix(
     "bst",
     {
         description: {
-            content: "Xem bộ sưu tập.",
+            content: `xem bộ sưu tập Card đã có, các Pack đã hoàn thành, số lượng Kẹo Cam, Kẹo Hắc Ám, Linh Hồn.`,
             examples: ["bst"],
             usage: "bst",
         },

@@ -11,7 +11,7 @@ import antiCrash from "@/plugins/antiCrash";
 import { PrismaClient } from "@prisma/client";
 import { ActivityType, Client, Collection, Partials, PresenceUpdateStatus } from "discord.js";
 import Express from "express";
-import type { Items } from "typings";
+import type { Items, Pack } from "typings";
 import type { Command } from "typings/command";
 import Utils from "./Utils";
 
@@ -78,7 +78,7 @@ export default class ExtendedClient extends Client<true> {
 
     public cards = cards;
 
-    public packs = packs;
+    public packs = packs as Pack[];
 
     public start = async (token: string, prefix: string) => {
         commands(this);

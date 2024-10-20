@@ -11,6 +11,7 @@ export default prefix(
             examples: ["keocam"],
             usage: "keocam",
         },
+        aliases: ["keo"],
         cooldown: "5s",
         botPermissions: ["SendMessages", "ReadMessageHistory", "ViewChannel", "EmbedLinks"],
         ignore: false,
@@ -20,7 +21,7 @@ export default prefix(
         const embed = new EmbedBuilder()
             .setColor(ranColor(client.colors.main))
             .setDescription(
-                `${client.items.premium_candy.icon} **|** là một vật phẩm có thể kiếm được qua việc thách đấu, điểm danh, làm nhiệm vụ. Dùng để nâng cấp thẻ và mua đồ trong shop`,
+                `${client.items.candy.icon} | Kẹo Cam\n> - Vật phẩm có được thông qua thách đấu, điểm danh hằng ngày, làm nhiệm vụ.\n> - Dùng để nâng cấp card, mua vật phẩm trong shop.`,
             );
 
         return await message.channel.send({ embeds: [embed] });

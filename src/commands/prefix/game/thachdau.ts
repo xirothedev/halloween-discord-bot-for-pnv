@@ -6,12 +6,13 @@ import ErrorInterface from "@/interfaces/error";
 import prefix from "@/layouts/prefix";
 import type { Card } from "@prisma/client";
 import { Category } from "typings/utils";
+import items from "@/data/items.json";
 
 export default prefix(
     "thachdau",
     {
         description: {
-            content: "Chiến đấu với người chơi khác.",
+            content: `sử dụng card để thách đấu với người chơi ngẫu nhiên khác. Chiến thắng sẽ nhận được ${items.candy.icon} và ${items.soul.icon}.`,
             examples: ["thachdau"],
             usage: "thachdau",
         },

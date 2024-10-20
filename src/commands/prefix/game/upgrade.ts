@@ -5,12 +5,13 @@ import ErrorInterface from "@/interfaces/error";
 import prefix from "@/layouts/prefix";
 import { bold } from "discord.js";
 import { Category } from "typings/utils";
+import items from "@/data/items.json";
 
 export default prefix(
     "upgrade",
     {
         description: {
-            content: "Điểm danh hằng ngày.",
+            content: `nâng cấp sức mạnh card của bạn, tốn ${items.candy.icon} và ${items.soul.icon}.`,
             examples: ["upgrade t1"],
             usage: "upgrade <id/tên card>",
         },

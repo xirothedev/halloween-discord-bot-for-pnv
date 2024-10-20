@@ -9,8 +9,7 @@ import {
     MessagePayload,
     StringSelectMenuBuilder,
     StringSelectMenuOptionBuilder,
-    type APIEmbed,
-    type MessageReplyOptions,
+    type MessageReplyOptions
 } from "discord.js";
 import { Category } from "typings/utils";
 
@@ -20,7 +19,7 @@ export default prefix(
     "bxh",
     {
         description: {
-            content: "Xem bảng xếp hạng.",
+            content: `xem bảng xếp hạng Kẹo Cam, Kẹo Hắc Ám, Sức mạnh.`,
             examples: ["bxh"],
             usage: "bxh",
         },

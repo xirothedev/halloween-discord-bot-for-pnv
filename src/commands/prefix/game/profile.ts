@@ -10,7 +10,7 @@ export default prefix(
     "profile",
     {
         description: {
-            content: "Xem thông tin người dùng.",
+            content: `xem thông tin hồ sơ cá nhân của bạn, bảng xếp hạng cá nhân.`,
             examples: ["profile"],
             usage: "profile",
         },

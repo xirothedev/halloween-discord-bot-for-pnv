@@ -1,17 +1,14 @@
 import ranColor from "@/helpers/ranColor";
-import ranInt from "@/helpers/ranInt";
-import DailyInterface from "@/interfaces/daily";
-import ErrorInterface from "@/interfaces/error";
 import prefix from "@/layouts/prefix";
-import { addDays } from "date-fns";
 import { bold, EmbedBuilder, resolveColor } from "discord.js";
 import { Category } from "typings/utils";
+import items from "@/data/items.json";
 
 export default prefix(
     "shop",
     {
         description: {
-            content: "Xem shop.",
+            content: `mở cửa hàng Halloween để mua các vật phẩm sự kiện bằng ${items.candy.icon} và ${items.premium_candy.icon}.`,
             examples: ["shop"],
             usage: "shop",
         },
@@ -28,10 +25,10 @@ export default prefix(
         const embed = new EmbedBuilder({
             color: resolveColor(ranColor(client.colors.main)),
             author: {
-                name: `Cửa hàng của ${message.guild.name} ngày Halloween`,
+                name: `Cửa hàng Halloween tại ${message.guild.name}`,
                 icon_url: message.guild?.iconURL()!,
             },
-            description: `Tất cả vật phẩm độc quyền mùa Halloween sẽ có mặt ở đây\n- \`${process.env.PREFIX} buy <id vật phẩm>\` để mua vật phẩm\n- \`${process.env.PREFIX} openpack <id pack>\` để mở vật phẩm\n════════════════════════════════\n${items.join("\n")}`,
+            description: `Tất cả vật phẩm độc quyền mùa Halloween sẽ có mặt ở đây\n- \`${process.env.PREFIX} buy <số lượng> <id vật phẩm>\` để mua vật phẩm\n- \`${process.env.PREFIX} openpack <id pack>\` để mở vật phẩm\n════════════════════════════════\n${items.join("\n")}`,
             footer: {
                 text: `@${message.author.username} • .gg/phonguoiviet`,
                 iconURL: message.author.displayAvatarURL(),

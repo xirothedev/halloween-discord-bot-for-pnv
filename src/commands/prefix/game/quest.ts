@@ -6,12 +6,13 @@ import prefix from "@/layouts/prefix";
 import type { Item, Quest } from "@prisma/client";
 import { bold, channelMention } from "discord.js";
 import { Category } from "typings/utils";
+import items from "@/data/items.json";
 
 export default prefix(
     "quest",
     {
         description: {
-            content: "Hiển thị menu trợ giúp.",
+            content: `làm nhiệm vụ hằng ngày để được nhận ${items.candy.icon}. Reset lúc 12h và 0h hằng ngày.`,
             examples: ["quest"],
             usage: "quest",
         },

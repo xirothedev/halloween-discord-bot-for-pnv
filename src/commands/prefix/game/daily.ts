@@ -4,12 +4,13 @@ import ErrorInterface from "@/interfaces/error";
 import prefix from "@/layouts/prefix";
 import { addDays } from "date-fns";
 import { Category } from "typings/utils";
+import items from "@/data/items.json";
 
 export default prefix(
     "daily",
     {
         description: {
-            content: "Điểm danh hằng ngày.",
+            content: `điểm danh hằng ngày để nhận được ${items.candy.icon}. Điểm danh chuỗi 3 ngày nhận 1 pack ngẫu nhiên miễn phí. Reset lúc 0h hằng ngày.`,
             examples: ["daily"],
             usage: "daily",
         },

@@ -1,17 +1,15 @@
-import ranInt from "@/helpers/ranInt";
-import DailyInterface from "@/interfaces/daily";
 import ErrorInterface from "@/interfaces/error";
 import prefix from "@/layouts/prefix";
-import { addDays } from "date-fns";
 import { Category } from "typings/utils";
+import items from "@/data/items.json";
 
 export default prefix(
     "buy",
     {
         description: {
-            content: "Điểm danh hằng ngày.",
-            examples: ["buy Urban Legends"],
-            usage: "buy",
+            content: `Mua các vật phẩm sự kiện tại cửa hàng Halloween bằng ${items.candy.icon} và ${items.premium_candy.icon}.`,
+            examples: ["buy 1 Urban Legends", "buy 2 tot"],
+            usage: "buy <số lượng> <id/tên vật phẩm>",
         },
         cooldown: "5s",
         botPermissions: ["SendMessages", "ReadMessageHistory", "ViewChannel", "EmbedLinks"],
@@ -19,6 +17,14 @@ export default prefix(
         category: Category.game,
     },
     async (client, user, message, args) => {
+        const amount = Number(args.shift());
+
+        if (!amount || isNaN(amount)) {
+            return message.channel.send({
+                embeds: [new ErrorInterface(client).setDescription("Bạn phải cung cấp số lượng cần mua")],
+            });
+        }
+
         if (!args[0]) {
             return message.channel.send({
                 embeds: [new ErrorInterface(client).setDescription("Bạn phải cung cấp id card")],
@@ -26,7 +32,14 @@ export default prefix(
         }
 
         const pack = client.packs.find(
-            (f) => f.id === args[0] || f.name.toLowerCase() === args.join(" ").toLowerCase(),
+            (f) =>
+                f.id === args[0] ||
+                f.name.toLowerCase() === args.join(" ").toLowerCase() ||
+                f.name
+                    .split(" ")
+                    .map((m) => m.slice(0, 1))
+                    .join("")
+                    .toLowerCase() === args[0].toLowerCase(),
         );
 
         if (!pack) {
@@ -35,7 +48,7 @@ export default prefix(
             });
         }
 
-        if (user.candy < 25) {
+        if (user.candy < 25 * amount) {
             return message.channel.send({
                 embeds: [new ErrorInterface(client).setDescription("Bạn không có đủ " + client.items.candy.icon)],
             });
@@ -43,7 +56,16 @@ export default prefix(
 
         await client.prisma.user.update({
             where: { user_id: user.user_id },
-            data: { candy: { decrement: 25 } },
+            data: {
+                candy: { decrement: 25 * amount },
+                packs: {
+                    upsert: {
+                        where: { pack_id_user_id: { pack_id: pack.id, user_id: user.user_id } },
+                        update: { quantity: { increment: amount } },
+                        create: { pack_id: pack.id, quantity: amount },
+                    },
+                },
+            },
         });
 
         return await message.react(client.emoji.done);

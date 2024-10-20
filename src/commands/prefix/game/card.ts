@@ -7,8 +7,8 @@ export default prefix(
     "card",
     {
         description: {
-            content: "Xem thẻ.",
-            examples: ["card u1", "card skeleton"],
+            content: `xem thông tin card được chỉ định bao gồm pack, cấp bậc, cấp, sức mạnh. Có thể dùng cho cả những card bạn chưa mở ra nhưng không hiển thị thông số card.`,
+            examples: ["card c1", "card scarlet_witch"],
             usage: "card <id/tên card>",
         },
         cooldown: "5s",

@@ -10,7 +10,7 @@ export default prefix(
     "openpack",
     {
         description: {
-            content: "Mở pack.",
+            content: `Mở pack đang có trong bst. Mỗi pack mở ra được 3 cards, mỗi lượt mở được 1 pack.`,
             examples: ["openpack hellpack"],
             usage: "openpack <tên pack>",
         },
@@ -27,13 +27,21 @@ export default prefix(
             });
         }
 
-        const item = client.packs.find((f) => f.id === args[0]);
-        const pack = user.packs.find((f) => f.pack_id === args[0]);
-        const _pack = client.packs.find((f) => f.id === args[0]);
+        const item = client.packs.find(
+            (f) => f.id === args[0] || f.name.toLowerCase() === args.join(" ").toLowerCase(),
+        );
 
-        if (!item || !_pack || !pack || pack.quantity <= 0) {
+        if (!item) {
             return message.channel.send({
                 embeds: [new ErrorInterface(client).setDescription("Vật phẩm này không thể mở")],
+            });
+        }
+
+        const pack = user.packs.find((f) => f.pack_id === item.id);
+
+        if (!pack || pack.quantity <= 0) {
+            return message.channel.send({
+                embeds: [new ErrorInterface(client).setDescription("Bạn không có vật phẩm này")],
             });
         }
 
@@ -133,6 +141,6 @@ export default prefix(
             );
         }
 
-        return await message.channel.send({ embeds: [new OpenpackInterface(client, message, _pack, user, cards)] });
+        return await message.channel.send({ embeds: [new OpenpackInterface(client, message, item, user, cards)] });
     },
 );

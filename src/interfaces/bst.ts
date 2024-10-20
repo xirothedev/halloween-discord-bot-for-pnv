@@ -10,7 +10,13 @@ export default class BstInterface extends EmbedBuilder {
         public message: Message,
         public user: FullUser,
     ) {
-        const vi = `<:pnv_diamond:1293649685566722140> ${bold("Ví")}\n> ${bold(`x${user.candy}`)} ${client.items.candy.icon}\n> ${bold(`x${user.premium_candy}`)} ${client.items.premium_candy.icon}\n> ${bold(`x${user.soul}`)} ${client.items.soul.icon}`;
+        const vi = `<:pnv_diamond:1293649685566722140> ${bold("Ví")}\n> ${bold(`x${user.candy}`)} ${client.items.candy.icon}\n> ${bold(`x${user.premium_candy}`)} ${client.items.premium_candy.icon}\n> ${bold(`x${user.soul}`)} ${client.items.soul.icon}\n${client.packs
+            .map((p) => {
+                const pack = user.packs.find((f) => f.pack_id === p.id);
+                if (!pack) return `> **x0** ${p.icon}`;
+                return `> ${bold(`x${pack.quantity}`)} ${p.icon}`;
+            })
+            .join("\n")}`;
 
         const progress = `<:pnv_global:1293649382809272445> ${bold("Tiến Trình Chung")}\n> - Tổng số card đã mở: \`${user.total_pack * 3}\`\n> - Tổng số card: \`${user.cards.length}/${client.cards.length}\`\n> - Số pack hoàn thành: \`${client.utils.getFinisedPack(user)}/${client.packs.length}\``;
 
@@ -55,7 +61,7 @@ export class BaseBstCardInterface extends EmbedBuilder {
             .join("\n")}`;
 
         super({
-            color: resolveColor(ranColor(client.colors.main)),
+            color: resolveColor(pack.color),
             author: {
                 name: `Bộ Sưu Tập Của ${message.author.username}`,
                 icon_url: message.guild?.iconURL()!,

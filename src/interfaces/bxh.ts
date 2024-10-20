@@ -34,7 +34,7 @@ export class BaseBxhInterface extends EmbedBuilder {
         super({
             color: resolveColor(ranColor(client.colors.main)),
             author: {
-                name: `Bảng xếp hạng ${message.guild?.name}`,
+                name: `Bảng xếp hạng tại ${message.guild?.name}`,
                 icon_url: message.guild?.iconURL()!,
             },
             footer: {

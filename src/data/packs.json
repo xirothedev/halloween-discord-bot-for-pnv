@@ -2,25 +2,29 @@
     {
         "id": "urban_legends",
         "name": "Urban Legends",
-        "icon": "<:2581012:1293488650725752832>",
+        "icon": "<:pnv_packul:1297226330764742726>",
+        "color": "#3DCE98",
         "cards": ["u1", "u2", "u3", "u4", "u5", "u6", "u7", "u8", "u9", "u10", "u11", "u12"]
     },
     {
-        "id": "treat_or_trick",
-        "name": "Treat or Trick",
-        "icon": "<:2581012:1293488650725752832>",
+        "id": "trick_or_treat",
+        "name": "Trick or Treat",
+        "icon": "<:pnv_packtot:1297226320849277089>",
+        "color": "#FF9429",
         "cards": ["t1", "t2", "t3", "t4", "t5", "t6", "t7", "t8", "t9", "t10", "t11", "t12"]
     },
     {
         "id": "mythology",
         "name": "Mythology",
-        "icon": "<:2581012:1293488650725752832>",
+        "icon": "<:pnv_packm:1297227586946072576>",
+        "color": "#F7E4B9",
         "cards": ["m1", "m2", "m3", "m4", "m5", "m6", "m7", "m8", "m9", "m10", "m11", "m12"]
     },
     {
         "id": "comic_villains",
         "name": "Comic Villains",
-        "icon": "<:2581012:1293488650725752832>",
+        "icon": "<:pnv_packcv:1297226327287529582>",
+        "color": "#CF2027",
         "cards": ["c1", "c2", "c3", "c4", "c5", "c6", "c7", "c8", "c9", "c10", "c11", "c12"]
     }
 ]
