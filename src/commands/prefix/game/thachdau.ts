@@ -16,7 +16,7 @@ export default prefix(
             examples: ["thachdau"],
             usage: "thachdau",
         },
-        cooldown: "5s",
+        cooldown: "30m",
         botPermissions: ["SendMessages", "ReadMessageHistory", "ViewChannel", "EmbedLinks"],
         ignore: false,
         category: Category.game,
@@ -35,7 +35,7 @@ export default prefix(
         const cards: Card[] = [];
 
         users.forEach((_user) => {
-            if (!_user.cards || _user.user_id === user.user_id) return;
+            if (_user.cards.length <= 0 || _user.user_id === user.user_id) return;
             cards.push(..._user.cards);
         });
         const UserCard = user.cards.find((f) => f.card_id === user.card_id)!;
@@ -48,8 +48,10 @@ export default prefix(
                 return power < userPower;
             } else if (won === false) {
                 return power > userPower;
-            } else {
+            } else if (won === false) {
                 return power === userPower;
+            } else {
+                return false;
             }
         });
 
@@ -78,18 +80,20 @@ export default prefix(
             reward.candy = ranInt(1, 21) + user.streak_winner * 3;
             reward.soul = ranInt(1, 6) + user.streak_winner * 3;
 
-            await client.prisma.user.update({
+            user = await client.prisma.user.update({
                 where: { user_id: user.user_id },
                 data: {
                     candy: { increment: reward.candy },
                     soul: { increment: reward.soul },
                     streak_winner: { increment: 1 },
                 },
+                include: { cards: true, packs: true, quests: true },
             });
         } else if (won === false) {
-            await client.prisma.user.update({
+            user = await client.prisma.user.update({
                 where: { user_id: user.user_id },
                 data: { streak_winner: 0 },
+                include: { cards: true, packs: true, quests: true },
             });
         }
 
@@ -116,7 +120,7 @@ export default prefix(
         }
 
         return await message.channel.send({
-            embeds: [new BattleInterface(client, message, user, enemy, won, reward)],
+            embeds: [new BattleInterface(client, message, user, cardUsed, won, reward)],
         });
     },
 );

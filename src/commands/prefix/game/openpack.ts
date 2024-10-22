@@ -7,14 +7,14 @@ import type { Rank } from "@prisma/client";
 import { Category } from "typings/utils";
 
 export default prefix(
-    "openpack",
+    "open",
     {
         description: {
-            content: `Mở pack đang có trong bst. Mỗi pack mở ra được 3 cards, mỗi lượt mở được 1 pack.`,
-            examples: ["openpack hellpack"],
-            usage: "openpack <tên pack>",
+            content: `Mở pack/box linh hồn đang có trong bst. Mỗi pack mở ra được 3 cards/ngẫu nhiên linh hồn, mỗi lượt mở được 1 pack/1 box.`,
+            examples: ["open hellpack", "open soul box"],
+            usage: "open <tên vật phẩm>",
         },
-        aliases: ["op", "open"],
+        aliases: ["op"],
         cooldown: "5s",
         botPermissions: ["SendMessages", "ReadMessageHistory", "ViewChannel", "EmbedLinks"],
         ignore: false,
@@ -27,8 +27,36 @@ export default prefix(
             });
         }
 
+        // code tạm
+        if (
+            args[0] === client.items.soul_box.id ||
+            args[0] === "sb" ||
+            args.join(" ").toLowerCase() === client.items.soul_box.name.toLowerCase()
+        ) {
+            const souls = ranInt(10, 51);
+
+            await client.prisma.user.update({
+                where: { user_id: user.user_id },
+                data: {
+                    soul: { increment: souls },
+                    soul_box: { decrement: 1 },
+                },
+            });
+
+            return message.channel.send({
+                content: `${client.items.soul_box.icon} | Bạn đã mở hộp linh hồn và nhận được **${souls}** ${client.items.soul.icon}!`,
+            });
+        }
+
         const item = client.packs.find(
-            (f) => f.id === args[0] || f.name.toLowerCase() === args.join(" ").toLowerCase(),
+            (f) =>
+                f.id === args[0] ||
+                f.name.toLowerCase() === args.join(" ").toLowerCase() ||
+                f.name
+                    .split(" ")
+                    .map((m) => m.slice(0, 1))
+                    .join("")
+                    .toLowerCase() === args[0].toLowerCase(),
         );
 
         if (!item) {
@@ -46,7 +74,7 @@ export default prefix(
         }
 
         const cards = [];
-        const card = client.cards.filter((f) => f.topic === args[0]);
+        const card = client.cards.filter((f) => f.topic === pack.pack_id);
 
         let streak_a = user.streak_a;
         let streak_r = user.streak_r;
@@ -104,7 +132,7 @@ export default prefix(
             });
         }
 
-        const data = await client.prisma.user.update({
+        user = await client.prisma.user.update({
             where: { user_id: user.user_id },
             data: {
                 streak_a,
@@ -114,24 +142,24 @@ export default prefix(
                 total_pack: { increment: 3 },
                 packs: {
                     update: {
-                        where: { pack_id_user_id: { pack_id: args[0], user_id: user.user_id } },
+                        where: { pack_id_user_id: { pack_id: pack.pack_id, user_id: user.user_id } },
                         data: { quantity: { decrement: 1 } },
                     },
                 },
                 quests: {
                     updateMany: {
                         where: {
-                            OR: [{ function: "open" }, { function: "open_pack", pack_id: args[0] }],
+                            OR: [{ function: "open" }, { function: "open_pack", pack_id: pack.pack_id }],
                             claimed: false,
                         },
                         data: { progress: { increment: 1 } },
                     },
                 },
             },
-            include: { quests: true },
+            include: { quests: true, cards: true, packs: true },
         });
 
-        const finishedQuests = data.quests.filter(
+        const finishedQuests = user.quests.filter(
             (f) => (f.function === "open" || f.function === "open_pack") && f.progress >= f.target,
         );
 

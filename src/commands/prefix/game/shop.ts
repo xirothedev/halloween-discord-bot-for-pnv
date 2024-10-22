@@ -19,8 +19,12 @@ export default prefix(
     },
     async (client, user, message, args) => {
         const items = client.packs.map((pack) => {
-            return `<:pnv_chamcam:1293566504524185642> Pack \`${pack.name}\`: ${bold("25")} ${client.items.candy.icon}`;
+            return `<:pnv_chamcam:1293566504524185642> Pack \`${pack.name}\`: ${bold("25")} ${client.items.candy.icon} hoặc ${bold("3")} ${client.items.premium_candy.icon}`;
         });
+
+        items.push(
+            `\n<:pnv_chamcam:1293566504524185642> Vật phẩm đặc biệt \`Soul Box\`: ${bold("5")} ${client.items.premium_candy.icon}`,
+        );
 
         const embed = new EmbedBuilder({
             color: resolveColor(ranColor(client.colors.main)),

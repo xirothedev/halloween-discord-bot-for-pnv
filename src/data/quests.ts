@@ -2,7 +2,7 @@ import items from "@/data/items.json";
 import packs from "@/data/packs.json";
 import ranInt from "@/helpers/ranInt";
 import { QuestFunction } from "@prisma/client";
-import type { QuestProps } from "typings";
+import type { Pack, QuestProps } from "typings";
 
 const generateRate = (min: number, max: number) => {
     const target = ranInt(min, max);
@@ -32,7 +32,7 @@ const quests: QuestProps[] = [
         rate: generateRate(1, 4),
     },
     {
-        name: "Mở $1 pack",
+        name: "Mở $1 pack bất kì",
         function: QuestFunction.open,
         item: items.candy.id,
         rate: generateRate(5, 10),
@@ -42,7 +42,7 @@ const quests: QuestProps[] = [
         function: QuestFunction.open_pack,
         item: items.candy.id,
         rate: generateRate(5, 10),
-        pack: packs[ranInt(0, packs.length)],
+        pack: packs[ranInt(0, packs.length)] as Pack,
     },
     {
         name: "Boost server $1 lần",

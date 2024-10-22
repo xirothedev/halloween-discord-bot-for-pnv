@@ -33,6 +33,7 @@ model User {
   soul             Int       @default(0)
   candy            Int       @default(0)
   premium_candy    Int       @default(0)
+  soul_box         Int       @default(0)
   quests           Quest[]
   cards            Card[]
   packs            Pack[]

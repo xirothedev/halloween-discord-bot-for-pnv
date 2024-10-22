@@ -47,11 +47,11 @@ export default prefix(
                 let name = q.name.replace("$1", q.rate.target.toString());
 
                 if (q.channel) {
-                    name.replace("$2", channelMention(q.channel));
+                    name = name.replace("$2", channelMention(q.channel));
                 }
 
-                if (q.pack) {
-                    name.replace("$2", bold(q.pack.name));
+                if (q.pack?.name) {
+                    name = name.replace("$2", q.pack.name);
                 }
 
                 quest.push({

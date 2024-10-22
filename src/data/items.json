@@ -13,5 +13,10 @@
         "id": "soul",
         "name": "soul",
         "icon": "<:pnv_linhhon:1293633284898816081>"
+    },
+    "soul_box": {
+        "id": "soul_box",
+        "name": "soul box",
+        "icon": "<:pnv_linhhon:1293633284898816081>"
     }
 }

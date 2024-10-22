@@ -83,7 +83,7 @@ export default class ExtendedClient extends Client<true> {
     public start = async (token: string, prefix: string) => {
         commands(this);
         events(this);
-        antiCrash(this);
+        // antiCrash(this);
         deploy(this);
         express(this);
 

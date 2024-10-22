@@ -20,7 +20,13 @@ export default prefix(
         const embed = new EmbedBuilder()
             .setColor(ranColor(client.colors.main))
             .setDescription(
-                `${client.items.premium_candy.icon} | Kẹo Hắc Ám\n> - Vật phẩm có được khi mua bằng VND <:pnv_logomoney:878391201366151218>. Mở ticket tại https://discord.com/channels/755793441287438469/919342147822555166 để được hỗ trợ.\n> - Dùng để mua vật phẩm trong shop.`,
+                `
+                ${client.items.premium_candy.icon} **| Kẹo Hắc Ám**
+                
+                > - Vật phẩm có được khi mua bằng VND <:pnv_logomoney:878391201366151218>. Mở ticket tại https://discord.com/channels/755793441287438469/919342147822555166 để được hỗ trợ.
+                > - Dùng để mua vật phẩm trong shop.
+                > - Bảng giá: 1000 <:pnv_logomoney:878391201366151218> = 2 ${client.items.premium_candy.icon}
+                `,
             );
 
         return await message.channel.send({ embeds: [embed] });

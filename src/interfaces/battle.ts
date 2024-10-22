@@ -1,5 +1,6 @@
 import { getPower } from "@/functions/power";
 import ranInt from "@/helpers/ranInt";
+import type { Card } from "@prisma/client";
 import { bold, EmbedBuilder, Message, resolveColor } from "discord.js";
 import type { UserWithCards } from "typings/command";
 
@@ -8,20 +9,19 @@ export default class BattleInterface extends EmbedBuilder {
         public client: ExtendedClient,
         public message: Message,
         public user: UserWithCards,
-        public enemy: UserWithCards,
+        public enemyCard: Card,
         public won: boolean | null,
         public reward: { candy: number; soul: number },
     ) {
-        const UserCard = user.cards.find((f) => f.card_id === user.card_id)!;
-        const EnemyCard = user.cards.find((f) => f.card_id === enemy.card_id)!;
-        const userEnemy = client.users.cache.get(enemy.user_id);
+        const UserCard = user.cards.find((f) => f.card_id === user.card_id)!;;
+        const userEnemy = client.users.cache.get(enemyCard.user_id);
 
         const thumbnail =
             won === true
-                ? "https://cdn.discordapp.com/attachments/1293487762753982478/1295079400576126996/1.png?ex=670e00ee&is=670caf6e&hm=0bc6e1d324afa0655c6a49507586fa0be9347195ca4b5d2cd0ebe232edaf1a88&"
+                ? "https://cdn.discordapp.com/attachments/1293978154163114115/1297985508684857515/win.png?ex=6717eab4&is=67169934&hm=eb5d820352b7fb705684254c40cd5497c2c03f16df3dfd4deab307eb434fd907&"
                 : won === false
-                  ? "https://cdn.discordapp.com/attachments/1293487762753982478/1295079400773128295/2.png?ex=670e00ee&is=670caf6e&hm=487351a89810023dfbc3140f689ed24ec63d4c926e2ef3ccba82b0cd8570bc6b&"
-                  : "https://cdn.discordapp.com/attachments/1293487762753982478/1295079400987033712/3.png?ex=670e00ee&is=670caf6e&hm=864baaba643c01ba03ab5b60a2b4db59cf769a8221423fca252f2f08cc53fa43&";
+                  ? "https://cdn.discordapp.com/attachments/1293978154163114115/1297985509238374400/lose.png?ex=6717eab4&is=67169934&hm=e2cd7aa3bf4eeb7ab081b0645bc73b9a897c18c2cb1b281daa4828f89886948f&"
+                  : "https://cdn.discordapp.com/attachments/1293978154163114115/1297985508198187028/draw.png?ex=6717eab4&is=67169934&hm=7c28605e939116d055072b42137a94f1aa9937799dd0209eb5e516caf00f7fef&";
 
         super({
             color: won === true ? resolveColor("Green") : won === false ? resolveColor("Red") : undefined,
@@ -37,7 +37,7 @@ export default class BattleInterface extends EmbedBuilder {
                 },
                 {
                     name: `@${userEnemy?.username || "Người bí ẩn"}`,
-                    value: `${client.icons[EnemyCard.rank]} • \`Lv ${EnemyCard.level}\` • ${bold(EnemyCard.name)}\n${client.icons.power} Sức mạnh ${bold(Intl.NumberFormat().format(getPower(EnemyCard.rank, EnemyCard.level)))}`,
+                    value: `${client.icons[enemyCard.rank]} • \`Lv ${enemyCard.level}\` • ${bold(enemyCard.name)}\n${client.icons.power} Sức mạnh ${bold(Intl.NumberFormat().format(getPower(enemyCard.rank, enemyCard.level)))}`,
                     inline: true,
                 },
                 {

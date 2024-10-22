@@ -1,7 +1,9 @@
+import items from "@/data/items.json";
+import ranColor from "@/helpers/ranColor";
 import ErrorInterface from "@/interfaces/error";
 import prefix from "@/layouts/prefix";
+import { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder } from "discord.js";
 import { Category } from "typings/utils";
-import items from "@/data/items.json";
 
 export default prefix(
     "buy",
@@ -31,6 +33,31 @@ export default prefix(
             });
         }
 
+        // code tạm
+        if (
+            args[0] === client.items.soul_box.id ||
+            args[0] === "sb" ||
+            args.join(" ").toLowerCase() === client.items.soul_box.name.toLowerCase()
+        ) {
+            if (user.candy < 5 * amount) {
+                return message.channel.send({
+                    embeds: [new ErrorInterface(client).setDescription("Bạn không có đủ " + client.items.candy.icon)],
+                });
+            }
+
+            await client.prisma.user.update({
+                where: { user_id: user.user_id },
+                data: {
+                    premium_candy: { decrement: 5 * amount },
+                    soul_box: { increment: amount },
+                },
+            });
+
+            return message.channel.send({
+                content: `${client.emoji.done} | Đã mua thành công`,
+            });
+        }
+
         const pack = client.packs.find(
             (f) =>
                 f.id === args[0] ||
@@ -48,26 +75,108 @@ export default prefix(
             });
         }
 
-        if (user.candy < 25 * amount) {
-            return message.channel.send({
-                embeds: [new ErrorInterface(client).setDescription("Bạn không có đủ " + client.items.candy.icon)],
-            });
-        }
+        const candy = new ButtonBuilder()
+            .setCustomId("candy")
+            .setStyle(ButtonStyle.Primary)
+            .setLabel("Kẹo cam")
+            .setEmoji(client.items.candy.icon);
+        const premiumCandy = new ButtonBuilder()
+            .setCustomId("premium_candy")
+            .setStyle(ButtonStyle.Primary)
+            .setLabel("Kẹo hắc ám")
+            .setEmoji(client.items.premium_candy.icon);
 
-        await client.prisma.user.update({
-            where: { user_id: user.user_id },
-            data: {
-                candy: { decrement: 25 * amount },
-                packs: {
-                    upsert: {
-                        where: { pack_id_user_id: { pack_id: pack.id, user_id: user.user_id } },
-                        update: { quantity: { increment: amount } },
-                        create: { pack_id: pack.id, quantity: amount },
-                    },
-                },
-            },
+        const row = new ActionRowBuilder<ButtonBuilder>().setComponents(candy, premiumCandy);
+
+        const msg = await message.channel.send({
+            embeds: [
+                new EmbedBuilder()
+                    .setDescription(`Bạn muốn mua **x${amount}** vật phẩm ${pack.name} bằng loại kẹo nào?`)
+                    .setColor(ranColor(client.colors.main)),
+            ],
+            components: [row],
         });
 
-        return await message.react(client.emoji.done);
+        const collector = await msg.createMessageComponentCollector({
+            filter: (f) => f.user.id === message.author.id,
+            time: 60_000,
+        });
+
+        collector.on("collect", async (i) => {
+            await i.deferUpdate();
+            if (i.customId === "candy") {
+                if (user.candy < 25 * amount) {
+                    return message.channel.send({
+                        embeds: [
+                            new ErrorInterface(client).setDescription("Bạn không có đủ " + client.items.candy.icon),
+                        ],
+                    });
+                }
+
+                await client.prisma.user.update({
+                    where: { user_id: user.user_id },
+                    data: {
+                        candy: { decrement: 25 * amount },
+                        packs: {
+                            upsert: {
+                                where: { pack_id_user_id: { pack_id: pack.id, user_id: user.user_id } },
+                                update: { quantity: { increment: amount } },
+                                create: { pack_id: pack.id, quantity: amount },
+                            },
+                        },
+                    },
+                });
+
+                return msg.edit({
+                    content: `${client.emoji.done} | Đã mua thành công`,
+                    components: [
+                        row.setComponents(
+                            candy.setStyle(ButtonStyle.Success).setDisabled(true),
+                            premiumCandy.setDisabled(true),
+                        ),
+                    ],
+                });
+            } else if (i.customId === "premium_candy") {
+                if (user.candy < 3 * amount) {
+                    return message.channel.send({
+                        embeds: [
+                            new ErrorInterface(client).setDescription(
+                                "Bạn không có đủ " + client.items.premium_candy.icon,
+                            ),
+                        ],
+                    });
+                }
+
+                await client.prisma.user.update({
+                    where: { user_id: user.user_id },
+                    data: {
+                        premium_candy: { decrement: 3 * amount },
+                        packs: {
+                            upsert: {
+                                where: { pack_id_user_id: { pack_id: pack.id, user_id: user.user_id } },
+                                update: { quantity: { increment: amount } },
+                                create: { pack_id: pack.id, quantity: amount },
+                            },
+                        },
+                    },
+                });
+
+                return msg.edit({
+                    content: `${client.emoji.done} | Đã mua thành công`,
+                    components: [
+                        row.setComponents(
+                            candy.setDisabled(true),
+                            premiumCandy.setStyle(ButtonStyle.Success).setDisabled(true),
+                        ),
+                    ],
+                });
+            }
+        });
+
+        collector.on("end", (collected, reason) => {
+            return msg.edit({
+                components: [row.setComponents(candy.setDisabled(true), premiumCandy.setDisabled(true))],
+            });
+        });
     },
 );
