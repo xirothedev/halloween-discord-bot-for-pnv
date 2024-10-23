@@ -16,7 +16,8 @@ export default prefix(
             examples: ["thachdau"],
             usage: "thachdau",
         },
-        cooldown: "30m",
+        aliases: ["td"],
+        cooldown: "5s",
         botPermissions: ["SendMessages", "ReadMessageHistory", "ViewChannel", "EmbedLinks"],
         ignore: false,
         category: Category.game,
@@ -48,7 +49,7 @@ export default prefix(
                 return power < userPower;
             } else if (won === false) {
                 return power > userPower;
-            } else if (won === false) {
+            } else if (won === null) {
                 return power === userPower;
             } else {
                 return false;

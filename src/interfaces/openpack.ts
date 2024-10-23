@@ -54,9 +54,7 @@ export default class OpenpackInterface extends EmbedBuilder {
                 iconURL: message.author.displayAvatarURL(),
             },
             image: { url: highestCard.image },
-            thumbnail: {
-                url: "https://images-ext-1.discordapp.net/external/AlEF_ptB1JDppn6CtBZJ7lpL2KSIM0TaSpYxMJVINtY/https/cdn3.emoji.gg/emojis/5356-pin-pack-brawlstars.png",
-            },
+            thumbnail: { url: pack.image },
         });
     }
 }

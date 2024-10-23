@@ -80,6 +80,8 @@ export default class ExtendedClient extends Client<true> {
 
     public packs = packs as Pack[];
 
+    public notiChannel = this.channels.cache.get("1298716490111123486")
+
     public start = async (token: string, prefix: string) => {
         commands(this);
         events(this);

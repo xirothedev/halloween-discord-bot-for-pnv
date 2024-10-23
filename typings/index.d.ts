@@ -27,6 +27,7 @@ type Pack = {
     name: string;
     icon: string;
     color: ColorResolvable;
+    image: string;
     cards: string[];
 };
 

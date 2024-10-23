@@ -4,6 +4,7 @@
         "name": "Urban Legends",
         "icon": "<:pnv_packul:1297226330764742726>",
         "color": "#3DCE98",
+        "image": "https://cdn.discordapp.com/attachments/1293978154163114115/1298712939460694016/pnv_packul.png?ex=671a902d&is=67193ead&hm=acdd66b53a0c8abe2e198091504ca0bea604bc4f18de4416b692f51b7febd2cb&",
         "cards": ["u1", "u2", "u3", "u4", "u5", "u6", "u7", "u8", "u9", "u10", "u11", "u12"]
     },
     {
@@ -11,6 +12,7 @@
         "name": "Trick or Treat",
         "icon": "<:pnv_packtot:1297226320849277089>",
         "color": "#FF9429",
+        "image": "https://cdn.discordapp.com/attachments/1293978154163114115/1298712938684747869/pnv_packtot.png?ex=671a902d&is=67193ead&hm=dc1089ce2bbdf2e50bdc46ef380bd84bde822883403b86b47549071478d66dd3&",
         "cards": ["t1", "t2", "t3", "t4", "t5", "t6", "t7", "t8", "t9", "t10", "t11", "t12"]
     },
     {
@@ -18,6 +20,7 @@
         "name": "Mythology",
         "icon": "<:pnv_packm:1297227586946072576>",
         "color": "#F7E4B9",
+        "image": "https://cdn.discordapp.com/attachments/1293978154163114115/1298712938928144495/pnv_packm.png?ex=671a902d&is=67193ead&hm=f149f823158a456cb81f6ed56eb6911f04cd6b5f900a94491530d781a46d9958&",
         "cards": ["m1", "m2", "m3", "m4", "m5", "m6", "m7", "m8", "m9", "m10", "m11", "m12"]
     },
     {
@@ -25,6 +28,7 @@
         "name": "Comic Villains",
         "icon": "<:pnv_packcv:1297226327287529582>",
         "color": "#CF2027",
+        "image": "https://cdn.discordapp.com/attachments/1293978154163114115/1298712939192389662/pnv_packcv.png?ex=671a902d&is=67193ead&hm=8b0237b3138a4a6b135ea3c32e2d2cc1aa5f2f6559a73093dd30a706fd3edf91&",
         "cards": ["c1", "c2", "c3", "c4", "c5", "c6", "c7", "c8", "c9", "c10", "c11", "c12"]
     }
 ]

@@ -1,15 +1,12 @@
 import { resolvePower } from "@/functions/power";
 import BxhInterface, { BaseBxhInterface } from "@/interfaces/bxh";
-import ErrorInterface from "@/interfaces/error";
 import prefix from "@/layouts/prefix";
 import {
     ActionRowBuilder,
     ButtonBuilder,
     ButtonStyle,
-    MessagePayload,
     StringSelectMenuBuilder,
     StringSelectMenuOptionBuilder,
-    type MessageReplyOptions
 } from "discord.js";
 import { Category } from "typings/utils";
 
@@ -19,13 +16,12 @@ export default prefix(
     "bxh",
     {
         description: {
-            content: `xem bảng xếp hạng Kẹo Cam, Kẹo Hắc Ám, Sức mạnh.`,
+            content: `Xem bảng xếp hạng Kẹo Cam, Kẹo Hắc Ám, Sức mạnh.`,
             examples: ["bxh"],
             usage: "bxh",
         },
         cooldown: "5s",
         botPermissions: ["SendMessages", "ReadMessageHistory", "ViewChannel", "EmbedLinks"],
-        ignore: false,
         category: Category.game,
     },
     async (client, user, message, args) => {
@@ -33,194 +29,161 @@ export default prefix(
             where: { card_id: { not: null } },
             include: { cards: true },
         });
-        const powers = users.map((_user) => ({ number: resolvePower(user, user.card_id), user: _user }));
+        const powers = users.map((_user) => ({ number: resolvePower(_user, _user.card_id), user: _user }));
         const power = resolvePower(user, user.card_id);
         const topPower = powers.filter((f) => f.number > power);
 
-        const prevButton = new ButtonBuilder({
-            customId: "previous",
-            label: "Trang trước",
-            style: ButtonStyle.Primary,
-        });
-        const nextButton = new ButtonBuilder({ customId: "next", label: "Trang sau", style: ButtonStyle.Primary });
+        let page = 1;
+        let type: Type = null;
+        let maxPage = 1;
 
-        const row = new ActionRowBuilder<ButtonBuilder>().setComponents(
-            prevButton.setDisabled(true),
-            nextButton.setDisabled(false),
-        );
+        const prevButton = new ButtonBuilder()
+            .setCustomId("previous")
+            .setLabel("Trang trước")
+            .setStyle(ButtonStyle.Primary)
+            .setDisabled(true);
 
-        const select = new ActionRowBuilder<StringSelectMenuBuilder>().setComponents(
-            new StringSelectMenuBuilder({ customId: "select", placeholder: "Chọn bảng xếp hạng" }).addOptions(
-                new StringSelectMenuOptionBuilder({
-                    label: "Kẹo Cam",
-                    value: "candy",
-                    emoji: client.items.candy.icon,
-                }),
-                new StringSelectMenuOptionBuilder({
-                    label: "Kẹo Hắc Ám",
-                    value: "premium_candy",
-                    emoji: client.items.premium_candy.icon,
-                }),
-                new StringSelectMenuOptionBuilder({
-                    label: "Điểm chiến lực",
-                    value: "power",
-                    emoji: client.icons.power,
-                }),
-            ),
+        const nextButton = new ButtonBuilder()
+            .setCustomId("next")
+            .setLabel("Trang sau")
+            .setStyle(ButtonStyle.Primary)
+            .setDisabled(false);
+
+        const row = new ActionRowBuilder<ButtonBuilder>().addComponents(prevButton, nextButton);
+
+        const selectMenu = new ActionRowBuilder<StringSelectMenuBuilder>().addComponents(
+            new StringSelectMenuBuilder()
+                .setCustomId("select")
+                .setPlaceholder("Chọn bảng xếp hạng")
+                .addOptions(
+                    new StringSelectMenuOptionBuilder()
+                        .setLabel("Kẹo Cam")
+                        .setValue("candy")
+                        .setEmoji(client.items.candy.icon),
+                    new StringSelectMenuOptionBuilder()
+                        .setLabel("Kẹo Hắc Ám")
+                        .setValue("premium_candy")
+                        .setEmoji(client.items.premium_candy.icon),
+                    new StringSelectMenuOptionBuilder()
+                        .setLabel("Điểm chiến lực")
+                        .setValue("power")
+                        .setEmoji(client.icons.power),
+                ),
         );
 
         const ranks = [
             `   • ${client.items.candy.icon} Top Kẹo Cam \`#${await client.utils.getTopCandy(user)}\``,
             `   • ${client.items.premium_candy.icon} Top Kẹo Hắc Ám \`#${await client.utils.getTopPremiumCandy(user)}\``,
-            `   • ${client.items.candy.icon} Top Sức Mạnh \`#${topPower.length}\``,
+            `   • ${client.icons.power} Top Sức Mạnh \`#${topPower.length}\``,
         ];
-
-        let page = 1;
-        let type: Type;
-        let maxpage = 1;
 
         const msg = await message.channel.send({
             embeds: [new BxhInterface(client, message, ranks)],
-            components: [select],
+            components: [selectMenu],
         });
 
         const getIcon = (index: number) => {
-            let icon;
+            const overallIndex = (page - 1) * 10 + index;
 
-            if (page === 1) {
-                if (index === 0) {
-                    icon = "<:pnv_medal1:1041704516241858601>";
-                } else if (index === 1) {
-                    icon = "<:pnv_medal2:1041704562345656360>";
-                } else if (index === 2) {
-                    icon = "<:pnv_medal3:1041704609774846023>";
-                } else if (index === 3) {
-                    icon = "<:pnv_medal4:1041704661138276362>";
-                } else {
-                    icon = `#${index + 1}`;
-                }
-            } else {
-                icon = `#${index + 1}`;
+            if (page === 1 && index < 3) {
+                const medals = [
+                    "<:pnv_medal1:1041704516241858601>",
+                    "<:pnv_medal2:1041704562345656360>",
+                    "<:pnv_medal3:1041704609774846023>",
+                ];
+                return medals[index];
             }
 
-            return icon;
+            return `#${overallIndex + 1}`;
         };
 
-        const getInterface = async (page: number) => {
-            if (type === "candy") {
-                maxpage = await client.prisma.user.count({ where: { NOT: { candy: 0 } } });
-                const datas = await client.prisma.user.findMany({
-                    take: 10,
-                    skip: 10 * (page - 1),
-                    orderBy: { candy: "desc" },
-                });
+        const getInterface = async (page: number, type: Type) => {
+            if (!type) return new BxhInterface(client, message, ranks);
 
-                const format = datas.map((data, index) => {
-                    const member = client.users.cache.get(data.user_id);
+            let countField: string | undefined;
+            let orderField: string;
+            let format;
 
-                    return `${getIcon(index)} \`${member?.username}\`: \`${data.candy}\` ${client.items.candy.icon}`;
-                });
+            switch (type) {
+                case "candy":
+                    countField = "candy";
+                    orderField = "candy";
+                    break;
+                case "premium_candy":
+                    countField = "premium_candy";
+                    orderField = "premium_candy";
+                    break;
+                case "power":
+                    countField = undefined; // "power" is handled separately
+                    break;
+            }
 
-                return new BaseBxhInterface(client, message, format);
-            } else if (type === "premium_candy") {
-                maxpage = await client.prisma.user.count({ where: { NOT: { premium_candy: 0 } } });
-                const datas = await client.prisma.user.findMany({
-                    take: 10,
-                    skip: 10 * (page - 1),
-                    orderBy: { premium_candy: "desc" },
-                });
+            if (type === "power") {
+                maxPage = Math.ceil(powers.length / 10);
 
-                const format = datas.map((data, index) => {
-                    const member = client.users.cache.get(data.user_id);
-
-                    return `${getIcon(index)} \`${member?.username}\`: \`${data.premium_candy}\` ${client.items.premium_candy.icon}`;
-                });
-
-                return new BaseBxhInterface(client, message, format);
-            } else if (type === "power") {
-                maxpage = await client.prisma.user.count({ where: { NOT: { card_id: null } } });
-                const format = powers
-                    .sort((a, b) => a.number - b.number)
+                format = powers
+                    .sort((a, b) => b.number - a.number)
+                    .slice(10 * (page - 1), 10 * page)
                     .map((pow, index) => {
                         const member = client.users.cache.get(pow.user.user_id);
-
                         return `${getIcon(index)} \`${member?.username}\`: \`${Intl.NumberFormat().format(pow.number)}\` ${client.icons.power}`;
                     });
-
-                return new BaseBxhInterface(client, message, format);
             } else {
-                return new BxhInterface(client, message, ranks);
+                const totalUsers = await client.prisma.user.count({ where: { NOT: { [countField!]: 0 } } });
+                maxPage = Math.ceil(totalUsers / 10);
+
+                const datas = await client.prisma.user.findMany({
+                    take: 10,
+                    skip: 10 * (page - 1),
+                    orderBy: { [orderField!]: "desc" },
+                });
+
+                format = datas.map((data: any, index) => {
+                    const member = client.users.cache.get(data.user_id);
+                    return `${getIcon(index)} \`${member?.username}\`: \`${Intl.NumberFormat().format(+data[orderField])}\` ${client.items[type!].icon}`;
+                });
             }
+
+            return new BaseBxhInterface(client, message, format);
         };
 
-        const collector = await msg.createMessageComponentCollector({
-            filter: (f) => f.user.id === message.author.id,
+        const collector = msg.createMessageComponentCollector({
+            filter: (i) => i.user.id === message.author.id,
             time: 5 * 60_000,
         });
 
         collector.on("collect", async (interaction) => {
             await interaction.deferUpdate();
 
-            if (interaction.customId === "select" && interaction.isStringSelectMenu()) {
+            if (interaction.isStringSelectMenu()) {
                 type = interaction.values[0] as Type;
+                page = 1;
 
-                const embed = await getInterface(page);
-
+                const embed = await getInterface(page, type);
                 await msg.edit({
                     embeds: [embed],
-                    components: [row.setComponents(prevButton.setDisabled(true), nextButton.setDisabled(false))],
+                    components: [
+                        selectMenu,
+                        row.setComponents(prevButton.setDisabled(true), nextButton.setDisabled(maxPage <= 1)),
+                    ],
                 });
-            } else if (interaction.customId === "previous") {
-                if (page <= 1) {
-                    return await interaction.followUp({
-                        embeds: [new ErrorInterface(client).setDescription("Trang này là trang đầu tiên")],
-                        ephemeral: true,
-                    });
-                }
+            } else if (interaction.isButton()) {
+                if (interaction.customId === "previous") page--;
+                if (interaction.customId === "next") page++;
 
-                page--;
-
-                const options: MessageReplyOptions = { embeds: [await getInterface(page)] };
-
-                if (page <= 1) {
-                    options.components = [
-                        row.setComponents(prevButton.setDisabled(true), nextButton.setDisabled(false)),
-                    ];
-                } else {
-                    options.components = [
-                        row.setComponents(prevButton.setDisabled(false), nextButton.setDisabled(false)),
-                    ];
-                }
-
-                await msg.edit({ embeds: options.embeds, components: options.components });
-            } else {
-                if (page >= 6) {
-                    return await interaction.followUp({
-                        embeds: [new ErrorInterface(client).setDescription("Trang này là trang cuối cùng")],
-                        ephemeral: true,
-                    });
-                }
-
-                page++;
-
-                const options: string | MessagePayload | MessageReplyOptions = { embeds: [await getInterface(page)] };
-
-                if (page >= maxpage) {
-                    options.components = [
-                        row.setComponents(prevButton.setDisabled(false), nextButton.setDisabled(true)),
-                    ];
-                } else {
-                    options.components = [
-                        row.setComponents(prevButton.setDisabled(false), nextButton.setDisabled(false)),
-                    ];
-                }
-
-                await msg.edit({ embeds: options.embeds, components: options.components });
+                const embed = await getInterface(page, type);
+                await msg.edit({
+                    embeds: [embed],
+                    components: [
+                        selectMenu,
+                        row.setComponents(prevButton.setDisabled(page <= 1), nextButton.setDisabled(page >= maxPage)),
+                    ],
+                });
             }
         });
 
-        collector.on("end", async (collected, reason) => {
-            await msg.edit({ components: [] });
+        collector.on("end", () => {
+            msg.edit({ components: [] });
         });
     },
 );

@@ -21,7 +21,10 @@ export default prefix(
             .setColor(ranColor(client.colors.main))
             .setDescription(
                 `${client.items.soul.icon} **| Linh Hồn**\n\n> - Vật phẩm có được thông qua thách đấu với người chơi khác.\n> - Dùng để nâng cấp card.`,
-            );
+            ).setFooter({
+                text: `@${message.author.username} • .gg/phonguoiviet`,
+                iconURL: message.author.displayAvatarURL(),
+            });
 
         return await message.channel.send({ embeds: [embed] });
     },

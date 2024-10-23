@@ -19,7 +19,11 @@ export default prefix(
     },
     async (client, user, message, args) => {
         const items = client.packs.map((pack) => {
-            return `<:pnv_chamcam:1293566504524185642> Pack \`${pack.name}\`: ${bold("25")} ${client.items.candy.icon} hoặc ${bold("3")} ${client.items.premium_candy.icon}`;
+            return `<:pnv_chamcam:1293566504524185642> Pack \`${pack.name} (${pack.name
+                .split(" ")
+                .map((m) => m.slice(0, 1))
+                .join("")
+                .toLowerCase()})\`: ${bold("30")} ${client.items.candy.icon} hoặc ${bold("3")} ${client.items.premium_candy.icon}`;
         });
 
         items.push(

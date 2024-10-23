@@ -1,5 +1,5 @@
 import ranColor from "@/helpers/ranColor";
-import type { Rank } from "@prisma/client";
+import type { Card, Rank } from "@prisma/client";
 import { bold, EmbedBuilder, Message, resolveColor } from "discord.js";
 import type { Pack } from "typings";
 import type { FullUser } from "typings/command";
@@ -10,18 +10,7 @@ export default class BstInterface extends EmbedBuilder {
         public message: Message,
         public user: FullUser,
     ) {
-        const vi = `<:pnv_diamond:1293649685566722140> ${bold("Ví")}\n> ${bold(`x${user.candy}`)} ${client.items.candy.icon}\n> ${bold(`x${user.premium_candy}`)} ${client.items.premium_candy.icon}\n> ${bold(`x${user.soul}`)} ${client.items.soul.icon}\n${client.packs
-            .map((p) => {
-                const pack = user.packs.find((f) => f.pack_id === p.id);
-                if (!pack) return `> **x0** ${p.icon}`;
-                return `> ${bold(`x${pack.quantity}`)} ${p.icon}`;
-            })
-            .join("\n")}`;
-
-        const progress = `<:pnv_global:1293649382809272445> ${bold("Tiến Trình Chung")}\n> - Tổng số card đã mở: \`${user.total_pack * 3}\`\n> - Tổng số card: \`${user.cards.length}/${client.cards.length}\`\n> - Số pack hoàn thành: \`${client.utils.getFinisedPack(user)}/${client.packs.length}\``;
-
-        const finishedPack = `<:pnv_global:1293649382809272445> ${bold("Tiến Trình Card")}\n> - ${client.icons.b_rank} \`${user.cards.filter((f) => f.rank === "b_rank").length}/${client.cards.filter((f) => f.rank === "b_rank").length}\`\n> - ${client.icons.a_rank} \`${user.cards.filter((f) => f.rank === "a_rank").length}/${client.cards.filter((f) => f.rank === "a_rank").length}\`\n> - ${client.icons.r_rank} \`${user.cards.filter((f) => f.rank === "r_rank").length}/${client.cards.filter((f) => f.rank === "r_rank").length}\`\n> - ${client.icons.sr_rank} \`${user.cards.filter((f) => f.rank === "sr_rank").length}/${client.cards.filter((f) => f.rank === "sr_rank").length}\`\n> - ${client.icons.s_rank} \`${user.cards.filter((f) => f.rank === "s_rank").length}/${client.cards.filter((f) => f.rank === "s_rank").length}\``;
-
+        // Call super first
         super({
             color: resolveColor(ranColor(client.colors.main)),
             author: {
@@ -32,11 +21,66 @@ export default class BstInterface extends EmbedBuilder {
                 text: `@${message.author.username} • .gg/phonguoiviet`,
                 iconURL: message.author.displayAvatarURL(),
             },
-            description: vi + "\n\n" + progress + "\n\n" + finishedPack,
+            description: "", // Set a default description
             thumbnail: {
                 url: "https://images-ext-1.discordapp.net/external/BBNdTd7dwpLmwjyT6xCsTow-pOo7fSmQHIqpCvQ3Fys/https/cdn-icons-png.flaticon.com/128/1183/1183774.png",
             },
         });
+
+        // Build the embed after calling super
+        const vi = this.buildWalletInfo(client, user);
+        const progress = this.buildProgressInfo(client, user);
+        const finishedPack = this.buildFinishedPackInfo(client, user);
+
+        // Set the description after the super call
+        this.setDescription(`${vi}\n${progress}\n${finishedPack}`);
+    }
+
+    private buildWalletInfo(client: ExtendedClient, user: FullUser): string {
+        const packsInfo = client.packs
+            .map((p) => {
+                const pack = user.packs.find((f) => f.pack_id === p.id);
+                return `> ${bold(`x${pack?.quantity || 0}`)} ${p.icon}`;
+            })
+            .join("\n");
+
+        return `
+            <:pnv_diamond:1293649685566722140> ${bold("Ví")}
+            > ${bold(`x${user.candy}`)} ${client.items.candy.icon}
+            > ${bold(`x${user.premium_candy}`)} ${client.items.premium_candy.icon}
+            > ${bold(`x${user.soul}`)} ${client.items.soul.icon}
+            ${packsInfo}
+            > ${bold(`x${user.soul_box}`)} ${client.items.soul_box.icon}
+        `;
+    }
+
+    private buildProgressInfo(client: ExtendedClient, user: FullUser): string {
+        const totalCards = user.total_pack * 3;
+        const completedPacks = client.utils.getFinisedPack(user);
+        const totalCardsCollected = `${user.cards.length}/${client.cards.length}`;
+
+        return `
+            <:pnv_global:1293649382809272445> ${bold("Tiến Trình Chung")}
+            > - Tổng số card đã mở: \`${totalCards}\`
+            > - Tổng số card: \`${totalCardsCollected}\`
+            > - Số pack hoàn thành: \`${completedPacks}/${client.packs.length}\`
+        `;
+    }
+
+    private buildFinishedPackInfo(client: ExtendedClient, user: FullUser): string {
+        const ranks: Rank[] = ["b_rank", "a_rank", "r_rank", "sr_rank", "s_rank"];
+        const rankProgress = ranks
+            .map((rank) => {
+                const userRankCount = user.cards.filter((f) => f.rank === rank).length;
+                const totalRankCount = client.cards.filter((f) => f.rank === rank).length;
+                return `> - ${client.icons[rank]} \`${userRankCount}/${totalRankCount}\``;
+            })
+            .join("\n");
+
+        return `
+            <:pnv_global:1293649382809272445> ${bold("Tiến Trình Card")}
+            ${rankProgress}
+        `;
     }
 }
 
@@ -47,19 +91,6 @@ export class BaseBstCardInterface extends EmbedBuilder {
         public user: FullUser,
         public pack: Pack,
     ) {
-        const finishedCard = client.utils.getFinisedCard(user, pack.id);
-        const packLine = `${pack.icon} ${bold(pack.name)}\n> - \`${finishedCard.cards.length}/${pack.cards.length}\``;
-        const cardLine = `${pack.icon} ${bold("Card Hiện Có")}\n${client.cards
-            .filter((f) => f.topic === pack.id)
-            .map((card) => {
-                if (finishedCard.cards.find((f) => f.card_id === card.id)) {
-                    return `> \`${card.id}\` • ${client.icons[card.rank as Rank]} • ${card.name}`;
-                } else {
-                    return `> \`${card.id}\` • ${client.icons[card.rank as Rank]} • ~~${card.name}~~`;
-                }
-            })
-            .join("\n")}`;
-
         super({
             color: resolveColor(pack.color),
             author: {
@@ -70,10 +101,29 @@ export class BaseBstCardInterface extends EmbedBuilder {
                 text: `@${message.author.username} • .gg/phonguoiviet`,
                 iconURL: message.author.displayAvatarURL(),
             },
-            description: packLine + "\n\n" + cardLine,
             thumbnail: {
                 url: "https://images-ext-1.discordapp.net/external/BBNdTd7dwpLmwjyT6xCsTow-pOo7fSmQHIqpCvQ3Fys/https/cdn-icons-png.flaticon.com/128/1183/1183774.png",
             },
         });
+        // Call super first
+        const finishedCard = client.utils.getFinisedCard(user, pack.id);
+        const packLine = `${pack.icon} ${bold(pack.name)}\n> - \`${finishedCard.cards.length}/${pack.cards.length}\``;
+        const cardLine = this.buildCardInfo(client, user, pack, finishedCard);
+        this.setDescription(`${packLine}\n\n${cardLine}`);
+    }
+
+    private buildCardInfo(client: ExtendedClient, user: FullUser, pack: Pack, finishedCard: { cards: Card[] }): string {
+        return `${pack.icon} ${bold("Card Hiện Có")}\n${client.cards
+            .filter((card) => card.topic === pack.id)
+            .map((card) => {
+                const isOwned = finishedCard.cards.some((f) => f.card_id === card.id);
+                const cardStatus = isOwned ? card.name : `~~${card.name}~~`;
+                return `> \`${card.id}\` • ${client.icons[card.rank as Rank]} • ${cardStatus}`;
+            })
+            .join("\n")}`;
+    }
+
+    private buildPackInfo(pack: Pack, finishedCard: any): string {
+        return `${pack.icon} ${bold(pack.name)}\n> - \`${finishedCard.cards.length}/${pack.cards.length}\``;
     }
 }

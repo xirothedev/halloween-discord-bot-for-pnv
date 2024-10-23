@@ -22,7 +22,10 @@ export default prefix(
             .setColor(ranColor(client.colors.main))
             .setDescription(
                 `${client.items.candy.icon} **| Kẹo Cam**\n\n> - Vật phẩm có được thông qua thách đấu, điểm danh hằng ngày, làm nhiệm vụ.\n> - Dùng để nâng cấp card, mua vật phẩm trong shop.`,
-            );
+            ).setFooter({
+                text: `@${message.author.username} • .gg/phonguoiviet`,
+                iconURL: message.author.displayAvatarURL(),
+            });
 
         return await message.channel.send({ embeds: [embed] });
     },

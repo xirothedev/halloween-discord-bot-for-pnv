@@ -13,7 +13,7 @@ const generateRate = (min: number, max: number) => {
 
 const quests: QuestProps[] = [
     {
-        name: "Nhắn $1 tin nhắn",
+        name: "Nhắn $1 tin nhắn ở kênh bất kì",
         function: QuestFunction.chat,
         item: items.candy.id,
         rate: generateRate(100, 201),

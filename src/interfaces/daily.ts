@@ -13,11 +13,11 @@ export default class DailyInterface extends EmbedBuilder {
         if (streakDaily % 3 === 0) {
             description =
                 description +
-                `\n\n<a:pnv_pumpkinlaugh:1032767073874620447> Chuỗi 3 ngày: ${bold(`x3`)} ${client.packs[0].icon}`;
+                `\n\n<a:pnv_pumpkinlaugh:1032767073874620447> Chuỗi 3 ngày: ${bold(`x3`)} <:pnv_pack:1295087974387548182> **ngẫu nhiên**`;
         } else {
             description =
                 description +
-                `\n\n<a:pnv_pumpkinlaugh:1032767073874620447> Điểm danh thêm ${bold(`${3 - (streakDaily % 3)} ngày`)} để nhận ${bold(`x3`)} ${client.packs[0].icon}`;
+                `\n\n<a:pnv_pumpkinlaugh:1032767073874620447> Điểm danh thêm ${bold(`${3 - (streakDaily % 3)} ngày`)} để nhận ${bold(`x3`)} <:pnv_pack:1295087974387548182> **ngẫu nhiên**`;
         }
 
         super({

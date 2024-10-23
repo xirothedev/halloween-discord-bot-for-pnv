@@ -5,7 +5,7 @@ import ms from "ms";
 import type { Command } from "typings/command";
 
 type CooldownProps = { name: string; availableAt: string };
-const cooldown = new Map<string, CooldownProps[]>();
+export const cooldown = new Map<string, CooldownProps[]>();
 
 export default event("messageCreate", { once: false }, async (client, message) => {
     if (message.author.bot || !message.inGuild()) return;
@@ -99,18 +99,25 @@ export default event("messageCreate", { once: false }, async (client, message) =
                     data = data.filter(({ name }: CooldownProps) => name === commandInput);
                     data = data[0];
                     if (data?.availableAt >= Date.now()) {
-                        return await message.channel.send({
-                            embeds: [
-                                embed
-                                    .setColor(client.color.red)
-                                    .setDescription(
-                                        `❌ **|** Bạn đang sử dụng quá nhanh lệnh này! Thử lại lúc  ${time(
-                                            Math.floor(data.availableAt / 1000),
-                                            "R",
-                                        )}!`,
-                                    ),
-                            ],
-                        });
+                        return await message.channel
+                            .send({
+                                embeds: [
+                                    embed
+                                        .setColor(client.color.red)
+                                        .setDescription(
+                                            `❌ **|** Bạn đang sử dụng quá nhanh lệnh này! Thử lại lúc  ${time(
+                                                Math.floor(data.availableAt / 1000),
+                                                "R",
+                                            )}!`,
+                                        ),
+                                ],
+                            })
+                            .then((msg) => {
+                                setTimeout(
+                                    () => msg.delete(),
+                                    data.availableAt - Date.now(),
+                                );
+                            });
                     }
                 } else {
                     cooldown.set(message.author.id, [setCooldown(commandInput, command.options.cooldown)]);
