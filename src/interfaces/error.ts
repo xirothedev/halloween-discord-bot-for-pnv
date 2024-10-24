@@ -1,4 +1,4 @@
-import { EmbedBuilder, Message, resolveColor } from "discord.js";
+import { EmbedBuilder, resolveColor } from "discord.js";
 
 export default class ErrorInterface extends EmbedBuilder {
     constructor(

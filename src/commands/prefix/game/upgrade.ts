@@ -6,6 +6,7 @@ import prefix from "@/layouts/prefix";
 import { bold } from "discord.js";
 import { Category } from "typings/utils";
 import items from "@/data/items.json";
+import NotEnoughEmbed from "@/interfaces/notEnough";
 
 export default prefix(
     "upgrade",
@@ -42,7 +43,14 @@ export default prefix(
 
         if (ingredient.candy > user.candy) {
             return message.channel.send({
-                embeds: [new ErrorInterface(client).setDescription("Bạn không có đủ " + client.items.candy.icon)],
+                embeds: [
+                    new NotEnoughEmbed(
+                        client,
+                        client.items.candy.icon,
+                        ingredient.candy - user.candy,
+                        `- Thách đấu người chơi khác (hlw thachdau) hoặc mua Rương linh hồn trong shop (hlw shop) để kiếm thêm linh hồn nhé!`,
+                    ),
+                ],
             });
         }
 
@@ -56,7 +64,7 @@ export default prefix(
             where: { user_id: user.user_id },
             data: {
                 candy: { decrement: ingredient.candy },
-                soul: { increment: ingredient.soul },
+                soul: { decrement: ingredient.soul },
                 cards: {
                     update: {
                         where: { card_id_user_id: { card_id: card.card_id, user_id: user.user_id } },

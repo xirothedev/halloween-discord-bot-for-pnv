@@ -10,7 +10,7 @@ import {
 } from "discord.js";
 import { Category } from "typings/utils";
 
-type Type = "candy" | "premium_candy" | "power" | null;
+type Type = "candy" | "premium_candy" | "power" | "winner" | null;
 
 export default prefix(
     "bxh",
@@ -65,16 +65,21 @@ export default prefix(
                         .setValue("premium_candy")
                         .setEmoji(client.items.premium_candy.icon),
                     new StringSelectMenuOptionBuilder()
-                        .setLabel("Điểm chiến lực")
+                        .setLabel("Sức mạnh")
                         .setValue("power")
                         .setEmoji(client.icons.power),
+                    new StringSelectMenuOptionBuilder()
+                        .setLabel("Chuỗi thắng")
+                        .setValue("winner")
+                        .setEmoji("<a:pnv_winstreak:1295079654473990214>"),
                 ),
         );
 
         const ranks = [
-            `   • ${client.items.candy.icon} Top Kẹo Cam \`#${await client.utils.getTopCandy(user)}\``,
-            `   • ${client.items.premium_candy.icon} Top Kẹo Hắc Ám \`#${await client.utils.getTopPremiumCandy(user)}\``,
-            `   • ${client.icons.power} Top Sức Mạnh \`#${topPower.length}\``,
+            `   • ${client.items.candy.icon} Top Kẹo Cam \`#${(await client.utils.getTopCandy(user)) + 1}\``,
+            `   • ${client.items.premium_candy.icon} Top Kẹo Hắc Ám \`#${(await client.utils.getTopPremiumCandy(user)) + 1}\``,
+            `   • ${client.icons.power} Top Sức Mạnh \`#${topPower.length + 1}\``,
+            `   • <a:pnv_winstreak:1295079654473990214> Top Chuỗi Thắng \`#${(await client.utils.getTopWinnerStreak(user)) + 1}\``,
         ];
 
         const msg = await message.channel.send({
@@ -113,8 +118,12 @@ export default prefix(
                     countField = "premium_candy";
                     orderField = "premium_candy";
                     break;
+                case "winner":
+                    countField = "streak_winner";
+                    orderField = "streak_winner";
+                    break;
                 case "power":
-                    countField = undefined; // "power" is handled separately
+                    countField = undefined;
                     break;
             }
 
@@ -129,7 +138,7 @@ export default prefix(
                         return `${getIcon(index)} \`${member?.username}\`: \`${Intl.NumberFormat().format(pow.number)}\` ${client.icons.power}`;
                     });
             } else {
-                const totalUsers = await client.prisma.user.count({ where: { NOT: { [countField!]: 0 } } });
+                const totalUsers = await client.prisma.user.count();
                 maxPage = Math.ceil(totalUsers / 10);
 
                 const datas = await client.prisma.user.findMany({
@@ -140,7 +149,7 @@ export default prefix(
 
                 format = datas.map((data: any, index) => {
                     const member = client.users.cache.get(data.user_id);
-                    return `${getIcon(index)} \`${member?.username}\`: \`${Intl.NumberFormat().format(+data[orderField])}\` ${client.items[type!].icon}`;
+                    return `${getIcon(index)} \`${member?.username}\`: \`${Intl.NumberFormat().format(+data[orderField])}\` ${client.items[type!]?.icon || "<a:pnv_winstreak:1295079654473990214>"}`;
                 });
             }
 

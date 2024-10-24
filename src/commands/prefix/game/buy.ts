@@ -1,6 +1,7 @@
 import items from "@/data/items.json";
 import ranColor from "@/helpers/ranColor";
 import ErrorInterface from "@/interfaces/error";
+import NotEnoughEmbed from "@/interfaces/notEnough";
 import prefix from "@/layouts/prefix";
 import {
     ActionRowBuilder,
@@ -15,8 +16,8 @@ import type { FullUser } from "typings/command";
 import { Category } from "typings/utils";
 
 const COST_CANDY = 30;
-const COST_PREMIUM_CANDY = 3;
-const SOUL_BOX_COST = 5;
+const COST_PREMIUM_CANDY = 4;
+const SOUL_BOX_COST = 6;
 
 export default prefix(
     "buy",
@@ -60,7 +61,7 @@ export default prefix(
         const candyButton = createButton(
             "candy",
             ButtonStyle.Primary,
-            `x${amount * 25} Kẹo cam`,
+            `x${amount * 30} Kẹo cam`,
             client.items.candy.icon,
         );
         const premiumCandyButton = createButton(
@@ -103,7 +104,6 @@ export default prefix(
     },
 );
 
-// Hàm xử lý mua soul_box
 async function handleSoulBoxPurchase(client: ExtendedClient, user: FullUser, message: Message<true>, amount: number) {
     if (user.premium_candy < SOUL_BOX_COST * amount) {
         return message.channel.send({
@@ -138,12 +138,10 @@ function findPack(client: ExtendedClient, args: string[]) {
     );
 }
 
-// Hàm tạo button
 function createButton(id: string, style: ButtonStyle, label: string, emoji: ComponentEmojiResolvable) {
     return new ButtonBuilder().setCustomId(id).setStyle(style).setLabel(label).setEmoji(emoji);
 }
 
-// Hàm kiểm tra soul_box
 function isSoulBox(arg: string, client: ExtendedClient) {
     return (
         arg === client.items.soul_box.id ||
@@ -152,7 +150,6 @@ function isSoulBox(arg: string, client: ExtendedClient) {
     );
 }
 
-// Hàm xử lý mua pack
 async function handlePurchase(
     client: ExtendedClient,
     user: FullUser,
@@ -168,7 +165,16 @@ async function handlePurchase(
 
     if (currency < cost * amount) {
         return msg.channel.send({
-            embeds: [new ErrorInterface(client).setDescription(`Bạn không có đủ ${client.items[currencyType].icon}`)],
+            embeds: [
+                new NotEnoughEmbed(
+                    client,
+                    client.items[currencyType].icon,
+                    cost * amount - currency,
+                    currencyType === "candy"
+                        ? `- Sử dụng lệnh \`hlw daily\` hoặc \`hlw quest\` để kiếm thêm Kẹo Cam Bạn nhé!`
+                        : `- Sử dụng \`hlw keohacam\` để mua thêm Kẹo Hắc Ám nhé`,
+                ),
+            ],
         });
     }
 

@@ -23,11 +23,11 @@ export default prefix(
                 .split(" ")
                 .map((m) => m.slice(0, 1))
                 .join("")
-                .toLowerCase()})\`: ${bold("30")} ${client.items.candy.icon} hoặc ${bold("3")} ${client.items.premium_candy.icon}`;
+                .toLowerCase()})\`: ${bold("30")} ${client.items.candy.icon} hoặc ${bold("4")} ${client.items.premium_candy.icon}`;
         });
 
         items.push(
-            `\n<:pnv_chamcam:1293566504524185642> Vật phẩm đặc biệt \`Soul Box\`: ${bold("5")} ${client.items.premium_candy.icon}`,
+            `\n<:pnv_chamcam:1293566504524185642> Vật phẩm đặc biệt \`Soul Box (sb)\`: ${bold("6")} ${client.items.premium_candy.icon}`,
         );
 
         const embed = new EmbedBuilder({
@@ -36,7 +36,7 @@ export default prefix(
                 name: `Cửa hàng Halloween tại ${message.guild.name}`,
                 icon_url: message.guild?.iconURL()!,
             },
-            description: `Tất cả vật phẩm độc quyền mùa Halloween sẽ có mặt ở đây\n- \`${process.env.PREFIX} buy <số lượng> <id vật phẩm>\` để mua vật phẩm\n- \`${process.env.PREFIX} openpack <id pack>\` để mở vật phẩm\n════════════════════════════════\n${items.join("\n")}`,
+            description: `Tất cả vật phẩm độc quyền mùa Halloween sẽ có mặt ở đây\n- \`${process.env.PREFIX} buy <số lượng> <id vật phẩm>\` để mua vật phẩm\n- \`${process.env.PREFIX} open <id pack>\` để mở vật phẩm\n════════════════════════════════\n${items.join("\n")}`,
             footer: {
                 text: `@${message.author.username} • .gg/phonguoiviet`,
                 iconURL: message.author.displayAvatarURL(),

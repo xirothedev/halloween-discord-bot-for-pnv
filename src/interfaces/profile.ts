@@ -8,10 +8,11 @@ export default class ProfileInterface extends EmbedBuilder {
         public message: Message,
         public user: FullUser,
     ) {
+        const author = client.users.cache.get(user.user_id)
         super({
             color: resolveColor(ranColor(client.colors.main)),
             author: {
-                name: `Profile của ${message.author.username}`,
+                name: `Profile của ${author?.username}`,
                 icon_url: message.guild?.iconURL()!,
             },
             footer: {

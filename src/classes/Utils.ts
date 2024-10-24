@@ -5,27 +5,35 @@ export default class Utils {
     constructor(private client: ExtendedClient) {}
 
     public async getTopPremiumCandy(user: FullUser) {
-        const premiumCandy = await this.client.prisma.user.findMany({
-            where: { premium_candy: { lt: user.premium_candy } },
+        const premiumCandy = await this.client.prisma.user.count({
+            where: { premium_candy: { gt: user.premium_candy } },
         });
 
-        return premiumCandy.length;
+        return premiumCandy;
     }
 
     public async getTopCandy(user: FullUser) {
-        const premiumCandy = await this.client.prisma.user.findMany({
-            where: { candy: { lt: user.candy } },
+        const premiumCandy = await this.client.prisma.user.count({
+            where: { candy: { gt: user.candy } },
         });
 
-        return premiumCandy.length;
+        return premiumCandy;
+    }
+
+    public async getTopWinnerStreak(user: FullUser) {
+        const streak = await this.client.prisma.user.count({
+            where: { streak_winner: { gt: user.streak_winner } },
+        });
+
+        return streak;
     }
 
     public async getWinnerStreak(user: FullUser) {
-        const winnerStreak = await this.client.prisma.user.findMany({
-            where: { streak_winner: { lt: user.streak_winner } },
+        const winnerStreak = await this.client.prisma.user.count({
+            where: { streak_winner: { gt: user.streak_winner } },
         });
 
-        return winnerStreak.length;
+        return winnerStreak;
     }
 
     public getFinisedPack(user: FullUser) {

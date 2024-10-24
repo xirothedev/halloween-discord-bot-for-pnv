@@ -1,174 +1,34 @@
-import claimQuest from "@/functions/claimQuest";
-import ranInt from "@/helpers/ranInt";
-import ErrorInterface from "@/interfaces/error";
-import OpenpackInterface from "@/interfaces/openpack";
+import ranColor from "@/helpers/ranColor";
 import prefix from "@/layouts/prefix";
-import type { Rank } from "@prisma/client";
+import { EmbedBuilder } from "discord.js";
 import { Category } from "typings/utils";
 
 export default prefix(
-    "open",
+    "keohacam",
     {
         description: {
-            content: `Mở pack/box linh hồn đang có trong bst. Mỗi pack mở ra được 3 cards/ngẫu nhiên linh hồn, mỗi lượt mở được 1 pack/1 box.`,
-            examples: ["open hellpack", "open soul box"],
-            usage: "open <tên vật phẩm>",
+            content: "Xem thông tin kẹo hắc ám.",
+            examples: ["keohacam"],
+            usage: "keohacam",
         },
-        aliases: ["op"],
         cooldown: "5s",
         botPermissions: ["SendMessages", "ReadMessageHistory", "ViewChannel", "EmbedLinks"],
         ignore: false,
-        category: Category.game,
+        category: Category.info,
     },
     async (client, user, message, args) => {
-        if (!args[0]) {
-            return message.channel.send({
-                embeds: [new ErrorInterface(client).setDescription("Bạn phải cung cấp id vật phẩm")],
-            });
-        }
-
-        const isSoulBox =
-            args[0] === client.items.soul_box.id ||
-            args[0] === "sb" ||
-            args.join(" ").toLowerCase() === client.items.soul_box.name.toLowerCase();
-
-        if (isSoulBox) {
-            if (user.soul_box <= 0) {
-                return message.channel.send({
-                    embeds: [
-                        new ErrorInterface(client).setDescription(`Bạn không có đủ ${client.items.soul_box.icon}`),
-                    ],
-                });
-            }
-
-            const souls = ranInt(10, 31);
-            await client.prisma.user.update({
-                where: { user_id: user.user_id },
-                data: {
-                    soul: { increment: souls },
-                    soul_box: { decrement: 1 },
-                },
-            });
-
-            return message.channel.send({
-                content: `${client.items.soul_box.icon} | Bạn đã mở hộp linh hồn và nhận được **${souls}** ${client.items.soul.icon}!`,
-            });
-        }
-
-        const item = client.packs.find(
-            (f) =>
-                f.id === args[0] ||
-                f.name.toLowerCase() === args.join(" ").toLowerCase() ||
-                f.name
-                    .split(" ")
-                    .map((m) => m.charAt(0))
-                    .join("")
-                    .toLowerCase() === args[0].toLowerCase(),
-        );
-
-        if (!item) {
-            return message.channel.send({
-                embeds: [new ErrorInterface(client).setDescription("Vật phẩm này không thể mở")],
-            });
-        }
-
-        const pack = user.packs.find((f) => f.pack_id === item.id);
-        if (!pack || pack.quantity <= 0) {
-            return message.channel.send({
-                embeds: [new ErrorInterface(client).setDescription("Bạn không có vật phẩm này")],
-            });
-        }
-
-        const cards = [];
-        const cardPool = client.cards.filter((f) => f.topic === pack.pack_id);
-
-        let streaks = { a: user.streak_a, r: user.streak_r, sr: user.streak_sr, s: user.streak_s };
-
-        for (let index = 0; index < 3; index++) {
-            const rand = ranInt(1, 101);
-            let c;
-
-            if (streaks.a >= 10) {
-                c = cardPool.filter((f) => f.rate.shortName === "A");
-                streaks.a = 0;
-            } else if (streaks.r >= 50) {
-                c = cardPool.filter((f) => f.rate.shortName === "R");
-                streaks.r = 0;
-            } else if (streaks.sr >= 100) {
-                c = cardPool.filter((f) => f.rate.shortName === "SR");
-                streaks.sr = 0;
-            } else if (streaks.s >= 1000) {
-                c = cardPool.filter((f) => f.rate.shortName === "S");
-                streaks.s = 0;
-            } else {
-                if (rand <= 0.25) {
-                    c = cardPool.filter((f) => f.rate.shortName === "S");
-                    streaks.s = 0;
-                } else if (rand <= 0.75) {
-                    c = cardPool.filter((f) => f.rate.shortName === "SR");
-                    streaks.sr = 0;
-                } else if (rand <= 1) {
-                    c = cardPool.filter((f) => f.rate.shortName === "R");
-                    streaks.r = 0;
-                } else {
-                    c = cardPool.filter((f) => f.rate.shortName === "A");
-                    streaks.a = 0;
-                }
-            }
-
-            const selectedCard = c[ranInt(0, c.length - 1)];
-            cards.push(selectedCard);
-
-            await client.prisma.card.upsert({
-                where: { card_id_user_id: { card_id: selectedCard.id, user_id: user.user_id } },
-                update: { quantity: { increment: 1 } },
-                create: {
-                    card_id: selectedCard.id,
-                    user_id: user.user_id,
-                    rank: selectedCard.rank as Rank,
-                    name: selectedCard.name,
-                    image: selectedCard.image,
-                },
-            });
-        }
-
-        user = await client.prisma.user.update({
-            where: { user_id: user.user_id },
-            data: {
-                streak_a: streaks.a,
-                streak_r: streaks.r,
-                streak_sr: streaks.sr,
-                streak_s: streaks.s,
-                total_pack: { increment: 3 },
-                packs: {
-                    update: {
-                        where: { pack_id_user_id: { pack_id: pack.pack_id, user_id: user.user_id } },
-                        data: { quantity: { decrement: 1 } },
-                    },
-                },
-                quests: {
-                    updateMany: {
-                        where: {
-                            OR: [{ function: "open" }, { function: "open_pack", pack_id: pack.pack_id }],
-                            claimed: false,
-                        },
-                        data: { progress: { increment: 1 } },
-                    },
-                },
-            },
-            include: { quests: true, cards: true, packs: true },
-        });
-
-        const finishedQuests = user.quests.filter(
-            (f) => (f.function === "open" || f.function === "open_pack") && f.progress >= f.target,
-        );
-
-        if (finishedQuests.length) {
-            await Promise.all(
-                finishedQuests.map(async (finishedQuest) => await claimQuest(client, user, finishedQuest)),
+        const embed = new EmbedBuilder()
+            .setColor(ranColor(client.colors.main))
+            .setDescription(
+                `
+                ${client.items.premium_candy.icon} **| Kẹo Hắc Ám**
+                
+                > - Vật phẩm có được khi mua bằng VND <:pnv_logomoney:878391201366151218>. Mở ticket tại https://discord.com/channels/755793441287438469/919342147822555166 để được hỗ trợ.
+                > - Dùng để mua vật phẩm trong shop.
+                > - Bảng giá: 1000 <:pnv_logomoney:878391201366151218> = 1 ${client.items.premium_candy.icon}
+                `,
             );
-        }
 
-        return message.channel.send({ embeds: [new OpenpackInterface(client, message, item, user, cards)] });
+        return await message.channel.send({ embeds: [embed] });
     },
 );

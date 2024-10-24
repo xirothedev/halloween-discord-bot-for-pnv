@@ -116,9 +116,9 @@ export class BaseBstCardInterface extends EmbedBuilder {
         return `${pack.icon} ${bold("Card Hiện Có")}\n${client.cards
             .filter((card) => card.topic === pack.id)
             .map((card) => {
-                const isOwned = finishedCard.cards.some((f) => f.card_id === card.id);
+                const isOwned = finishedCard.cards.find((f) => f.card_id === card.id);
                 const cardStatus = isOwned ? card.name : `~~${card.name}~~`;
-                return `> \`${card.id}\` • ${client.icons[card.rank as Rank]} • ${cardStatus}`;
+                return `> \`${card.id}\` • ${client.icons[card.rank as Rank]} • ${cardStatus} (${isOwned?.quantity || 0})`;
             })
             .join("\n")}`;
     }
