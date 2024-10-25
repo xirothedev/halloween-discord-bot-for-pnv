@@ -26,10 +26,10 @@ const quests: QuestProps[] = [
         channel: "878311098070228992",
     },
     {
-        name: "Treo voice $1 tiếng",
+        name: "Treo voice $1 phút",
         function: QuestFunction.voice,
         item: items.candy.id,
-        rate: generateRate(1, 4),
+        rate: generateRate(1, 4 * 60),
     },
     {
         name: "Mở $1 pack bất kì",

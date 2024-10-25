@@ -5,6 +5,7 @@ export default async function claimQuest(client: ExtendedClient, user: User, que
     if (!item) client.logger.error("Không tìm thấy vật phẩm: ", quest.reward_item);
 
     if (item.id === "candy") {
+        console.log("Hoàn thành", quest);
         await client.prisma.user.update({
             where: { user_id: user.user_id },
             data: {

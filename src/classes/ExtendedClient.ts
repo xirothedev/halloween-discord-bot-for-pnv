@@ -5,12 +5,9 @@ import packs from "@/data/packs.json";
 import commands from "@/handlers/commands";
 import deploy from "@/handlers/deploy";
 import events from "@/handlers/events";
-import express from "@/handlers/express";
 import Logger from "@/helpers/logger";
-import antiCrash from "@/plugins/antiCrash";
 import { PrismaClient } from "@prisma/client";
 import { ActivityType, Client, Collection, Partials, PresenceUpdateStatus } from "discord.js";
-import Express from "express";
 import type { Items, Pack } from "typings";
 import type { Command } from "typings/command";
 import Utils from "./Utils";
@@ -58,8 +55,6 @@ export default class ExtendedClient extends Client<true> {
         });
     }
 
-    public app = Express();
-
     public utils = new Utils(this);
 
     public prisma = prisma;
@@ -80,14 +75,13 @@ export default class ExtendedClient extends Client<true> {
 
     public packs = packs as Pack[];
 
-    public notiChannel = this.channels.cache.get("1298716490111123486")
+    public notiChannel = this.channels.cache.get("1298716490111123486");
 
     public start = async (token: string, prefix: string) => {
         commands(this);
         events(this);
         // antiCrash(this);
         deploy(this);
-        express(this);
 
         await this.login(token);
         await this.application?.fetch();

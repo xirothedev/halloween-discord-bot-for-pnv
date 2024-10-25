@@ -46,7 +46,7 @@ export default prefix(
             where: { user_id: user.user_id },
             data: {
                 streak_daily: isBreakStreak ? 1 : { increment: 1 },
-                // last_claim_daily: new Date(),
+                last_claim_daily: new Date(),
                 candy: { increment: reward },
                 packs:
                     !isBreakStreak && (user.streak_daily + 1) % 3 === 0

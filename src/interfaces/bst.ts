@@ -114,7 +114,7 @@ export class BaseBstCardInterface extends EmbedBuilder {
 
     private buildCardInfo(client: ExtendedClient, user: FullUser, pack: Pack, finishedCard: { cards: Card[] }): string {
         return `${pack.icon} ${bold("Card Hiện Có")}\n${client.cards
-            .filter((card) => card.topic === pack.id)
+            .filter((card) => card.topic.includes(pack.id))
             .map((card) => {
                 const isOwned = finishedCard.cards.find((f) => f.card_id === card.id);
                 const cardStatus = isOwned ? card.name : `~~${card.name}~~`;

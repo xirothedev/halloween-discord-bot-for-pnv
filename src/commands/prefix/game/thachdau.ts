@@ -18,7 +18,7 @@ export default prefix(
             usage: "thachdau",
         },
         aliases: ["td"],
-        cooldown: "5s",
+        cooldown: "5m",
         botPermissions: ["SendMessages", "ReadMessageHistory", "ViewChannel", "EmbedLinks"],
         ignore: false,
         category: Category.game,
@@ -91,9 +91,26 @@ export default prefix(
                         candy: { increment: reward.candy },
                         soul: { increment: reward.soul },
                         streak_winner: { increment: 1 },
+                        quests: {
+                            updateMany: {
+                                where: {
+                                    function: "win_battle",
+                                    claimed: false,
+                                },
+                                data: { progress: { increment: 1 } },
+                            },
+                        },
                     },
                     include: { cards: true, packs: true, quests: true },
                 });
+
+                const finishedQuestWinner = user.quests.find(
+                    (f) => f.function === "win_battle" && f.progress >= f.target && !f.claimed,
+                );
+
+                if (finishedQuestWinner) {
+                    await claimQuest(client, user, finishedQuestWinner);
+                }
             } else if (won === false) {
                 user = await client.prisma.user.update({
                     where: { user_id: user.user_id },
@@ -108,7 +125,7 @@ export default prefix(
                     quests: {
                         updateMany: {
                             where: {
-                                function: "win_battle",
+                                function: "battle",
                                 claimed: false,
                             },
                             data: { progress: { increment: 1 } },
@@ -118,7 +135,7 @@ export default prefix(
                 include: { quests: true },
             });
 
-            const finishedQuest = data.quests.find((f) => f.function === "upgrade_card" && f.progress >= f.target);
+            const finishedQuest = data.quests.find((f) => f.function === "battle" && f.progress >= f.target && !f.claimed);
 
             if (finishedQuest) {
                 await claimQuest(client, user, finishedQuest);

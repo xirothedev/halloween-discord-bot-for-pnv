@@ -81,7 +81,9 @@ export default prefix(
             include: { quests: true },
         });
 
-        const finishedQuest = data.quests.find((f) => f.function === "upgrade_card" && f.progress >= f.target);
+        const finishedQuest = data.quests.find(
+            (f) => f.function === "upgrade_card" && f.progress >= f.target && !f.claimed,
+        );
 
         if (finishedQuest) {
             await claimQuest(client, user, finishedQuest);

@@ -81,15 +81,16 @@ export default prefix(
             });
         }
 
-        const cardPool = client.cards.filter((card) => card.topic === pack.pack_id);
+        const cardPool = client.cards.filter((card) => card.topic.includes(pack.pack_id));
         const cards = [];
         let { streak_a, streak_r, streak_sr, streak_s } = user;
 
+        streak_a++;
+        streak_r++;
+        streak_sr++;
+        streak_s++;
+        
         for (let i = 0; i < 3; i++) {
-            streak_a++;
-            streak_r++;
-            streak_sr++;
-            streak_s++;
             const rand = ranInt(1, 10001);
 
             let filteredCards;

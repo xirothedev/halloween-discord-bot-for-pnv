@@ -3,7 +3,7 @@
         "id": "u1",
         "name": "Slenderman",
         "icon": "<:pnv_SR:1293615184027451473>",
-        "topic": "urban_legends",
+        "topic": ["urban_legends"],
         "rank": "sr_rank",
         "rate": {
             "shortName": "SR",
@@ -15,7 +15,7 @@
         "id": "u2",
         "name": "Pennywise",
         "icon": "<:pnv_R:1293614458706333776>",
-        "topic": "urban_legends",
+        "topic": ["urban_legends"],
         "rank": "r_rank",
         "rate": {
             "shortName": "R",
@@ -27,7 +27,7 @@
         "id": "u3",
         "name": "Freddy Krueger",
         "icon": "<:pnv_R:1293614458706333776>",
-        "topic": "urban_legends",
+        "topic": ["urban_legends"],
         "rank": "r_rank",
         "rate": {
             "shortName": "R",
@@ -39,7 +39,7 @@
         "id": "u4",
         "name": "Spring Bonnie",
         "icon": "<:pnv_A:1293614453677490186>",
-        "topic": "urban_legends",
+        "topic": ["urban_legends"],
         "rank": "a_rank",
         "rate": {
             "shortName": "A",
@@ -51,7 +51,7 @@
         "id": "u5",
         "name": "Sirenhead",
         "icon": "<:pnv_A:1293614453677490186>",
-        "topic": "urban_legends",
+        "topic": ["urban_legends"],
         "rank": "a_rank",
         "rate": {
             "shortName": "A",
@@ -63,7 +63,7 @@
         "id": "u6",
         "name": "Werewolf",
         "icon": "<:pnv_A:1293614453677490186>",
-        "topic": "urban_legends",
+        "topic": ["urban_legends"],
         "rank": "a_rank",
         "rate": {
             "shortName": "A",
@@ -75,7 +75,7 @@
         "id": "u7",
         "name": "Annabelle",
         "icon": "<:pnv_A:1293614453677490186>",
-        "topic": "urban_legends",
+        "topic": ["urban_legends"],
         "rank": "a_rank",
         "rate": {
             "shortName": "A",
@@ -87,7 +87,7 @@
         "id": "u8",
         "name": "Bigfoot",
         "icon": "<:pnv_B:1293614451408240751>",
-        "topic": "urban_legends",
+        "topic": ["urban_legends"],
         "rank": "b_rank",
         "rate": {
             "shortName": "B",
@@ -99,7 +99,7 @@
         "id": "u9",
         "name": "Billy",
         "icon": "<:pnv_B:1293614451408240751>",
-        "topic": "urban_legends",
+        "topic": ["urban_legends"],
         "rank": "b_rank",
         "rate": {
             "shortName": "B",
@@ -111,7 +111,7 @@
         "id": "u10",
         "name": "Goblin",
         "icon": "<:pnv_B:1293614451408240751>",
-        "topic": "urban_legends",
+        "topic": ["urban_legends"],
         "rank": "b_rank",
         "rate": {
             "shortName": "B",
@@ -123,7 +123,7 @@
         "id": "u11",
         "name": "The Cult",
         "icon": "<:pnv_B:1293614451408240751>",
-        "topic": "urban_legends",
+        "topic": ["urban_legends"],
         "rank": "b_rank",
         "rate": {
             "shortName": "B",
@@ -135,7 +135,7 @@
         "id": "u12",
         "name": "Nessie",
         "icon": "<:pnv_B:1293614451408240751>",
-        "topic": "urban_legends",
+        "topic": ["urban_legends"],
         "rank": "b_rank",
         "rate": {
             "shortName": "B",
@@ -147,7 +147,7 @@
         "id": "t1",
         "name": "Vampire",
         "icon": "<:pnv_SR:1293615184027451473>",
-        "topic": "trick_or_treat",
+        "topic": ["trick_or_treat"],
         "rank": "sr_rank",
         "rate": {
             "shortName": "SR",
@@ -159,7 +159,7 @@
         "id": "t2",
         "name": "Witch",
         "icon": "<:pnv_R:1293614458706333776>",
-        "topic": "trick_or_treat",
+        "topic": ["trick_or_treat"],
         "rank": "r_rank",
         "rate": {
             "shortName": "R",
@@ -171,7 +171,7 @@
         "id": "t3",
         "name": "Grim Reaper",
         "icon": "<:pnv_R:1293614458706333776>",
-        "topic": "trick_or_treat",
+        "topic": ["trick_or_treat"],
         "rank": "r_rank",
         "rate": {
             "shortName": "R",
@@ -183,7 +183,7 @@
         "id": "t4",
         "name": "Frankenstein",
         "icon": "<:pnv_A:1293614453677490186>",
-        "topic": "trick_or_treat",
+        "topic": ["trick_or_treat"],
         "rank": "a_rank",
         "rate": {
             "shortName": "A",
@@ -195,7 +195,7 @@
         "id": "t5",
         "name": "Scarecrow",
         "icon": "<:pnv_A:1293614453677490186>",
-        "topic": "trick_or_treat",
+        "topic": ["trick_or_treat"],
         "rank": "a_rank",
         "rate": {
             "shortName": "A",
@@ -207,7 +207,7 @@
         "id": "t6",
         "name": "Devil",
         "icon": "<:pnv_A:1293614453677490186>",
-        "topic": "trick_or_treat",
+        "topic": ["trick_or_treat"],
         "rank": "a_rank",
         "rate": {
             "shortName": "A",
@@ -219,7 +219,7 @@
         "id": "t7",
         "name": "Grave",
         "icon": "<:pnv_A:1293614453677490186>",
-        "topic": "trick_or_treat",
+        "topic": ["trick_or_treat"],
         "rank": "a_rank",
         "rate": {
             "shortName": "A",
@@ -232,7 +232,7 @@
         "id": "t8",
         "name": "Ghost",
         "icon": "<:pnv_B:1293614451408240751>",
-        "topic": "trick_or_treat",
+        "topic": ["trick_or_treat"],
         "rank": "b_rank",
         "rate": {
             "shortName": "B",
@@ -244,7 +244,7 @@
         "id": "t9",
         "name": "Black Cat",
         "icon": "<:pnv_B:1293614451408240751>",
-        "topic": "trick_or_treat",
+        "topic": ["trick_or_treat"],
         "rank": "b_rank",
         "rate": {
             "shortName": "B",
@@ -256,7 +256,7 @@
         "id": "t10",
         "name": "Mummy",
         "icon": "<:pnv_B:1293614451408240751>",
-        "topic": "trick_or_treat",
+        "topic": ["trick_or_treat"],
         "rank": "b_rank",
         "rate": {
             "shortName": "B",
@@ -268,7 +268,7 @@
         "id": "t11",
         "name": "Skeleton",
         "icon": "<:pnv_B:1293614451408240751>",
-        "topic": "trick_or_treat",
+        "topic": ["trick_or_treat"],
         "rank": "b_rank",
         "rate": {
             "shortName": "B",
@@ -280,7 +280,7 @@
         "id": "t12",
         "name": "Jack O' Lantern",
         "icon": "<:pnv_B:1293614451408240751>",
-        "topic": "trick_or_treat",
+        "topic": ["trick_or_treat"],
         "rank": "b_rank",
         "rate": {
             "shortName": "B",
@@ -292,7 +292,7 @@
         "id": "m1",
         "name": "Phoenix",
         "icon": "<:pnv_SR:1293615184027451473>",
-        "topic": "mythology",
+        "topic": ["mythology"],
         "rank": "sr_rank",
         "rate": {
             "shortName": "SR",
@@ -304,7 +304,7 @@
         "id": "m2",
         "name": "Cerberus",
         "icon": "<:pnv_R:1293614458706333776>",
-        "topic": "mythology",
+        "topic": ["mythology"],
         "rank": "r_rank",
         "rate": {
             "shortName": "R",
@@ -316,7 +316,7 @@
         "id": "m3",
         "name": "Hydra",
         "icon": "<:pnv_R:1293614458706333776>",
-        "topic": "mythology",
+        "topic": ["mythology"],
         "rank": "r_rank",
         "rate": {
             "shortName": "R",
@@ -328,7 +328,7 @@
         "id": "m4",
         "name": "Pandora Box",
         "icon": "<:pnv_A:1293614453677490186>",
-        "topic": "mythology",
+        "topic": ["mythology"],
         "rank": "a_rank",
         "rate": {
             "shortName": "A",
@@ -340,7 +340,7 @@
         "id": "m5",
         "name": "Griffin",
         "icon": "<:pnv_A:1293614453677490186>",
-        "topic": "mythology",
+        "topic": ["mythology"],
         "rank": "a_rank",
         "rate": {
             "shortName": "A",
@@ -352,7 +352,7 @@
         "id": "m6",
         "name": "Basilisk",
         "icon": "<:pnv_A:1293614453677490186>",
-        "topic": "mythology",
+        "topic": ["mythology"],
         "rank": "a_rank",
         "rate": {
             "shortName": "A",
@@ -364,7 +364,7 @@
         "id": "m7",
         "name": "Dragon",
         "icon": "<:pnv_A:1293614453677490186>",
-        "topic": "mythology",
+        "topic": ["mythology"],
         "rank": "a_rank",
         "rate": {
             "shortName": "A",
@@ -376,7 +376,7 @@
         "id": "m8",
         "name": "Nine-tailed fox",
         "icon": "<:pnv_B:1293614451408240751>",
-        "topic": "mythology",
+        "topic": ["mythology"],
         "rank": "b_rank",
         "rate": {
             "shortName": "B",
@@ -388,7 +388,7 @@
         "id": "m9",
         "name": "Unicorn",
         "icon": "<:pnv_B:1293614451408240751>",
-        "topic": "mythology",
+        "topic": ["mythology"],
         "rank": "b_rank",
         "rate": {
             "shortName": "B",
@@ -400,7 +400,7 @@
         "id": "m10",
         "name": "Faun",
         "icon": "<:pnv_B:1293614451408240751>",
-        "topic": "mythology",
+        "topic": ["mythology"],
         "rank": "b_rank",
         "rate": {
             "shortName": "B",
@@ -412,7 +412,7 @@
         "id": "m11",
         "name": "Centaur",
         "icon": "<:pnv_B:1293614451408240751>",
-        "topic": "mythology",
+        "topic": ["mythology"],
         "rank": "b_rank",
         "rate": {
             "shortName": "B",
@@ -424,7 +424,7 @@
         "id": "m12",
         "name": "Mermaid",
         "icon": "<:pnv_B:1293614451408240751>",
-        "topic": "mythology",
+        "topic": ["mythology"],
         "rank": "b_rank",
         "rate": {
             "shortName": "B",
@@ -437,7 +437,7 @@
         "id": "c1",
         "name": "Scarlet Witch",
         "icon": "<:pnv_SR:1293615184027451473>",
-        "topic": "comic_villains",
+        "topic": ["comic_villains"],
         "rank": "sr_rank",
         "rate": {
             "shortName": "SR",
@@ -449,7 +449,7 @@
         "id": "c2",
         "name": "Hela",
         "icon": "<:pnv_R:1293614458706333776>",
-        "topic": "comic_villains",
+        "topic": ["comic_villains"],
         "rank": "r_rank",
         "rate": {
             "shortName": "R",
@@ -461,7 +461,7 @@
         "id": "c3",
         "name": "Joker",
         "icon": "<:pnv_R:1293614458706333776>",
-        "topic": "comic_villains",
+        "topic": ["comic_villains"],
         "rank": "r_rank",
         "rate": {
             "shortName": "R",
@@ -473,7 +473,7 @@
         "id": "c4",
         "name": "Harley",
         "icon": "<:pnv_A:1293614453677490186>",
-        "topic": "comic_villains",
+        "topic": ["comic_villains"],
         "rank": "a_rank",
         "rate": {
             "shortName": "A",
@@ -485,7 +485,7 @@
         "id": "c5",
         "name": "Doctor Doom",
         "icon": "<:pnv_A:1293614453677490186>",
-        "topic": "comic_villains",
+        "topic": ["comic_villains"],
         "rank": "a_rank",
         "rate": {
             "shortName": "A",
@@ -497,7 +497,7 @@
         "id": "c6",
         "name": "Catwoman",
         "icon": "<:pnv_A:1293614453677490186>",
-        "topic": "comic_villains",
+        "topic": ["comic_villains"],
         "rank": "a_rank",
         "rate": {
             "shortName": "A",
@@ -509,7 +509,7 @@
         "id": "c7",
         "name": "Magneto",
         "icon": "<:pnv_A:1293614453677490186>",
-        "topic": "comic_villains",
+        "topic": ["comic_villains"],
         "rank": "a_rank",
         "rate": {
             "shortName": "A",
@@ -521,7 +521,7 @@
         "id": "c8",
         "name": "Red Skull",
         "icon": "<:pnv_B:1293614451408240751>",
-        "topic": "comic_villains",
+        "topic": ["comic_villains"],
         "rank": "b_rank",
         "rate": {
             "shortName": "B",
@@ -533,7 +533,7 @@
         "id": "c9",
         "name": "Bucky",
         "icon": "<:pnv_B:1293614451408240751>",
-        "topic": "comic_villains",
+        "topic": ["comic_villains"],
         "rank": "b_rank",
         "rate": {
             "shortName": "B",
@@ -545,7 +545,7 @@
         "id": "c10",
         "name": "Carnage",
         "icon": "<:pnv_B:1293614451408240751>",
-        "topic": "comic_villains",
+        "topic": ["comic_villains"],
         "rank": "b_rank",
         "rate": {
             "shortName": "B",
@@ -557,7 +557,7 @@
         "id": "c11",
         "name": "Darkseid",
         "icon": "<:pnv_B:1293614451408240751>",
-        "topic": "comic_villains",
+        "topic": ["comic_villains"],
         "rank": "b_rank",
         "rate": {
             "shortName": "B",
@@ -569,12 +569,36 @@
         "id": "c12",
         "name": "Ultron",
         "icon": "<:pnv_B:1293614451408240751>",
-        "topic": "comic_villains",
+        "topic": ["comic_villains"],
         "rank": "b_rank",
         "rate": {
             "shortName": "B",
             "fullName": "Basic"
         },
         "image": "https://cdn.discordapp.com/attachments/1293978154163114115/1296128488385941644/Comic-13.png?ex=67112938&is=670fd7b8&hm=448970c8eb68070beeff5009ef2bb7625e40911d64ca292659e76a0db347ad64&"
+    },
+    {
+        "id": "s1",
+        "name": "Courage",
+        "icon": "<:pnv_S:1293614468885905488>",
+        "topic": ["urban_legends", "mythology"],
+        "rank": "s_rank",
+        "rate": {
+            "shortName": "S",
+            "fullName": "Secret"
+        },
+        "image": "https://cdn.discordapp.com/attachments/1293978154163114115/1299328122482851911/Courage.gif?ex=671ccd1c&is=671b7b9c&hm=d7736216e2d3cb93b80227c783c3f45b17f809b895ef64b5fe7b4e987d5d40ab&"
+    },
+    {
+        "id": "s2",
+        "name": "Skibidi",
+        "icon": "<:pnv_S:1293614468885905488>",
+        "topic": ["comic_villains", "trick_or_treat"],
+        "rank": "s_rank",
+        "rate": {
+            "shortName": "S",
+            "fullName": "Secret"
+        },
+        "image": "https://cdn.discordapp.com/attachments/1293978154163114115/1299328139067129866/Skibidi.gif?ex=671ccd20&is=671b7ba0&hm=bae77ac945168d98fc7187a24a016158b61e9e2de98f16f8e79145fd1c95edcc&"
     }
 ]

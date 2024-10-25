@@ -13,6 +13,7 @@ export default event("messageCreate", { once: false }, async (client, message) =
     const noChannel = user.quests.find((f) => f.function === "chat");
 
     if (channel && channel.channel_id === message.channelId) {
+        console.log("Chat kênh")
         const quest = await client.prisma.quest.update({
             where: { quest_id: channel.quest_id },
             data: { progress: { increment: 1 } },

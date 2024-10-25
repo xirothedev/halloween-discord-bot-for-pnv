@@ -35,7 +35,7 @@ type Card = {
     id: string;
     name: string;
     icon: string;
-    topic: string;
+    topic: string[];
     rank: string;
     rate: {
         shortName: string;

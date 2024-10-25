@@ -191,8 +191,8 @@ export default prefix(
             }
         });
 
-        collector.on("end", () => {
-            msg.edit({ components: [] });
+        collector.on("end", async () => {
+            await msg.edit({ components: [] });
         });
     },
 );
