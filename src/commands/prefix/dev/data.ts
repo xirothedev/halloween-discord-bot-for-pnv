@@ -1,29 +1,24 @@
 import ErrorInterface from "@/interfaces/error";
 import prefix from "@/layouts/prefix";
+import { codeBlock } from "discord.js";
 import { Category } from "typings/utils";
 
 export default prefix(
-    "addcandy",
+    "data",
     {
         description: {
-            content: "Add kẹo hắc ám",
-            usage: "addcandy <@user> <số lượng>",
-            examples: ["addcandy @PNV 10"],
+            content: "Xem data người dùng",
+            usage: "data <@user>",
+            examples: ["data @PNV"],
         },
         ownerOnly: true,
         category: Category.dev,
         hidden: true,
     },
     async (client, user, message, args) => {
-        if (!args[0] || !args[1]) {
+        if (!args[0]) {
             return message.channel.send({
-                embeds: [new ErrorInterface(client).setDescription("Bạn phải cung cấp người chơi và số lượng!")],
-            });
-        }
-
-        if (isNaN(Number(args[1])) && Number(args[1]) % 1 === 0) {
-            return message.channel.send({
-                embeds: [new ErrorInterface(client).setDescription("Sai định dạng số lượng!")],
+                embeds: [new ErrorInterface(client).setDescription("Bạn phải cung cấp người chơi!")],
             });
         }
 
@@ -40,12 +35,10 @@ export default prefix(
             user = member;
         }
 
-        await client.prisma.user.upsert({
+        const data = await client.prisma.user.findUnique({
             where: { user_id: user.user_id },
-            create: { user_id: user.user_id, premium_candy: +args[1] },
-            update: { premium_candy: { increment: +args[1] } },
         });
 
-        return await message.react(client.emoji.done);
+        return message.channel.send({ content: codeBlock("json", JSON.stringify(data)) });
     },
 );

@@ -1,13 +1,12 @@
-import items from "@/data/items.json";
-import quests from "@/data/quests";
-import ranInt from "@/helpers/ranInt";
-import QuestInterface from "@/interfaces/quest";
 import prefix from "@/layouts/prefix";
 import type { Item, Quest } from "@prisma/client";
 import { channelMention } from "discord.js";
 import type { FullUser } from "typings/command";
 import { Category } from "typings/utils";
-
+import items from "@/data/items.json";
+import QuestInterface from "@/interfaces/quest";
+import quests from "@/data/quests";
+import ranInt from "@/helpers/ranInt";
 type Type = Omit<Quest, "quest_id" | "user_id">;
 
 export default prefix(
@@ -27,23 +26,24 @@ export default prefix(
     async (client, user, message, args) => {
         const now = new Date();
 
-        const midnight = new Date(now.setHours(0, 0, 0, 0)); // 12:00 AM
-        const midday = new Date(now.setHours(12, 0, 0, 0)); // 12:00 PM
+        // Calculate reset times for today
+        const midnight = new Date(now);
+        midnight.setHours(0, 0, 0, 0);
+
+        const midday = new Date(now);
+        midday.setHours(12, 0, 0, 0);
 
         let quest: Type[] = [];
 
-        if (now.getTime() < midday.getTime()) {
-            if (user.last_claim_quest && user.last_claim_quest.getTime() > midnight.getTime()) {
-                quest = user.quests || [];
-            } else {
-                await resetUserQuests(client, user, quest);
-            }
+        // Determine the most recent reset time
+        const lastResetTime = now.getTime() < midday.getTime() ? midnight : midday;
+
+        if (user.last_claim_quest && user.last_claim_quest.getTime() > lastResetTime.getTime()) {
+            // User has already claimed quests after the last reset time, so no reset needed
+            quest = user.quests || [];
         } else {
-            if (user.last_claim_quest && user.last_claim_quest.getTime() > midday.getTime()) {
-                quest = user.quests || [];
-            } else {
-                await resetUserQuests(client, user, quest);
-            }
+            // Time to reset the quests
+            await resetUserQuests(client, user, quest);
         }
 
         return message.channel.send({

@@ -13,8 +13,10 @@ export default class BattleInterface extends EmbedBuilder {
         public won: boolean | null,
         public reward: { candy: number; soul: number },
     ) {
-        const UserCard = user.cards.find((f) => f.card_id === user.card_id)!;;
+        const UserCard = user.cards.find((f) => f.card_id === user.card_id)!;
         const userEnemy = client.users.cache.get(enemyCard.user_id);
+
+        const image = won === true ? UserCard.image : won === false ? enemyCard.image : undefined;
 
         const thumbnail =
             won === true
@@ -51,6 +53,7 @@ export default class BattleInterface extends EmbedBuilder {
                 iconURL: message.author.displayAvatarURL(),
             },
             thumbnail: { url: thumbnail },
+            image: image ? { url: image } : undefined,
         });
     }
 }

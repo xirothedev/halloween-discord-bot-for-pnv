@@ -32,6 +32,7 @@ export default prefix(
         );
 
         const images = [
+            "https://cdn.discordapp.com/attachments/1293978154163114115/1299377487276539905/HLW_1.jpg?ex=671cfb16&is=671ba996&hm=e8ba38b41a70f442fe98022d24eb85cee20aa5fa367330cbb2148ecbe72e6cb1&",
             "https://cdn.discordapp.com/attachments/1293978154163114115/1299057435167686676/cv_banner-01.jpg?ex=671c79c3&is=671b2843&hm=814494991f34da5e57f24622873549519b9ac8ec876309c37f8ba611df1440b4&",
             "https://cdn.discordapp.com/attachments/1293978154163114115/1299057435595509852/myth_banner.jpg?ex=671c79c3&is=671b2843&hm=ee61dad44f7d8a4b30a0e7c71e604a56112a610032dfd0926aea18568702fc19&",
             "https://cdn.discordapp.com/attachments/1293978154163114115/1299057436002619514/tot_banner-01.jpg?ex=671c79c4&is=671b2844&hm=a2a5a3a67e6712dabca6caa70cbdff47526f5217f2e73ab0d36319c5813d1b70&",

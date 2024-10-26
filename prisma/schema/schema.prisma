@@ -19,24 +19,25 @@ model Payment {
 }
 
 model User {
-  user_id          String    @id
-  card_id          String?
-  last_claim_daily DateTime?
-  last_claim_quest DateTime?
-  streak_daily     Int       @default(0)
-  streak_winner    Int       @default(0)
-  streak_a         Int       @default(0)
-  streak_r         Int       @default(0)
-  streak_sr        Int       @default(0)
-  streak_s         Int       @default(0)
-  total_pack       Int       @default(0)
-  soul             Int       @default(0)
-  candy            Int       @default(0)
-  premium_candy    Int       @default(0)
-  soul_box         Int       @default(0)
-  quests           Quest[]
-  cards            Card[]
-  packs            Pack[]
+  user_id               String    @id
+  card_id               String?
+  last_claim_daily      DateTime?
+  last_claim_quest      DateTime?
+  streak_daily          Int       @default(0)
+  streak_winner         Int       @default(0)
+  highest_streak_winner Int       @default(0)
+  streak_a              Int       @default(0)
+  streak_r              Int       @default(0)
+  streak_sr             Int       @default(0)
+  streak_s              Int       @default(0)
+  total_pack            Int       @default(0)
+  soul                  Int       @default(0)
+  candy                 Int       @default(0)
+  premium_candy         Int       @default(0)
+  soul_box              Int       @default(0)
+  quests                Quest[]
+  cards                 Card[]
+  packs                 Pack[]
 
   @@map("user")
 }

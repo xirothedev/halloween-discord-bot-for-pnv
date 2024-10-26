@@ -30,7 +30,13 @@ export default prefix(
             include: { cards: true },
         });
         const powers = users.map((_user) => ({ number: resolvePower(_user, _user.card_id), user: _user }));
-        const power = resolvePower(user, user.card_id);
+        let power = 0;
+        user.cards.forEach((card) => {
+            const p = resolvePower(user, card.card_id);
+            if (p > power) {
+                power = p;
+            }
+        });
         const topPower = powers.filter((f) => f.number > power);
 
         let page = 1;
@@ -79,7 +85,7 @@ export default prefix(
             `   • ${client.items.candy.icon} Top Kẹo Cam \`#${(await client.utils.getTopCandy(user)) + 1}\``,
             `   • ${client.items.premium_candy.icon} Top Kẹo Hắc Ám \`#${(await client.utils.getTopPremiumCandy(user)) + 1}\``,
             `   • ${client.icons.power} Top Sức Mạnh \`#${topPower.length + 1}\``,
-            `   • <a:pnv_winstreak:1295079654473990214> Top Chuỗi Thắng \`#${(await client.utils.getTopWinnerStreak(user)) + 1}\``,
+            `   • <a:pnv_winstreak:1295079654473990214> Top Chuỗi Thắng \`#${(await client.utils.getWinnerStreak(user)) + 1}\``,
         ];
 
         const msg = await message.channel.send({
@@ -105,25 +111,20 @@ export default prefix(
         const getInterface = async (page: number, type: Type) => {
             if (!type) return new BxhInterface(client, message, ranks);
 
-            let countField: string | undefined;
             let orderField: string;
             let format;
 
             switch (type) {
                 case "candy":
-                    countField = "candy";
                     orderField = "candy";
                     break;
                 case "premium_candy":
-                    countField = "premium_candy";
                     orderField = "premium_candy";
                     break;
                 case "winner":
-                    countField = "streak_winner";
-                    orderField = "streak_winner";
+                    orderField = "highest_streak_winner";
                     break;
                 case "power":
-                    countField = undefined;
                     break;
             }
 
@@ -147,10 +148,12 @@ export default prefix(
                     orderBy: { [orderField!]: "desc" },
                 });
 
-                format = datas.map((data: any, index) => {
-                    const member = client.users.cache.get(data.user_id);
-                    return `${getIcon(index)} \`${member?.username}\`: \`${Intl.NumberFormat().format(+data[orderField])}\` ${client.items[type!]?.icon || "<a:pnv_winstreak:1295079654473990214>"}`;
-                });
+                format = await Promise.all(
+                    datas.map(async (data: any, index) => {
+                        const member = await client.users.fetch(data.user_id);
+                        return `${getIcon(index)} \`${member?.username}\`: \`${Intl.NumberFormat().format(+data[orderField])}\` ${client.items[type!]?.icon || "<a:pnv_winstreak:1295079654473990214>"}`;
+                    }),
+                );
             }
 
             return new BaseBxhInterface(client, message, format);

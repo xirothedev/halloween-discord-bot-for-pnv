@@ -1,4 +1,5 @@
 import items from "@/data/items.json";
+import findPack from "@/functions/findPack";
 import ranColor from "@/helpers/ranColor";
 import ErrorInterface from "@/interfaces/error";
 import NotEnoughEmbed from "@/interfaces/notEnough";
@@ -61,13 +62,13 @@ export default prefix(
         const candyButton = createButton(
             "candy",
             ButtonStyle.Primary,
-            `x${amount * 30} Kẹo cam`,
+            `x${amount * COST_CANDY} Kẹo cam`,
             client.items.candy.icon,
         );
         const premiumCandyButton = createButton(
             "premium_candy",
             ButtonStyle.Primary,
-            `x${amount * 3} Kẹo hắc ám`,
+            `x${amount * COST_PREMIUM_CANDY} Kẹo hắc ám`,
             client.items.premium_candy.icon,
         );
 
@@ -122,20 +123,6 @@ async function handleSoulBoxPurchase(client: ExtendedClient, user: FullUser, mes
     return message.channel.send({
         content: `${client.emoji.done} | Đã mua thành công`,
     });
-}
-
-// Hàm tìm kiếm pack dựa trên id hoặc tên
-function findPack(client: ExtendedClient, args: string[]) {
-    return client.packs.find(
-        (f) =>
-            f.id === args[0] ||
-            f.name.toLowerCase() === args.join(" ").toLowerCase() ||
-            f.name
-                .split(" ")
-                .map((m) => m.slice(0, 1))
-                .join("")
-                .toLowerCase() === args[0].toLowerCase(),
-    );
 }
 
 function createButton(id: string, style: ButtonStyle, label: string, emoji: ComponentEmojiResolvable) {

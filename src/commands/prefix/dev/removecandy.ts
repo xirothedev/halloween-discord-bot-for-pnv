@@ -3,12 +3,12 @@ import prefix from "@/layouts/prefix";
 import { Category } from "typings/utils";
 
 export default prefix(
-    "addcandy",
+    "removecandy",
     {
         description: {
-            content: "Add kẹo hắc ám",
-            usage: "addcandy <@user> <số lượng>",
-            examples: ["addcandy @PNV 10"],
+            content: "Xóa kẹo hắc ám",
+            usage: "removecandy <@user> <số lượng>",
+            examples: ["removecandy @PNV 10"],
         },
         ownerOnly: true,
         category: Category.dev,
@@ -42,8 +42,8 @@ export default prefix(
 
         await client.prisma.user.upsert({
             where: { user_id: user.user_id },
-            create: { user_id: user.user_id, premium_candy: +args[1] },
-            update: { premium_candy: { increment: +args[1] } },
+            create: { user_id: user.user_id, premium_candy: -args[1] },
+            update: { premium_candy: { decrement: +args[1] } },
         });
 
         return await message.react(client.emoji.done);

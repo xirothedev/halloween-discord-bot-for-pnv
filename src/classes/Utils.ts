@@ -20,17 +20,9 @@ export default class Utils {
         return premiumCandy;
     }
 
-    public async getTopWinnerStreak(user: FullUser) {
-        const streak = await this.client.prisma.user.count({
-            where: { streak_winner: { gt: user.streak_winner } },
-        });
-
-        return streak;
-    }
-
     public async getWinnerStreak(user: FullUser) {
         const winnerStreak = await this.client.prisma.user.count({
-            where: { streak_winner: { gt: user.streak_winner } },
+            where: { highest_streak_winner: { gt: user.highest_streak_winner } },
         });
 
         return winnerStreak;

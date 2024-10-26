@@ -7,10 +7,12 @@ import deploy from "@/handlers/deploy";
 import events from "@/handlers/events";
 import Logger from "@/helpers/logger";
 import { PrismaClient } from "@prisma/client";
-import { ActivityType, Client, Collection, Partials, PresenceUpdateStatus } from "discord.js";
+import { ActivityType, Client, Collection, Partials, PresenceUpdateStatus, type Channel } from "discord.js";
 import type { Items, Pack } from "typings";
 import type { Command } from "typings/command";
 import Utils from "./Utils";
+import antiCrash from "@/plugins/antiCrash";
+import cronJob from "@/handlers/cronJob";
 
 export const logger = new Logger();
 export const prisma = new PrismaClient();
@@ -75,13 +77,16 @@ export default class ExtendedClient extends Client<true> {
 
     public packs = packs as Pack[];
 
-    public notiChannel = this.channels.cache.get("1298716490111123486");
+    public notiChannel: Channel | null = null;
+
+    public logQuestChannel: Channel | null = null;
 
     public start = async (token: string, prefix: string) => {
         commands(this);
         events(this);
-        // antiCrash(this);
+        antiCrash(this);
         deploy(this);
+        cronJob(this);
 
         await this.login(token);
         await this.application?.fetch();

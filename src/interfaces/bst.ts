@@ -117,7 +117,7 @@ export class BaseBstCardInterface extends EmbedBuilder {
             .filter((card) => card.topic.includes(pack.id))
             .map((card) => {
                 const isOwned = finishedCard.cards.find((f) => f.card_id === card.id);
-                const cardStatus = isOwned ? card.name : `~~${card.name}~~`;
+                const cardStatus = isOwned ? card.name : card.rank === "s_rank" ? "||Secret||" : `~~${card.name}~~`;
                 return `> \`${card.id}\` • ${client.icons[card.rank as Rank]} • ${cardStatus} (${isOwned?.quantity || 0})`;
             })
             .join("\n")}`;

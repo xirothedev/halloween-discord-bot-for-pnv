@@ -59,7 +59,7 @@ export default prefix(
 
         const information = `
         <:pnv_viewpack:1293634668725534852> ${bold("Thông Tin")}
-        > - Số pack đã mở: ${bold(user.total_pack.toString())}
+        > - Số cards đã mở: ${bold(user.total_pack.toString())}
         > - ${client.icons.b_rank} ${bold(`x${totalBCard}`)}, ${client.icons.a_rank} ${bold(`x${totalACard}`)}, ${client.icons.r_rank} ${bold(`x${totalRCard}`)}, ${client.icons.sr_rank} ${bold(`x${totalSRCard}`)}, ${client.icons.s_rank} ${bold(`x${totalSCard}`)}
         `;
 

@@ -16,7 +16,7 @@ export default prefix(
             examples: ["upgrade t1"],
             usage: "upgrade <id/tên card>",
         },
-        aliases: ["upg", "levelup"],
+        aliases: ["upg", "levelup", "lvlup"],
         cooldown: "5s",
         botPermissions: ["SendMessages", "ReadMessageHistory", "ViewChannel", "EmbedLinks"],
         ignore: false,
@@ -48,7 +48,7 @@ export default prefix(
                         client,
                         client.items.candy.icon,
                         ingredient.candy - user.candy,
-                        `- Thách đấu người chơi khác (hlw thachdau) hoặc mua Rương linh hồn trong shop (hlw shop) để kiếm thêm linh hồn nhé!`,
+                        `- Sử dụng \`hlw daily\` \`hlw quest\` để kiếm thêm Kẹo Cam Bạn nhé`,
                     ),
                 ],
             });
@@ -56,7 +56,14 @@ export default prefix(
 
         if (ingredient.soul > user.soul) {
             return message.channel.send({
-                embeds: [new ErrorInterface(client).setDescription("Bạn không có đủ " + client.items.soul.icon)],
+                embeds: [
+                    new NotEnoughEmbed(
+                        client,
+                        client.items.soul.icon,
+                        ingredient.soul - user.soul,
+                        `- Thách đấu người chơi khác (\`hlw thachdau\`) hoặc mua Rương linh hồn trong shop (\`hlw shop\`) để kiếm thêm linh hồn nhé!`,
+                    ),
+                ],
             });
         }
 

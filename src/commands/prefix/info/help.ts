@@ -40,7 +40,7 @@ export default prefix(
                     `**Mô tả:** ${command.options.description.content}\n**Cách sử dụng:** ${client.prefix} ${
                         command.options.description.usage
                     }\n**Ví dụ:** ${command.options.description.examples
-                        .map((example: string) => `${client.prefix}${example}`)
+                        .map((example: string) => `${client.prefix} ${example}`)
                         .join(", ")}\n**Biệt danh:** ${
                         command.options.aliases?.map((alias: string) => `\`${alias}\``).join(", ") || "Không có"
                     }`,
@@ -61,7 +61,10 @@ export default prefix(
             .setColor(ranColor(client.colors.main))
             .setTitle("Menu trợ giúp")
             .setDescription(
-                `Chào bạn! Tôi là ${client.user?.displayName}, một bot sự kiện Halloween được tạo bởi Phố Người Việt. Bạn có thể sử dụng \`${client.prefix} help <command>\` để biết thêm thông tin về lệnh.`,
+                `
+                Chào bạn! Tôi là ${client.user?.displayName}, một bot sự kiện Halloween được tạo bởi Phố Người Việt. Bạn có thể sử dụng \`${client.prefix} help <command>\` để biết thêm thông tin về lệnh.
+                > Để được hỗ trợ, vui lòng đăng post tại kênh <#1299375688234700880>
+                `,
             )
             .setFooter({
                 text: `Sử dụng ${client.prefix} help <command> để biết thêm thông tin về lệnh`,

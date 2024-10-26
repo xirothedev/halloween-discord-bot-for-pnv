@@ -16,20 +16,20 @@ const quests: QuestProps[] = [
         name: "Nhắn $1 tin nhắn ở kênh bất kì",
         function: QuestFunction.chat,
         item: items.candy.id,
-        rate: generateRate(100, 201),
+        rate: generateRate(70, 121),
     },
     {
         name: "Nhắn $1 tin nhắn tại kênh $2",
         function: QuestFunction.chat_channel,
         item: items.candy.id,
-        rate: generateRate(50, 151),
+        rate: generateRate(50, 101),
         channel: "878311098070228992",
     },
     {
         name: "Treo voice $1 phút",
         function: QuestFunction.voice,
         item: items.candy.id,
-        rate: generateRate(1, 4 * 60),
+        rate: generateRate(1, 2 * 60),
     },
     {
         name: "Mở $1 pack bất kì",
@@ -45,13 +45,7 @@ const quests: QuestProps[] = [
         pack: packs[ranInt(0, packs.length)] as Pack,
     },
     {
-        name: "Boost server $1 lần",
-        function: QuestFunction.boost,
-        item: items.candy.id,
-        rate: generateRate(1, 2),
-    },
-    {
-        name: "Nâng cấp thẻ $1 lần",
+        name: "Nâng cấp thẻ $1 lần (hlw upg <id>)",
         function: QuestFunction.upgrade_card,
         item: items.candy.id,
         rate: generateRate(1, 4),

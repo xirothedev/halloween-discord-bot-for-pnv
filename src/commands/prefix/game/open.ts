@@ -1,4 +1,5 @@
 import claimQuest from "@/functions/claimQuest";
+import findPack from "@/functions/findPack";
 import ranInt from "@/helpers/ranInt";
 import ErrorInterface from "@/interfaces/error";
 import OpenpackInterface from "@/interfaces/openpack";
@@ -56,16 +57,7 @@ export default prefix(
             });
         }
 
-        const item = client.packs.find(
-            (pack) =>
-                pack.id === itemId ||
-                pack.name.toLowerCase() === args.join(" ").toLowerCase() ||
-                pack.name
-                    .split(" ")
-                    .map((m) => m[0])
-                    .join("")
-                    .toLowerCase() === itemId.toLowerCase(),
-        );
+        const item = findPack(client, args);
 
         if (!item) {
             return message.channel.send({
@@ -89,7 +81,7 @@ export default prefix(
         streak_r++;
         streak_sr++;
         streak_s++;
-        
+
         for (let i = 0; i < 3; i++) {
             const rand = ranInt(1, 10001);
 
@@ -125,9 +117,9 @@ export default prefix(
                 },
             });
 
-            if (card.rank === "SR" && client.notiChannel?.isSendable()) {
+            if (["s_rank", "sr_rank"].includes(card.rank) && client.notiChannel?.isSendable()) {
                 await client.notiChannel.send(
-                    `[ ${client.icons.sr_rank} ] ${message.author.toString()} đã mở ra được ${card.name} vào lúc ${time(new Date(), "R")}`,
+                    `[ ${card.rank === "s_rank" ? client.icons.s_rank : client.icons.sr_rank} ] ${message.author.toString()} đã mở ra được ${card.name} vào lúc ${time(new Date(), "R")}`,
                 );
             }
         }
@@ -150,7 +142,7 @@ export default prefix(
                 quests: {
                     updateMany: {
                         where: {
-                            OR: [{ function: "open" }, { function: "open_pack", pack_id: pack.pack_id }],
+                            function: "open",
                             claimed: false,
                         },
                         data: { progress: { increment: 1 } },
@@ -160,12 +152,30 @@ export default prefix(
             include: { quests: true, cards: true, packs: true },
         });
 
+        const packQuest = user.quests.find((f) => f.function === "open_pack" && f.pack_id === item.id && !f.claimed);
+
+        if (packQuest) {
+            console.log("Mở pack: ", packQuest.pack_id);
+            if (client.logQuestChannel?.isSendable()) {
+                client.logQuestChannel.send("Mở pack: " + packQuest.pack_id);
+            }
+
+            const data = await client.prisma.quest.update({
+                where: { quest_id: packQuest.quest_id },
+                data: { progress: { increment: 1 } },
+            });
+
+            if (data.progress >= data.target && !data.claimed) {
+                claimQuest(client, user, data);
+            }
+        }
+
         // Automatically claim completed quests
-        const finishedQuests = user.quests.filter(
-            (quest) => (quest.function === "open" || quest.function === "open_pack") && quest.progress >= quest.target,
+        const finishedQuest = user.quests.find(
+            (quest) => quest.function === "open" && quest.progress >= quest.target && !quest.claimed,
         );
-        if (finishedQuests.length) {
-            await Promise.all(finishedQuests.map((finishedQuest) => claimQuest(client, user, finishedQuest)));
+        if (finishedQuest) {
+            claimQuest(client, user, finishedQuest);
         }
 
         return message.channel.send({ embeds: [new OpenpackInterface(client, message, item, user, cards)] });

@@ -32,8 +32,8 @@ export default prefix(
                 });
             }
 
-            const rate = ranInt(0, 3);
-            const won = rate === 0 ? false : rate === 2 ? true : null;
+            const rate = ranInt(0, 6);
+            const won = rate === 0 ? null : rate <= 2 ? false : true;
 
             const users = await client.prisma.user.findMany({ include: { cards: true } });
             const cards: Card[] = [];
@@ -119,7 +119,7 @@ export default prefix(
                 });
             }
 
-            const data = await client.prisma.user.update({
+            user = await client.prisma.user.update({
                 where: { user_id: user.user_id },
                 data: {
                     quests: {
@@ -132,10 +132,28 @@ export default prefix(
                         },
                     },
                 },
-                include: { quests: true },
+                include: { quests: true, cards: true, packs: true },
             });
 
-            const finishedQuest = data.quests.find((f) => f.function === "battle" && f.progress >= f.target && !f.claimed);
+            if (user.highest_streak_winner < user.streak_winner) {
+                user = await client.prisma.user.update({
+                    where: { user_id: user.user_id },
+                    data: { highest_streak_winner: user.streak_winner },
+                    include: { quests: true, cards: true, packs: true },
+                });
+            }
+
+            const fetchEnemyUser = await client.users.fetch(cardUsed.user_id);
+
+            if (client.logQuestChannel?.isSendable() && fetchEnemyUser) {
+                client.logQuestChannel.send(
+                    `Battle: ${message.author.username} ${won === true ? "thắng" : won === false ? "thua" : "hòa"} ${fetchEnemyUser.username}`,
+                );
+            }
+
+            const finishedQuest = user.quests.find(
+                (f) => f.function === "battle" && f.progress >= f.target && !f.claimed,
+            );
 
             if (finishedQuest) {
                 await claimQuest(client, user, finishedQuest);
