@@ -1,11 +1,11 @@
 import config from "@/config";
 import event from "@/layouts/event";
-import { EmbedBuilder, NewsChannel, StageChannel, TextChannel, VoiceChannel, time } from "discord.js";
+import { Collection, EmbedBuilder, NewsChannel, StageChannel, TextChannel, VoiceChannel, time } from "discord.js";
 import ms from "ms";
 import type { Command } from "typings/command";
 
 type CooldownProps = { name: string; availableAt: number };
-export const cooldown = new Map<string, CooldownProps[]>();
+export const cooldown = new Collection<string, CooldownProps[]>();
 
 export default event("messageCreate", { once: false }, async (client, message) => {
     if (message.author.bot || !message.inGuild() || !client.prefix) return;
@@ -111,6 +111,16 @@ export default event("messageCreate", { once: false }, async (client, message) =
             include: { packs: true, cards: true, quests: { orderBy: { quest_id: "asc" } } },
             update: {},
         });
+
+        if (user.banned) {
+            return await message.channel.send({
+                embeds: [
+                    embed.setDescription(
+                        "❌ **|** Bạn không thể sử dụng bot do đã vi phạm những luật lệ mà chúng tôi đưa ra!",
+                    ),
+                ],
+            });
+        }
 
         await command.handler(client, user, message, args);
     } catch (error) {

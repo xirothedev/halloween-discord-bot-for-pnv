@@ -7,6 +7,7 @@ import items from "@/data/items.json";
 import QuestInterface from "@/interfaces/quest";
 import quests from "@/data/quests";
 import ranInt from "@/helpers/ranInt";
+import type { QuestProps } from "typings";
 type Type = Omit<Quest, "quest_id" | "user_id">;
 
 export default prefix(
@@ -35,14 +36,11 @@ export default prefix(
 
         let quest: Type[] = [];
 
-        // Determine the most recent reset time
         const lastResetTime = now.getTime() < midday.getTime() ? midnight : midday;
 
         if (user.last_claim_quest && user.last_claim_quest.getTime() > lastResetTime.getTime()) {
-            // User has already claimed quests after the last reset time, so no reset needed
             quest = user.quests || [];
         } else {
-            // Time to reset the quests
             await resetUserQuests(client, user, quest);
         }
 
@@ -56,11 +54,11 @@ async function resetUserQuests(client: ExtendedClient, user: FullUser, quest: Ty
     await client.prisma.quest.deleteMany({ where: { user_id: user.user_id } });
 
     for (let index = 0; index < 3; index++) {
-        let q = quests[ranInt(0, quests.length)];
+        let q: QuestProps;
 
-        if (quest.find((f) => f.function === q.function)) {
+        do {
             q = quests[ranInt(0, quests.length)];
-        }
+        } while (quest.find((f) => f.function === q.function));
 
         let name = q.name.replace("$1", q.rate.target.toString());
 

@@ -42,6 +42,12 @@ export default prefix(
             });
         }
 
+        if (!Number.isInteger(amount) || amount <= 0) {
+            return message.channel.send({
+                embeds: [new ErrorInterface(client).setDescription("Số lượng cần mua không hợp lệ")],
+            });
+        }
+
         if (!args[0]) {
             return message.channel.send({
                 embeds: [new ErrorInterface(client).setDescription("Bạn phải cung cấp id card")],

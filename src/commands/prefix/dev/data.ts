@@ -11,7 +11,7 @@ export default prefix(
             usage: "data <@user>",
             examples: ["data @PNV"],
         },
-        ownerOnly: true,
+        developersOnly: true,
         category: Category.dev,
         hidden: true,
     },
@@ -39,6 +39,6 @@ export default prefix(
             where: { user_id: user.user_id },
         });
 
-        return message.channel.send({ content: codeBlock("json", JSON.stringify(data)) });
+        return message.channel.send({ content: codeBlock("json", JSON.stringify(data, null, 2)) });
     },
 );

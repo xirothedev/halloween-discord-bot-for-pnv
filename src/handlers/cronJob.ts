@@ -31,6 +31,10 @@ export default function cronJob(client: ExtendedClient) {
 
                     if (data.progress >= data.target && !data.claimed) {
                         await claimQuest(client, quest.user, data);
+                        const interval = client.collection.userVoiceCount.get(member.id);
+                        if (interval) {
+                            clearInterval(interval);
+                        }
                     }
                 };
 
@@ -42,6 +46,7 @@ export default function cronJob(client: ExtendedClient) {
                         client.collection.userVoiceCount.delete(member.id); // Xóa user khỏi collection
                         return client.logger.info(`User ${member.id} đã rời voice channel, xóa interval`);
                     }
+
                     await updateVoiceState();
                 }, 60000);
 

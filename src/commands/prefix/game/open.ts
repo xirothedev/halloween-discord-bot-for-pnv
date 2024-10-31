@@ -77,10 +77,10 @@ export default prefix(
         const cards = [];
         let { streak_a, streak_r, streak_sr, streak_s } = user;
 
-        streak_a++;
-        streak_r++;
-        streak_sr++;
-        streak_s++;
+        streak_a += 2;
+        streak_r += 2;
+        streak_sr += 2;
+        streak_s += 2;
 
         for (let i = 0; i < 3; i++) {
             const rand = ranInt(1, 10001);

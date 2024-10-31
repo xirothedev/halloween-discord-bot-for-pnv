@@ -19,7 +19,6 @@ export default event("voiceStateUpdate", { once: false }, async (client, oldStat
 
     // Người dùng vào kênh voice
     if (!oldState.channelId && newState.channelId) {
-        // Kiểm tra xem người dùng đã có interval chưa
         if (client.collection.userVoiceCount.has(user.user_id)) {
             return client.logger.info(`User ${user.user_id} đã có interval`);
         }
@@ -27,43 +26,42 @@ export default event("voiceStateUpdate", { once: false }, async (client, oldStat
         // Tạo hàm cập nhật tiến trình nhiệm vụ voice
         const updateVoiceState = async () => {
             const data = await client.prisma.quest.update({
-                where: { quest_id: quest.quest_id },
+                where: { quest_id: quest.quest_id, claimed: false },
                 data: { progress: { increment: 1 } },
             });
 
             console.log("Cộng", data);
 
-            // Kiểm tra nếu nhiệm vụ hoàn thành
             if (data.progress >= data.target && !data.claimed) {
                 await claimQuest(client, user, data);
+                const interval = client.collection.userVoiceCount.get(user.user_id);
+                if (interval) {
+                    clearInterval(interval);
+                }
             }
         };
 
-        // Tạo interval để cập nhật nhiệm vụ mỗi phút
         const intervalID = setInterval(async () => {
-            // Kiểm tra lại nếu người dùng vẫn còn trong voice
             const refreshedMember = await newState.guild.members.fetch(user.user_id);
             if (!refreshedMember.voice.channelId) {
-                clearInterval(intervalID); // Xóa interval nếu người dùng rời khỏi voice
-                client.collection.userVoiceCount.delete(user.user_id); // Xóa user khỏi collection
+                clearInterval(intervalID);
+                client.collection.userVoiceCount.delete(user.user_id);
                 return client.logger.info(`User ${user.user_id} đã rời voice channel, xóa interval`);
             }
             await updateVoiceState();
         }, 60000);
 
-        // Lưu interval vào bộ nhớ
         client.collection.userVoiceCount.set(user.user_id, intervalID);
         client.logger.info(`Tạo interval cho user ${user.user_id}`);
     }
 
-    // Người dùng rời kênh voice
     if (oldState.channelId && !newState.channelId) {
         const interval = client.collection.userVoiceCount.get(user.user_id);
 
-        if (!interval) return; // Nếu không có interval thì thoát
+        if (!interval) return;
 
-        clearInterval(interval); // Xóa interval
-        client.collection.userVoiceCount.delete(user.user_id); // Xóa user khỏi collection
+        clearInterval(interval);
+        client.collection.userVoiceCount.delete(user.user_id);
         client.logger.info(`User ${user.user_id} rời khỏi voice channel, xóa interval`);
     }
 });

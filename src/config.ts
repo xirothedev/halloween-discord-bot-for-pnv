@@ -4,7 +4,7 @@ const config = {
     preconnect: true,
     users: {
         ownerId: "523708248600346635",
-        devIds: ["1291013382849167542", "969704491643457636"],
+        devIds: ["1291013382849167542", "523708248600346635"],
     },
     publicCommand: true,
     deleteErrorAfter: "5s",

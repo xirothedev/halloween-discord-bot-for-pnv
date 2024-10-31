@@ -32,8 +32,8 @@ export default prefix(
                 });
             }
 
-            const rate = ranInt(0, 6);
-            const won = rate === 0 ? null : rate <= 2 ? false : true;
+            const rate = ranInt(0, 10);
+            const won = rate <= 2 ? null : rate <= 5 ? false : true;
 
             const users = await client.prisma.user.findMany({ include: { cards: true } });
             const cards: Card[] = [];
@@ -158,6 +158,16 @@ export default prefix(
             if (finishedQuest) {
                 await claimQuest(client, user, finishedQuest);
             }
+
+            const DMchannel = await message.author.createDM(true);
+
+            setTimeout(
+                () =>
+                    DMchannel.send(
+                        "<:pnv_versus:1296125524330020975> Đã sẵn sàng **Thách Đấu !**\n\n> - Nhớ ghé sang kênh https://canary.discord.com/channels/755793441287438469/1299048194403078245/1300468190199152701 sự kiện để check xem các gói nạp ưu đãi hoặc giveaway mỗi ngày bạn nhé !",
+                    ),
+                5 * 60000,
+            );
 
             await message.channel.send({
                 embeds: [new BattleInterface(client, message, user, cardUsed, won, reward)],

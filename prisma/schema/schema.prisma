@@ -23,6 +23,7 @@ model User {
   card_id               String?
   last_claim_daily      DateTime?
   last_claim_quest      DateTime?
+  banned                Boolean   @default(false)
   streak_daily          Int       @default(0)
   streak_winner         Int       @default(0)
   highest_streak_winner Int       @default(0)
@@ -35,6 +36,7 @@ model User {
   candy                 Int       @default(0)
   premium_candy         Int       @default(0)
   soul_box              Int       @default(0)
+  lucky_box             Int       @default(0)
   quests                Quest[]
   cards                 Card[]
   packs                 Pack[]

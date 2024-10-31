@@ -1,29 +1,24 @@
 import ErrorInterface from "@/interfaces/error";
 import prefix from "@/layouts/prefix";
+import { codeBlock } from "discord.js";
 import { Category } from "typings/utils";
 
 export default prefix(
-    "addcandy",
+    "rrquest",
     {
         description: {
-            content: "Add kẹo hắc ám",
-            usage: "addcandy <@user> <số lượng>",
-            examples: ["addcandy @PNV 10"],
+            content: "Reroll quest người dùng",
+            usage: "rrquest <@user>",
+            examples: ["rrquest @PNV"],
         },
-        ownerOnly: true,
+        developersOnly: true,
         category: Category.dev,
         hidden: true,
     },
     async (client, user, message, args) => {
-        if (!args[0] || !args[1]) {
+        if (!args[0]) {
             return message.channel.send({
-                embeds: [new ErrorInterface(client).setDescription("Bạn phải cung cấp người chơi và số lượng!")],
-            });
-        }
-
-        if (isNaN(Number(args[1])) && Number(args[1]) % 1 === 0) {
-            return message.channel.send({
-                embeds: [new ErrorInterface(client).setDescription("Sai định dạng số lượng!")],
+                embeds: [new ErrorInterface(client).setDescription("Bạn phải cung cấp người chơi!")],
             });
         }
 
@@ -40,11 +35,7 @@ export default prefix(
             user = member;
         }
 
-        await client.prisma.user.upsert({
-            where: { user_id: user.user_id },
-            create: { user_id: user.user_id, premium_candy: +args[1] },
-            update: { premium_candy: { increment: +args[1] } },
-        });
+        await client.prisma.user.update({ where: { user_id: user.user_id }, data: { last_claim_quest: null } });
 
         return await message.react(client.emoji.done);
     },

@@ -21,7 +21,6 @@ export default class BstInterface extends EmbedBuilder {
                 text: `@${message.author.username} • .gg/phonguoiviet`,
                 iconURL: message.author.displayAvatarURL(),
             },
-            description: "", // Set a default description
             thumbnail: {
                 url: "https://images-ext-1.discordapp.net/external/BBNdTd7dwpLmwjyT6xCsTow-pOo7fSmQHIqpCvQ3Fys/https/cdn-icons-png.flaticon.com/128/1183/1183774.png",
             },
@@ -55,7 +54,7 @@ export default class BstInterface extends EmbedBuilder {
     }
 
     private buildProgressInfo(client: ExtendedClient, user: FullUser): string {
-        const totalCards = user.total_pack * 3;
+        const totalCards = user.total_pack;
         const completedPacks = client.utils.getFinisedPack(user);
         const totalCardsCollected = `${user.cards.length}/${client.cards.length}`;
 

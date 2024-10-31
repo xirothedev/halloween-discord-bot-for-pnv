@@ -13,7 +13,7 @@
         "icon": "<:pnv_packtot:1297226320849277089>",
         "color": "#FF9429",
         "image": "https://cdn.discordapp.com/attachments/1293978154163114115/1298712938684747869/pnv_packtot.png?ex=671a902d&is=67193ead&hm=dc1089ce2bbdf2e50bdc46ef380bd84bde822883403b86b47549071478d66dd3&",
-        "cards": ["t1", "t2", "t3", "t4", "t5", "t6", "t7", "t8", "t9", "t10", "t11", "t12", "s1"]
+        "cards": ["t1", "t2", "t3", "t4", "t5", "t6", "t7", "t8", "t9", "t10", "t11", "t12", "s2"]
     },
     {
         "id": "mythology",
@@ -21,7 +21,7 @@
         "icon": "<:pnv_packm:1297227586946072576>",
         "color": "#F7E4B9",
         "image": "https://cdn.discordapp.com/attachments/1293978154163114115/1298712938928144495/pnv_packm.png?ex=671a902d&is=67193ead&hm=f149f823158a456cb81f6ed56eb6911f04cd6b5f900a94491530d781a46d9958&",
-        "cards": ["m1", "m2", "m3", "m4", "m5", "m6", "m7", "m8", "m9", "m10", "m11", "m12", "s2"]
+        "cards": ["m1", "m2", "m3", "m4", "m5", "m6", "m7", "m8", "m9", "m10", "m11", "m12", "s1"]
     },
     {
         "id": "comic_villains",

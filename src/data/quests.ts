@@ -45,7 +45,7 @@ const quests: QuestProps[] = [
         pack: packs[ranInt(0, packs.length)] as Pack,
     },
     {
-        name: "Nâng cấp thẻ $1 lần (hlw upg <id>)",
+        name: "Nâng cấp thẻ $1 lần",
         function: QuestFunction.upgrade_card,
         item: items.candy.id,
         rate: generateRate(1, 4),

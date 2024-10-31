@@ -30,7 +30,7 @@ export default async function claimQuest(client: ExtendedClient, user: User, que
 
         console.log("Hoàn thành", msg);
         if (client.logQuestChannel?.isSendable()) {
-            client.logQuestChannel.send("Hoàn thành: " + codeBlock("json", JSON.stringify(msg)));
+            client.logQuestChannel.send("Hoàn thành: " + codeBlock("json", JSON.stringify(msg, null, 2)));
         }
     } else {
         // Log lỗi khi trường hợp không xác định xảy ra
