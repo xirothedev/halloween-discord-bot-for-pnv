@@ -24,7 +24,7 @@ export default prefix(
                 .split(" ")
                 .map((m) => m.slice(0, 1))
                 .join("")
-                .toLowerCase()})\`: ${bold("30")} ${client.items.candy.icon} hoặc ${bold("4")} ${client.items.premium_candy.icon}`;
+                .toLowerCase()})\`: ${bold("20")} ${client.items.candy.icon} hoặc ${bold("4")} ${client.items.premium_candy.icon}`;
         });
 
         items.push(

@@ -77,25 +77,25 @@ export default prefix(
         const cards = [];
         let { streak_a, streak_r, streak_sr, streak_s } = user;
 
-        streak_a += 2;
-        streak_r += 2;
-        streak_sr += 2;
-        streak_s += 2;
+        streak_a += 3;
+        streak_r += 3;
+        streak_sr += 3;
+        streak_s += 3;
 
         for (let i = 0; i < 3; i++) {
             const rand = ranInt(1, 10001);
 
             let filteredCards;
-            if (streak_a >= 10 || rand <= 300) {
+            if (streak_a >= 10 || rand <= 600) {
                 filteredCards = cardPool.filter((card) => card.rate.shortName === "A");
                 streak_a = 0;
-            } else if (streak_r >= 50 || rand <= 100) {
+            } else if (streak_r >= 50 || rand <= 200) {
                 filteredCards = cardPool.filter((card) => card.rate.shortName === "R");
                 streak_r = 0;
-            } else if (streak_sr >= 100 || rand <= 75) {
+            } else if (streak_sr >= 100 || rand <= 150) {
                 filteredCards = cardPool.filter((card) => card.rate.shortName === "SR");
                 streak_sr = 0;
-            } else if (streak_s >= 1000 || rand <= 25) {
+            } else if (streak_s >= 1000 || rand <= 50) {
                 filteredCards = cardPool.filter((card) => card.rate.shortName === "S");
                 streak_s = 0;
             } else {
@@ -124,7 +124,6 @@ export default prefix(
             }
         }
 
-        // Update user data (streaks, total packs, and quest progress)
         user = await client.prisma.user.update({
             where: { user_id: user.user_id },
             data: {

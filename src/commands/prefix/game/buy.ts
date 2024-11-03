@@ -16,7 +16,7 @@ import type { Pack } from "typings";
 import type { FullUser } from "typings/command";
 import { Category } from "typings/utils";
 
-const COST_CANDY = 30;
+const COST_CANDY = 20;
 const COST_PREMIUM_CANDY = 4;
 const SOUL_BOX_COST = 6;
 
